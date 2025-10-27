@@ -1,25 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function ForgotPasswordScreen() {
-     const [countryCode, setCountryCode] = useState("+250");
-     const [phoneNumber, setPhoneNumber] = useState("");
+  const [countryCode, setCountryCode] = useState("+250");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
   return (
     <View style={styles.container}>
       {/* Top images */}
       <View style={styles.imagesContainer}>
         <Image
-          source={require("../assets/images/Character.png")}
-          style={styles.image}
-        />
-        <Image
-          source={require("../assets/images/Screen.png")}
-          style={styles.image}
-        />
-        <Image
-          source={require("../assets/images/Plant.png")}
-          style={styles.image}
+          source={require("../assets/images/cuate.png")}
         />
       </View>
 
@@ -28,18 +20,23 @@ export default function ForgotPasswordScreen() {
 
       {/* Subparagraph */}
       <Text style={styles.subParagraph}>
-        Don't worry! it happens. Please enter phone number associated with your account
+        Don't worry! It happens. Please enter the phone number associated with your account.
       </Text>
 
-      {/* Subheading */}
-      <Text style={styles.subHeading}>Enter Your Number</Text>
-
-      {/* Input field */}
-      <TextInput
-        style={styles.input}
-        placeholder="Your number"
-        keyboardType="phone-pad"
-      />
+      {/* Phone input */}
+      <View style={styles.phoneInputContainer}>
+        <TouchableOpacity style={styles.countryCodeContainer}>
+          <Text style={styles.countryCodeText}>{countryCode}</Text>
+          <AntDesign name="down" size={16} color="#000" style={{ marginLeft: 5 }} />
+        </TouchableOpacity>
+        <TextInput
+          style={styles.input}
+          placeholder="876-788-890"
+          keyboardType="phone-pad"
+          value={phoneNumber}
+          onChangeText={setPhoneNumber}
+        />
+      </View>
 
       {/* Button */}
       <TouchableOpacity style={styles.button} onPress={() => {}}>
@@ -54,23 +51,23 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: "#EDEDED",
-    justifyContent: "center", // content starts from top
+    justifyContent: "flex-end", // move content toward the bottom
     alignItems: "center",
-    bottom:0,
+    paddingBottom:0,
   },
   imagesContainer: {
     flexDirection: "row",
     alignItems: "center",
-    width: "100%", // fill the width
+    width: "100%",
+    justifyContent: "center",
     marginBottom: 30,
-    justifyContent:"center",
-    marginTop: 20,
   },
   image: {
     width: 90,
     height: 150,
     borderRadius: 10,
     resizeMode: "contain",
+    marginHorizontal: 5,
   },
   title: {
     fontSize: 28,
@@ -84,30 +81,40 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: "#555",
   },
-  subHeading: {
-    fontSize: 18,
-    fontWeight: "600",
-    alignSelf: "flex-start", // align left
-    marginBottom: 10,
-    marginLeft:10
-  },
-  input: {
+  phoneInputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
     borderWidth: 1,
     borderColor: "#ccc",
-    padding: 20,
     borderRadius: 8,
-    fontSize: 15,
+    overflow: "hidden",
     width: "95%",
     marginBottom: 20,
     backgroundColor: "#fff",
   },
+  countryCodeContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 12,
+    paddingVertical: 20,
+    backgroundColor: "#f0f0f0",
+  },
+  countryCodeText: {
+    fontWeight: "600",
+    fontSize: 16,
+  },
+  input: {
+    flex: 1,
+    paddingHorizontal: 12,
+    fontSize: 16,
+  },
   button: {
     backgroundColor: "#0a1a2f",
     paddingVertical: 20,
-    paddingHorizontal: 25,
     borderRadius: 10,
     width: "95%",
     alignItems: "center",
+    marginBottom: 20, // space from bottom
   },
   buttonText: {
     color: "#fff",

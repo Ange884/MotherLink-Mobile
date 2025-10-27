@@ -19,7 +19,7 @@ export default function LandingScreen({ navigation }) { // receive navigation pr
           style={styles.button}
           onPress={() => navigation.navigate("ForgotPassword")} // navigate to ForgotPasswordScreen
         >
-          <Text style={styles.buttonText}>Forgot Password?</Text>
+          <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -32,15 +32,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#EDEDED",
     justifyContent: "center",
     alignItems: "center",
-    
   },
   circle: {
     position: "absolute",
     width: 120,
     height: 120,
     borderRadius: 60,
-    backgroundColor: "#0a1a2f",
-    opacity: 0.9,
+    backgroundColor: "#09111E",
+    opacity: 1,
   },
   circleTopRight: {
     top: 60,
@@ -48,10 +47,10 @@ const styles = StyleSheet.create({
   },
   rectangle: {
     position: "absolute",
-    width: 150,
+    width: 100,
     height: 100,
-    backgroundColor: "#0a1a2f",
-    opacity: 0.9,
+    backgroundColor: "#09111E",
+    opacity: 1,
     transform: [{ rotate: "-25deg" }],
   },
   rectangleBottomLeft: {
@@ -74,9 +73,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: "#0a1a2f",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    backgroundColor: "#09111E",
+    paddingVertical: 20,
+    paddingHorizontal: 30,
     borderRadius: 8,
   },
   buttonText: {
