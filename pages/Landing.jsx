@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
-export default function LandingScreen() {
+export default function LandingScreen({ navigation }) { // receive navigation prop
   return (
     <View style={styles.container}>
       <View style={[styles.circle, styles.circleTopRight]} />
@@ -9,22 +9,30 @@ export default function LandingScreen() {
 
       <View style={styles.centerContent}>
         <Image
-          source={require("../assets/images/logo.png")} // ← your logo image path
+          source={require("../assets/images/logo.png")}
           style={styles.logo}
         />
         <Text style={styles.title}>MotherLink</Text>
+
+        {/* Forgot Password Button */}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("ForgotPassword")} // navigate to ForgotPasswordScreen
+        >
+          <Text style={styles.buttonText}>Forgot Password?</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f4f4f4",
+    backgroundColor: "#EDEDED",
     justifyContent: "center",
     alignItems: "center",
+    
   },
   circle: {
     position: "absolute",
@@ -54,14 +62,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    width: 60, // size of your logo image
+    width: 60,
     height: 60,
     marginBottom: 10,
-    resizeMode: "contain", // keeps logo aspect ratio
+    resizeMode: "contain",
   },
   title: {
     fontSize: 22,
     fontWeight: "bold",
     color: "#000",
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: "#0a1a2f",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "600",
+    fontSize: 16,
   },
 });
