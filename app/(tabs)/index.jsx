@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import LandingScreen from "../../pages/Landing";
 import LoginScreen from "../../pages/login"
+import VerifyScreen from "../../pages/Verify"
 import ForgotPasswordScreen from "../../pages/forgot-password";
 import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
 import { setCustomText, setCustomTextInput } from 'react-native-global-props';
@@ -39,6 +40,11 @@ export default function AppNavigator() {
           name="Login" 
           component={LoginScreen} 
           options={{ title: "login" }} 
+        />
+        <Stack.Screen 
+          name="verify" 
+          component={VerifyScreen} 
+          options={{ title: "Verify OTP" }} 
         />
       </Stack.Navigator>
     // </NavigationContainer>

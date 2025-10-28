@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function ForgotPasswordScreen() {
+export default function ForgotPasswordScreen({navigation}) {
   const [countryCode, setCountryCode] = useState("+250");
   const [phoneNumber, setPhoneNumber] = useState("");
 

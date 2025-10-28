@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 60,
     backgroundColor: "#EDEDED",
+    justifyContent:"flex-end"
   },
   imageContainer: {
     marginBottom: 20,
