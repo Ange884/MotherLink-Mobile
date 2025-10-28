@@ -17,7 +17,7 @@ export default function LandingScreen({ navigation }) { // receive navigation pr
         {/* Forgot Password Button */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("ForgotPassword")} // navigate to ForgotPasswordScreen
+          onPress={() => navigation.navigate("Login")} // navigate to LoginScreen
         >
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>

@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import LandingScreen from "../../pages/Landing";
+import LoginScreen from "../../pages/login"
 import ForgotPasswordScreen from "../../pages/forgot-password";
 import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
 import { setCustomText, setCustomTextInput } from 'react-native-global-props';
@@ -33,6 +34,11 @@ export default function AppNavigator() {
           name="ForgotPassword" 
           component={ForgotPasswordScreen} 
           options={{ title: "Forgot Password" }} 
+        />
+        <Stack.Screen 
+          name="Login" 
+          component={LoginScreen} 
+          options={{ title: "login" }} 
         />
       </Stack.Navigator>
     // </NavigationContainer>
