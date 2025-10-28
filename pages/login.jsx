@@ -90,10 +90,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   checkbox: {
-    width:18,
-    height: 18,
-    borderWidth: 2,
-    borderColor: "#09111E",
+    width:16,
+    height: 16,
+    borderWidth: 1,
+    borderColor: "#454546ff",
     borderRadius: 4,
   },
   rememberText: {
