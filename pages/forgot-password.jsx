@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
-import AppLoading from 'expo-app-loading'; // optional, can return null
 
 export default function ForgotPasswordScreen({ navigation }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular });
@@ -47,7 +46,7 @@ export default function ForgotPasswordScreen({ navigation }) {
       {/* Button */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Verify")}
+        onPress={() => navigation.navigate("verify")}
       >
         <Text style={[styles.buttonText, { fontFamily: 'Poppins_400Regular' }]}>
           Reset Password

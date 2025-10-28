@@ -1,9 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
 
 export default function LandingScreen({ navigation }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular });
-  if (!fontsLoaded) return null; // receive navigation prop
+
   return (
     <View style={styles.container}>
       <View style={[styles.circle, styles.circleTopRight]} />

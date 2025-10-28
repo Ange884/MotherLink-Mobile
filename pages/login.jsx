@@ -9,8 +9,6 @@ import {
 } from "react-native";
 import BackgroundLayout from "../components/background.jsx";
 import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
-import AppLoading from 'expo-app-loading'; // optional, can return null
-
 
 export default function LoginScreen({ navigation }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular });
