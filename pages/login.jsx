@@ -8,34 +8,45 @@ import {
   Image,
 } from "react-native";
 import BackgroundLayout from "../components/background.jsx";
+import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
+import AppLoading from 'expo-app-loading'; // optional, can return null
+
 
 export default function LoginScreen({ navigation }) {
+  const [fontsLoaded] = useFonts({ Poppins_400Regular });
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  return (
+  if (!fontsLoaded) return null; // optionally <AppLoading />
+
+
+    return (
     <BackgroundLayout>
       {/* Logo */}
       <Image
         source={require("../assets/images/logo.png")}
         style={styles.logo}
       />
-      <Text style={styles.title}>Login</Text>
+
+      <Text style={[styles.title, { fontFamily: 'Poppins_400Regular' }]}>
+        Login
+      </Text>
 
       {/* Inputs */}
       <TextInput
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
-        style={styles.input}
+        style={[styles.input, { fontFamily: 'Poppins_400Regular' }]}
       />
       <TextInput
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-        style={styles.input}
+        style={[styles.input, { fontFamily: 'Poppins_400Regular' }]}
       />
 
       {/* Row: Remember Me + Forgot Password */}
@@ -48,23 +59,28 @@ export default function LoginScreen({ navigation }) {
             ]}
             onPress={() => setRememberMe(!rememberMe)}
           />
-          <Text style={styles.rememberText}>Remember Me</Text>
+          <Text style={[styles.rememberText, { fontFamily: 'Poppins_400Regular' }]}>
+            Remember Me
+          </Text>
         </View>
 
-        <TouchableOpacity
-          onPress={() => navigation.navigate("ForgotPassword")}
-        >
-          <Text style={styles.forgotText}>Forgot Password?</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
+          <Text style={[styles.forgotText, { fontFamily: 'Poppins_400Regular' }]}>
+            Forgot Password?
+          </Text>
         </TouchableOpacity>
       </View>
 
       {/* Login Button */}
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={[styles.buttonText, { fontFamily: 'Poppins_400Regular' }]}>
+          Login
+        </Text>
       </TouchableOpacity>
     </BackgroundLayout>
   );
 }
+
 
 const styles = StyleSheet.create({
   logo: { width: 60, height: 60, marginBottom: 10, resizeMode: "contain" },
