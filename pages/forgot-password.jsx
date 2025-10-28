@@ -39,7 +39,7 @@ export default function ForgotPasswordScreen() {
       </View>
 
       {/* Button */}
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("verify")}>
         <Text style={styles.buttonText}>Reset Password</Text>
       </TouchableOpacity>
     </View>
