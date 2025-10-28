@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
+import AppLoading from 'expo-app-loading'; // optional, can return null
 
-export default function ForgotPasswordScreen({navigation}) {
+export default function ForgotPasswordScreen({ navigation }) {
+  const [fontsLoaded] = useFonts({ Poppins_400Regular });
   const [countryCode, setCountryCode] = useState("+250");
   const [phoneNumber, setPhoneNumber] = useState("");
+
+  if (!fontsLoaded) return null; // optionally <AppLoading />
 
   return (
     <View style={styles.container}>
@@ -12,25 +17,26 @@ export default function ForgotPasswordScreen({navigation}) {
       <View style={styles.imagesContainer}>
         <Image
           source={require("../assets/images/cuate.png")}
+          style={styles.image} // make sure to use the style
         />
       </View>
 
       {/* Title */}
-      <Text style={styles.title}>Forgot Password?</Text>
+      <Text style={[styles.title, { fontFamily: 'Poppins_400Regular' }]}>Forgot Password?</Text>
 
       {/* Subparagraph */}
-      <Text style={styles.subParagraph}>
+      <Text style={[styles.subParagraph, { fontFamily: 'Poppins_400Regular' }]}>
         Don't worry! It happens. Please enter the phone number associated with your account.
       </Text>
 
       {/* Phone input */}
       <View style={styles.phoneInputContainer}>
         <TouchableOpacity style={styles.countryCodeContainer}>
-          <Text style={styles.countryCodeText}>{countryCode}</Text>
+          <Text style={[styles.countryCodeText, { fontFamily: 'Poppins_400Regular' }]}>{countryCode}</Text>
           <AntDesign name="down" size={16} color="#000" style={{ marginLeft: 5 }} />
         </TouchableOpacity>
         <TextInput
-          style={styles.input}
+          style={[styles.input, { fontFamily: 'Poppins_400Regular' }]}
           placeholder="876-788-890"
           keyboardType="phone-pad"
           value={phoneNumber}
@@ -39,8 +45,13 @@ export default function ForgotPasswordScreen({navigation}) {
       </View>
 
       {/* Button */}
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("verify")}>
-        <Text style={styles.buttonText}>Reset Password</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Verify")}
+      >
+        <Text style={[styles.buttonText, { fontFamily: 'Poppins_400Regular' }]}>
+          Reset Password
+        </Text>
       </TouchableOpacity>
     </View>
   );

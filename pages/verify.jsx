@@ -1,7 +1,12 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
 
 export default function VerifyScreen({ navigation }) {
+  const [fontsLoaded] = useFonts({ Poppins_400Regular });
+
+  if (!fontsLoaded) return null; // or a loading spinner
+
   return (
     <View style={styles.container}>
       {/* Top Image */}
@@ -13,11 +18,13 @@ export default function VerifyScreen({ navigation }) {
       </View>
 
       {/* Headings */}
-      <Text style={styles.mainHeading}>Enter OTP</Text>
-      <Text style={styles.subHeading}>
+      <Text style={[styles.mainHeading, { fontFamily: 'Poppins_400Regular' }]}>Enter OTP</Text>
+      <Text style={[styles.subHeading, { fontFamily: 'Poppins_400Regular' }]}>
         A 4-digit OTP has been sent to
       </Text>
-      <Text style={styles.subHeading}>+1 458-465-6466</Text>
+      <Text style={[styles.subHeading, { fontFamily: 'Poppins_400Regular' }]}>
+        +1 458-465-6466
+      </Text>
 
       {/* OTP Boxes */}
       <View style={styles.boxesContainer}>
@@ -29,12 +36,12 @@ export default function VerifyScreen({ navigation }) {
 
       {/* Verify Button */}
       <TouchableOpacity style={styles.button} onPress={() => alert("Verify pressed")}>
-        <Text style={styles.buttonText}>Verify</Text>
+        <Text style={[styles.buttonText, { fontFamily: 'Poppins_400Regular' }]}>Verify</Text>
       </TouchableOpacity>
 
       {/* Resend OTP */}
       <TouchableOpacity>
-        <Text style={styles.resendText}>Resend OTP</Text>
+        <Text style={[styles.resendText, { fontFamily: 'Poppins_400Regular' }]}>Resend OTP</Text>
       </TouchableOpacity>
     </View>
   );
