@@ -25,7 +25,7 @@ export default function ForgotPasswordScreen({ navigation }) {
 
       {/* Subparagraph */}
       <Text style={[styles.subParagraph, { fontFamily: 'Poppins_400Regular' }]}>
-        Don't worry! It happens. Please enter the phone number associated with your account.
+        Don't worry! It happens. Please enter the phone number associated .
       </Text>
 
       {/* Phone input */}
