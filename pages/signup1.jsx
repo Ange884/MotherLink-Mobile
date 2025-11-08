@@ -1,0 +1,173 @@
+import React, { useState } from "react";
+import {
+  View,
+  TextInput,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+} from "react-native";
+import { useFonts, Poppins_400Regular,Poppins_700Bold } from "@expo-google-fonts/poppins";
+
+export default function Signup1screen({ navigation }) {
+  const [fontsLoaded] = useFonts({ Poppins_400Regular,Poppins_700Bold });
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+
+  if (!fontsLoaded) return null;
+
+  return (
+    <View style={styles.container}>
+      {/* Logo */}
+      <Image
+        source={require("../assets/images/logo.png")}
+        style={styles.logo}
+      />
+
+      <Text style={[styles.title, { fontFamily: "Poppins_400Regular" }]}>
+        LOGIN
+      </Text>
+
+      {/* Email Fieldset */}
+      <View style={styles.fieldset}>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular" }]}>Email</Text>
+        <TextInput
+          value={email}
+          onChangeText={setEmail}
+          style={[styles.input, { fontFamily: "Poppins_400Regular" }]}
+          placeholder="Enter your email"
+          placeholderTextColor="#09111E"
+        />
+      </View>
+
+      {/* Password Fieldset */}
+      <View style={styles.fieldset}>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular" }]}>Password</Text>
+        <TextInput
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          style={[styles.input, { fontFamily: "Poppins_400Regular" }]}
+          placeholder="Enter your password"
+          placeholderTextColor="#09111E"
+        />
+      </View>
+      <View style={styles.fieldset}>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular" }]}>Confirm Password</Text>
+        <TextInput
+          value={email}
+          onChangeText={setEmail}
+          style={[styles.input, { fontFamily: "Poppins_400Regular" }]}
+          placeholder="confirm your password"
+          placeholderTextColor="#09111E"
+        />
+      </View>
+
+      {/* Row: Remember Me + Forgot Password */}
+      <View style={styles.row}>
+        <View style={styles.rememberMeContainer}>
+          
+          <Text
+            style={[
+              styles.rememberText,
+              { fontFamily: "Poppins_400Regular" },
+            ]}
+          >
+            New? Create Account
+          </Text>
+        </View>
+
+        <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
+          <Text
+            style={[styles.forgotText, { fontFamily: "Poppins_400Regular" }]}
+          >
+            Forgot Password?
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Login Button */}
+      <TouchableOpacity style={styles.button}>
+        <Text
+          style={[styles.buttonText, { fontFamily: "Poppins_400Regular" }]}
+        >
+          Login
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f8f8f8",
+    paddingBottom: 40,
+  },
+  logo: { width: 60, height: 60, marginBottom: 10, resizeMode: "contain" },
+  title: { fontSize: 24, fontFamily:"Poppins_700Bold",fontWeight:"900", marginBottom: 20, color: "#09111E" },
+
+  // Fieldset style (mimics HTML fieldset)
+  fieldset: {
+    width: 300,
+    borderWidth: 1.5,
+    borderColor: "#09111E",
+    borderRadius: 8,
+    position: "relative",
+    paddingTop: 10,
+    marginVertical: 17,
+    backgroundColor: "#fff",
+  },
+  legend: {
+    position: "absolute",
+    top: -10,
+    left: 15,
+    backgroundColor: "#f8f8f8",
+    paddingHorizontal: 6,
+    fontSize: 16,
+    color: "#09111E",
+  },
+  input: {
+    padding: 12,
+    fontSize: 10,
+    color: "#09111E",
+  },
+
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: 300,
+    marginBottom: 15,
+  },
+  rememberMeContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  checkbox: {
+    width: 16,
+    height: 16,
+    borderWidth: 1,
+    borderColor: "#454546ff",
+    borderRadius: 4,
+  },
+  rememberText: {
+    marginLeft: 8,
+    color: "#09111E",
+    fontSize: 12,
+  },
+  button: {
+    backgroundColor: "#09111E",
+    padding: 15,
+    marginTop: 20,
+    borderRadius: 8,
+    width: 300,
+    alignItems: "center",
+  },
+  buttonText: { color: "#fff", fontWeight: "600", fontSize: 16 },
+  forgotText: { color: "#09111E",fontSize:12 },
+});

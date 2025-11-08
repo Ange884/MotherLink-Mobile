@@ -20,7 +20,7 @@ export default function LandingScreen({ navigation }) {
         {/* Forgot Password Button */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Login")} // navigate to LoginScreen
+          onPress={() => navigation.navigate("signup1")} // navigate to LoginScreen
         >
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
