@@ -27,7 +27,7 @@ export default function Signup1screen({ navigation }) {
       />
 
       <Text style={[styles.title, { fontFamily: "Poppins_400Regular" }]}>
-        LOGIN
+        REGISTER
       </Text>
 
       {/* Email Fieldset */}
@@ -65,28 +65,15 @@ export default function Signup1screen({ navigation }) {
         />
       </View>
 
-      {/* Row: Remember Me + Forgot Password */}
-      <View style={styles.row}>
-        <View style={styles.rememberMeContainer}>
-          
-          <Text
-            style={[
-              styles.rememberText,
-              { fontFamily: "Poppins_400Regular" },
-            ]}
-          >
-            New? Create Account
-          </Text>
-        </View>
-
-        <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
-          <Text
-            style={[styles.forgotText, { fontFamily: "Poppins_400Regular" }]}
-          >
-            Forgot Password?
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <Text style={styles.signupText}>
+  Already have an account?
+  <Text
+    style={styles.loginLink}
+    onPress={() => navigation.navigate("Login")}
+  >
+    {" "}Login
+  </Text>
+</Text>
 
       {/* Login Button */}
       <TouchableOpacity style={styles.button}>
@@ -120,8 +107,21 @@ const styles = StyleSheet.create({
     position: "relative",
     paddingTop: 10,
     marginVertical: 17,
-    backgroundColor: "#fff",
   },
+  signupText: {
+  fontSize: 14,
+  color: "#09111E",
+  textAlign: "start",
+  marginTop: 15,
+  fontFamily: "Poppins_400Regular",
+},
+
+loginLink: {
+  color: "#1048C5", // blue link color
+  fontWeight: "bold",
+  
+},
+
   legend: {
     position: "absolute",
     top: -10,
