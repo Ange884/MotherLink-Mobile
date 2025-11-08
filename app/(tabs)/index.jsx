@@ -11,6 +11,7 @@ import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
 import { setCustomText, setCustomTextInput } from 'react-native-global-props';
 import Signup1screen from "../../pages/sign-up1.jsx";
 import Signup2screen from "../../pages/sign-up2.jsx";
+import Signup3screen from "../../pages/sign-up3.jsx";
 
 
 const Stack = createNativeStackNavigator();
@@ -50,7 +51,7 @@ export default function AppNavigator() {
         />
          <Stack.Screen 
           name="signup3" 
-          component={ForgotPasswordScreen} 
+          component={Signup3screen} 
           options={{ title: "Third-Signup" }} 
         />
         

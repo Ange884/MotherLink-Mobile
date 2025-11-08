@@ -122,7 +122,7 @@ export default function Signup2screen({ navigation }) {
         </Text>
       </Text>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("signup3")}>
         <Text
           style={[styles.buttonText, { fontFamily: "Poppins_400Regular" ,fontWeight:200}]}
         >
