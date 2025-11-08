@@ -12,6 +12,7 @@ import { setCustomText, setCustomTextInput } from 'react-native-global-props';
 import Signup1screen from "../../pages/sign-up1.jsx";
 import Signup2screen from "../../pages/sign-up2.jsx";
 import Signup3screen from "../../pages/sign-up3.jsx";
+import Home from "../../pages/Home.jsx"
 
 
 const Stack = createNativeStackNavigator();
