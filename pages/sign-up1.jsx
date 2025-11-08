@@ -14,37 +14,54 @@ export default function Signup1screen({ navigation }) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [focusedField, setFocusedField] = useState(null); // new: track focused field
 
   if (!fontsLoaded) return null;
 
   return (
     <View style={styles.container}>
-      {/* Logo */}
       <Image
         source={require("../assets/images/logo.png")}
         style={styles.logo}
       />
-
       <Text style={[styles.title, { fontFamily: "Poppins_400Regular" }]}>
+        MotherLink
+      </Text>
+
+      <Text style={[styles.subtitle, { fontFamily: "Poppins_400Regular" }]}>
         REGISTER
       </Text>
 
       {/* Email Fieldset */}
-      <View style={styles.fieldset}>
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular" }]}>Email</Text>
+      <View
+        style={[
+          styles.fieldset,
+          { borderColor: focusedField === "email" ? "#1048C5" : "#09111E" },
+        ]}
+      >
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Email</Text>
         <TextInput
           value={email}
           onChangeText={setEmail}
           style={[styles.input, { fontFamily: "Poppins_400Regular" }]}
           placeholder="Enter your email"
           placeholderTextColor="#09111E"
+          underlineColorAndroid="transparent"
+          selectionColor="#09111E"
+          onFocus={() => setFocusedField("email")}
+          onBlur={() => setFocusedField(null)}
         />
       </View>
 
       {/* Password Fieldset */}
-      <View style={styles.fieldset}>
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular" }]}>Password</Text>
+      <View
+        style={[
+          styles.fieldset,
+          { borderColor: focusedField === "password" ? "#1048C5" : "#09111E" },
+        ]}
+      >
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Password</Text>
         <TextInput
           value={password}
           onChangeText={setPassword}
@@ -52,35 +69,48 @@ export default function Signup1screen({ navigation }) {
           style={[styles.input, { fontFamily: "Poppins_400Regular" }]}
           placeholder="Enter your password"
           placeholderTextColor="#09111E"
+          underlineColorAndroid="transparent"
+          selectionColor="#09111E"
+          onFocus={() => setFocusedField("password")}
+          onBlur={() => setFocusedField(null)}
         />
       </View>
-      <View style={styles.fieldset}>
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular" }]}>Confirm Password</Text>
+
+      {/* Confirm Password Fieldset */}
+      <View
+        style={[
+          styles.fieldset,
+        ]}
+      >
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Confirm Password</Text>
         <TextInput
-          value={email}
-          onChangeText={setEmail}
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
           style={[styles.input, { fontFamily: "Poppins_400Regular" }]}
-          placeholder="confirm your password"
+          placeholder="Confirm your password"
           placeholderTextColor="#09111E"
+          underlineColorAndroid="transparent"
+          selectionColor="#09111E"
+          onFocus={() => setFocusedField("confirm")}
+          onBlur={() => setFocusedField(null)}
         />
       </View>
 
       <Text style={styles.signupText}>
-  Already have an account?
-  <Text
-    style={styles.loginLink}
-    onPress={() => navigation.navigate("Login")}
-  >
-    {" "}Login
-  </Text>
-</Text>
-
-      {/* Login Button */}
-      <TouchableOpacity style={styles.button}>
+        Already have an account?
         <Text
-          style={[styles.buttonText, { fontFamily: "Poppins_400Regular" }]}
+          style={styles.loginLink}
+          onPress={() => navigation.navigate("Login")}
         >
-          Login
+          {" "}Login
+        </Text>
+      </Text>
+
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("signup2")}>
+        <Text
+          style={[styles.buttonText, { fontFamily: "Poppins_400Regular" ,fontWeight:200}]}
+        >
+          Proceed
         </Text>
       </TouchableOpacity>
     </View>
@@ -95,32 +125,31 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8f8f8",
     paddingBottom: 40,
   },
-  logo: { width: 60, height: 60, marginBottom: 10, resizeMode: "contain" },
-  title: { fontSize: 24, fontFamily:"Poppins_700Bold",fontWeight:"900", marginBottom: 20, color: "#09111E" },
+  logo: { width: 60, height: 60, resizeMode: "contain" },
+  title: { fontSize: 18, fontFamily:"Poppins_700Bold", fontWeight:"900", marginBottom: 20, color: "#09111E" },
+  subtitle:{ fontSize: 16, fontFamily:"Poppins_700Bold", fontWeight:"700", marginBottom: 20, color: "#09111E" },
 
-  // Fieldset style (mimics HTML fieldset)
   fieldset: {
     width: 300,
     borderWidth: 1.5,
-    borderColor: "#09111E",
+    borderColor: "#000",
     borderRadius: 8,
     position: "relative",
     paddingTop: 10,
     marginVertical: 17,
   },
   signupText: {
-  fontSize: 14,
-  color: "#09111E",
-  textAlign: "start",
-  marginTop: 15,
-  fontFamily: "Poppins_400Regular",
-},
-
-loginLink: {
-  color: "#1048C5", // blue link color
-  fontWeight: "bold",
-  
-},
+    fontSize: 14,
+    color: "#09111E",
+    textAlign: "left",
+    marginTop: 15,
+    fontFamily: "Poppins_400Regular",
+  },
+  loginLink: {
+    color: "#063392ff", // blue link color
+    fontWeight: "bold",
+    marginEnd:65,
+  },
 
   legend: {
     position: "absolute",
@@ -128,13 +157,14 @@ loginLink: {
     left: 15,
     backgroundColor: "#f8f8f8",
     paddingHorizontal: 6,
-    fontSize: 16,
+    fontSize: 14,
     color: "#09111E",
   },
   input: {
     padding: 12,
     fontSize: 10,
     color: "#09111E",
+    borderWidth: 0, // ensures no extra border
   },
 
   row: {

@@ -9,7 +9,8 @@ import VerifyScreen from "../../pages/Verify"
 import ForgotPasswordScreen from "../../pages/forgot-password";
 import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
 import { setCustomText, setCustomTextInput } from 'react-native-global-props';
-import Signup1screen from "../../pages/signup1.jsx"
+import Signup1screen from "../../pages/sign-up1.jsx";
+import Signup2screen from "../../pages/sign-up2.jsx";
 
 
 const Stack = createNativeStackNavigator();
@@ -44,7 +45,7 @@ export default function AppNavigator() {
         />
         <Stack.Screen 
           name="signup2" 
-          component={ForgotPasswordScreen} 
+          component={Signup2screen} 
           options={{ title: "second-Signup" }} 
         />
          <Stack.Screen 
