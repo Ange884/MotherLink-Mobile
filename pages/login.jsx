@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Image,
 } from "react-native";
-import BackgroundLayout from "../components/background.jsx";
+// import BackgroundLayout from "../components/background.jsx";
 import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
 
 export default function LoginScreen({ navigation }) {
@@ -21,7 +21,7 @@ export default function LoginScreen({ navigation }) {
 
 
     return (
-    <BackgroundLayout>
+    <View style={styles.container}>
       {/* Logo */}
       <Image
         source={require("../assets/images/logo.png")}
@@ -29,7 +29,7 @@ export default function LoginScreen({ navigation }) {
       />
 
       <Text style={[styles.title, { fontFamily: 'Poppins_400Regular' }]}>
-        Login
+        LOGIN
       </Text>
 
       {/* Inputs */}
@@ -75,7 +75,7 @@ export default function LoginScreen({ navigation }) {
           Login
         </Text>
       </TouchableOpacity>
-    </BackgroundLayout>
+   </View>
   );
 }
 
@@ -83,12 +83,21 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   logo: { width: 60, height: 60, marginBottom: 10, resizeMode: "contain" },
   title: { fontSize: 24, fontWeight: "bold", marginBottom: 20, color: "#000" },
+  container: {
+  flex: 1,
+  justifyContent: "center", // Pushes everything to the bottom
+  alignItems: "center",        // Centers horizontally
+  backgroundColor: "#f8f8f8",  // optional
+  paddingBottom: 40,           // adds space from the bottom edge
+},
+
   input: {
     width: 300,
     backgroundColor: "#fff",
     padding: 12,
     borderRadius: 8,
     marginVertical: 8,
+    marginBottom:20,
     borderWidth: 1,
     borderColor: "#ccc",
   },
@@ -117,6 +126,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#09111E",
     padding: 15,
+    marginTop:20,
     borderRadius: 8,
     width: 300,
     alignItems: "center",
