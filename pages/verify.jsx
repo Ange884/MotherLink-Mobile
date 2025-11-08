@@ -35,7 +35,7 @@ export default function VerifyScreen({ navigation }) {
       </View>
 
       {/* Verify Button */}
-      <TouchableOpacity style={styles.button} onPress={() => alert("Verify pressed")}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Login")}>
         <Text style={[styles.buttonText, { fontFamily: 'Poppins_400Regular' }]}>Verify</Text>
       </TouchableOpacity>
 

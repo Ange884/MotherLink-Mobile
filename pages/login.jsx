@@ -63,7 +63,7 @@ export default function LoginScreen({ navigation }) {
             style={[
               styles.rememberText,
               { fontFamily: "Poppins_400Regular" },
-            ]}
+            ]} onPress={()=>navigation.navigate("signup1")}
           >
             New? Create Account
           </Text>

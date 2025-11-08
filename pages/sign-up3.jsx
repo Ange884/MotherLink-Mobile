@@ -30,7 +30,7 @@ export default function Signup3screen({ navigation }) {
       </Text>
 
       <Text style={[styles.subtitle, { fontFamily: "Poppins_400Regular" }]}>
-        Details
+        Location
       </Text>
 
       {/* Email Fieldset */}
@@ -39,12 +39,12 @@ export default function Signup3screen({ navigation }) {
           styles.fieldset,
         ]}
       >
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Names</Text>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>District</Text>
         <TextInput
           value={email}
           onChangeText={setEmail}
           style={[styles.input, { fontFamily: "Poppins_400Regular",fontWeight:"600"  }]}
-          placeholder="Enter your names"
+          placeholder="Enter your district"
           placeholderTextColor="#09111E"
           underlineColorAndroid="transparent"
           selectionColor="#09111E"
@@ -59,13 +59,13 @@ export default function Signup3screen({ navigation }) {
           styles.fieldset,
         ]}
       >
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Number</Text>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Sector</Text>
         <TextInput
           value={password}
           onChangeText={setPassword}
           secureTextEntry
           style={[styles.input, { fontFamily: "Poppins_400Regular",fontWeight:"600" }]}
-          placeholder="Enter your email "
+          placeholder="Enter your sector "
           placeholderTextColor="#09111E"
           underlineColorAndroid="transparent"
           selectionColor="#09111E"
@@ -80,12 +80,12 @@ export default function Signup3screen({ navigation }) {
           styles.fieldset,
         ]}
       >
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Email</Text>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Cell</Text>
         <TextInput
           value={confirmPassword}
           onChangeText={setConfirmPassword}
           style={[styles.input, { fontFamily: "Poppins_400Regular" ,fontWeight:"600"}]}
-          placeholder="Enter your email"
+          placeholder="Enter your cell"
           placeholderTextColor="#09111E"
           underlineColorAndroid="transparent"
           selectionColor="#09111E"
@@ -98,12 +98,12 @@ export default function Signup3screen({ navigation }) {
           styles.fieldset,
         ]}
       >
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>National Id</Text>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Village</Text>
         <TextInput
           value={confirmPassword}
           onChangeText={setConfirmPassword}
           style={[styles.input, { fontFamily: "Poppins_400Regular" ,fontWeight:"600"}]}
-          placeholder="Enter national Id"
+          placeholder="Enter your village"
           placeholderTextColor="#09111E"
           underlineColorAndroid="transparent"
           selectionColor="#09111E"
@@ -122,7 +122,7 @@ export default function Signup3screen({ navigation }) {
         </Text>
       </Text>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Login")}>
         <Text
           style={[styles.buttonText, { fontFamily: "Poppins_400Regular" ,fontWeight:200}]}
         >
