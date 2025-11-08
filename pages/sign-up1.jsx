@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useFonts, Poppins_400Regular,Poppins_700Bold } from "@expo-google-fonts/poppins";
 
-export default function Signup1screen({ navigation }) {
+export default function Signup2screen({ navigation }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular,Poppins_700Bold });
 
   const [email, setEmail] = useState("");
@@ -44,7 +44,7 @@ export default function Signup1screen({ navigation }) {
         <TextInput
           value={email}
           onChangeText={setEmail}
-          style={[styles.input, { fontFamily: "Poppins_400Regular" }]}
+          style={[styles.input, { fontFamily: "Poppins_400Regular",fontWeight:"600"  }]}
           placeholder="Enter your email"
           placeholderTextColor="#09111E"
           underlineColorAndroid="transparent"
@@ -66,7 +66,7 @@ export default function Signup1screen({ navigation }) {
           value={password}
           onChangeText={setPassword}
           secureTextEntry
-          style={[styles.input, { fontFamily: "Poppins_400Regular" }]}
+          style={[styles.input, { fontFamily: "Poppins_400Regular",fontWeight:"600" }]}
           placeholder="Enter your password"
           placeholderTextColor="#09111E"
           underlineColorAndroid="transparent"
@@ -86,7 +86,7 @@ export default function Signup1screen({ navigation }) {
         <TextInput
           value={confirmPassword}
           onChangeText={setConfirmPassword}
-          style={[styles.input, { fontFamily: "Poppins_400Regular" }]}
+          style={[styles.input, { fontFamily: "Poppins_400Regular" ,fontWeight:"600"}]}
           placeholder="Confirm your password"
           placeholderTextColor="#09111E"
           underlineColorAndroid="transparent"
@@ -96,7 +96,7 @@ export default function Signup1screen({ navigation }) {
         />
       </View>
 
-      <Text style={styles.signupText}>
+      <Text style={[styles.signupText,{fontWeight:"600"}]}>
         Already have an account?
         <Text
           style={styles.loginLink}
@@ -106,7 +106,7 @@ export default function Signup1screen({ navigation }) {
         </Text>
       </Text>
 
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("signup2")}>
+      <TouchableOpacity style={styles.button}>
         <Text
           style={[styles.buttonText, { fontFamily: "Poppins_400Regular" ,fontWeight:200}]}
         >

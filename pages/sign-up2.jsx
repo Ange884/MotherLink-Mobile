@@ -30,7 +30,7 @@ export default function Signup2screen({ navigation }) {
       </Text>
 
       <Text style={[styles.subtitle, { fontFamily: "Poppins_400Regular" }]}>
-        REGISTER
+        Details
       </Text>
 
       {/* Email Fieldset */}
@@ -44,7 +44,7 @@ export default function Signup2screen({ navigation }) {
         <TextInput
           value={email}
           onChangeText={setEmail}
-          style={[styles.input, { fontFamily: "Poppins_400Regular" }]}
+          style={[styles.input, { fontFamily: "Poppins_400Regular",fontWeight:"600"  }]}
           placeholder="Enter your email"
           placeholderTextColor="#09111E"
           underlineColorAndroid="transparent"
@@ -66,7 +66,7 @@ export default function Signup2screen({ navigation }) {
           value={password}
           onChangeText={setPassword}
           secureTextEntry
-          style={[styles.input, { fontFamily: "Poppins_400Regular" }]}
+          style={[styles.input, { fontFamily: "Poppins_400Regular",fontWeight:"600" }]}
           placeholder="Enter your password"
           placeholderTextColor="#09111E"
           underlineColorAndroid="transparent"
@@ -86,7 +86,7 @@ export default function Signup2screen({ navigation }) {
         <TextInput
           value={confirmPassword}
           onChangeText={setConfirmPassword}
-          style={[styles.input, { fontFamily: "Poppins_400Regular" }]}
+          style={[styles.input, { fontFamily: "Poppins_400Regular" ,fontWeight:"600"}]}
           placeholder="Confirm your password"
           placeholderTextColor="#09111E"
           underlineColorAndroid="transparent"
@@ -96,7 +96,7 @@ export default function Signup2screen({ navigation }) {
         />
       </View>
 
-      <Text style={styles.signupText}>
+      <Text style={[styles.signupText,{fontWeight:"600"}]}>
         Already have an account?
         <Text
           style={styles.loginLink}
