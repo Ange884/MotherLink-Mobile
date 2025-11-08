@@ -37,15 +37,14 @@ export default function Signup2screen({ navigation }) {
       <View
         style={[
           styles.fieldset,
-          { borderColor: focusedField === "email" ? "#1048C5" : "#09111E" },
         ]}
       >
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Email</Text>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Names</Text>
         <TextInput
           value={email}
           onChangeText={setEmail}
           style={[styles.input, { fontFamily: "Poppins_400Regular",fontWeight:"600"  }]}
-          placeholder="Enter your email"
+          placeholder="Enter your names"
           placeholderTextColor="#09111E"
           underlineColorAndroid="transparent"
           selectionColor="#09111E"
@@ -58,16 +57,15 @@ export default function Signup2screen({ navigation }) {
       <View
         style={[
           styles.fieldset,
-          { borderColor: focusedField === "password" ? "#1048C5" : "#09111E" },
         ]}
       >
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Password</Text>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Number</Text>
         <TextInput
           value={password}
           onChangeText={setPassword}
           secureTextEntry
           style={[styles.input, { fontFamily: "Poppins_400Regular",fontWeight:"600" }]}
-          placeholder="Enter your password"
+          placeholder="Enter your email "
           placeholderTextColor="#09111E"
           underlineColorAndroid="transparent"
           selectionColor="#09111E"
@@ -82,12 +80,30 @@ export default function Signup2screen({ navigation }) {
           styles.fieldset,
         ]}
       >
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Confirm Password</Text>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Email</Text>
         <TextInput
           value={confirmPassword}
           onChangeText={setConfirmPassword}
           style={[styles.input, { fontFamily: "Poppins_400Regular" ,fontWeight:"600"}]}
-          placeholder="Confirm your password"
+          placeholder="Enter your email"
+          placeholderTextColor="#09111E"
+          underlineColorAndroid="transparent"
+          selectionColor="#09111E"
+          onFocus={() => setFocusedField("confirm")}
+          onBlur={() => setFocusedField(null)}
+        />
+      </View>
+      <View
+        style={[
+          styles.fieldset,
+        ]}
+      >
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>National Id</Text>
+        <TextInput
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          style={[styles.input, { fontFamily: "Poppins_400Regular" ,fontWeight:"600"}]}
+          placeholder="Enter national Id"
           placeholderTextColor="#09111E"
           underlineColorAndroid="transparent"
           selectionColor="#09111E"
@@ -126,8 +142,8 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   logo: { width: 60, height: 60, resizeMode: "contain" },
-  title: { fontSize: 18, fontFamily:"Poppins_700Bold", fontWeight:"900", marginBottom: 20, color: "#09111E" },
-  subtitle:{ fontSize: 16, fontFamily:"Poppins_700Bold", fontWeight:"700", marginBottom: 20, color: "#09111E" },
+  title: { fontSize: 18, fontFamily:"Poppins_700Bold", fontWeight:"900", marginBottom: 15, color: "#09111E" },
+  subtitle:{ fontSize: 16, fontFamily:"Poppins_700Bold", fontWeight:"700", marginBottom: 15, color: "#09111E" },
 
   fieldset: {
     width: 300,
@@ -135,7 +151,7 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     borderRadius: 8,
     position: "relative",
-    paddingTop: 10,
+    paddingTop: 5,
     marginVertical: 17,
   },
   signupText: {

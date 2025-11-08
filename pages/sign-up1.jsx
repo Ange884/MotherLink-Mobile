@@ -57,8 +57,7 @@ export default function Signup2screen({ navigation }) {
       {/* Password Fieldset */}
       <View
         style={[
-          styles.fieldset,
-          { borderColor: focusedField === "password" ? "#1048C5" : "#09111E" },
+          styles.fieldset         
         ]}
       >
         <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Password</Text>
@@ -106,7 +105,7 @@ export default function Signup2screen({ navigation }) {
         </Text>
       </Text>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("signup2")}>
         <Text
           style={[styles.buttonText, { fontFamily: "Poppins_400Regular" ,fontWeight:200}]}
         >
