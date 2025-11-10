@@ -41,6 +41,11 @@ export default function AppNavigator() {
           options={{ title: "Forgot Password" }} 
         />
         <Stack.Screen 
+          name="home" 
+          component={Home} 
+          options={{ title: "Home" }} 
+        />
+        <Stack.Screen 
           name="signup1" 
           component={Signup1screen} 
           options={{ title: "First-Signup" }} 
