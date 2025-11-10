@@ -1,10 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
 import BottomNav from "../components/navbar.jsx";
-
-import React from "react";
-import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, TextInput,Image, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { Ionicons, Feather } from "@expo/vector-icons";
 
 const HomeScreen = () => {
@@ -14,7 +11,7 @@ const HomeScreen = () => {
       <View style={styles.header}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Ionicons name="menu" size={28} color="#fff" />
-          <Text style={styles.headerText}>Hi Bonnie!</Text>
+          <Text style={styles.headerText}>Hi Nziza!</Text>
         </View>
         <Ionicons name="notifications-outline" size={24} color="#fff" />
       </View>
@@ -31,6 +28,7 @@ const HomeScreen = () => {
 
       {/* Week Calendar */}
       <View style={styles.calendar}>
+        <Text>August 2024</Text>
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"].map((day, index) => (
           <View
             key={index}
@@ -110,6 +108,7 @@ const HomeScreen = () => {
           <Text style={styles.actionText}>Reports</Text>
         </TouchableOpacity>
       </View>
+      <BottomNav/>
     </ScrollView>
   );
 };
