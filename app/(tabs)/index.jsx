@@ -40,9 +40,9 @@ export default function AppNavigator() {
           options={{ headerShown: false }} 
         />
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Appointments" component={Appointments} />
-        <Stack.Screen name="Search" component={Search} />
-        <Stack.Screen name="Notifications" component={Notifications} />
+        <Stack.Screen name="appointments" component={Appointments} />
+        <Stack.Screen name="search" component={Search} />
+        <Stack.Screen name="notifications" component={Notifications} />
         <Stack.Screen name="settings" component={Settings} />
         <Stack.Screen 
           name="ForgotPassword" 

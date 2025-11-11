@@ -15,13 +15,18 @@ export default function BottomNav() {
     setActive(screenName);
     navigation.navigate(screenName);
   };
+  const handleNav = (buttonName, screenName) => {
+  setActive(buttonName);           // styling
+  navigation.navigate(screenName); // navigation
+};
+
   return (
     <View style={styles.container}>
       {/* Bottom Navigation Bar */}
       <View style={styles.navBar}>
         <TouchableOpacity
   onPress={() =>{ setActive("home");
-              handlePress("home")}
+              handlePress("Home")}
   }
   style={[styles.navItem, active === "home" && styles.activeNavItem]}
 >
@@ -52,19 +57,21 @@ export default function BottomNav() {
 </TouchableOpacity>
 
 <TouchableOpacity
-  onPress={() => {setActive("add");
-                handlePress("appointments");
-  }}
+  onPress={() => handleNav("add", "appointments")}
   style={[styles.navItem, active === "add" && styles.activeNavItem]}
 >
-  <Image source={require("../assets/images/appoint.png")} style={[
-    styles.icon,
-    { tintColor: active === "add" ? "#fff" : "#09111E" }, // dynamic tint
-  ]} />
+  <Image
+    source={require("../assets/images/appoint.png")}
+    style={[
+      styles.icon,
+      { tintColor: active === "add" ? "#fff" : "#09111E" },
+    ]}
+  />
   <Text style={[styles.label, active === "add" && styles.activeLabel]}>
     Appointments
   </Text>
 </TouchableOpacity>
+
 
 <TouchableOpacity
   onPress={() => {setActive("notifications");
