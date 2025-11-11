@@ -13,7 +13,24 @@ export default function Appointments(){
       if (!fontsLoaded) {
         return null; // Wait for fonts to load
       }
-
+const appointments = [
+  {
+    type: "upcoming",
+    title: "Upcoming appointment",
+    time: "11:00",
+    location: "Mukamira sector",
+    icon: require("../assets/images/Tick.png"),
+    rightIcon: null,
+  },
+  {
+    type: "missed",
+    title: "Missed appointment",
+    time: "11:00",
+    location: "Mukamira sector",
+    icon: require("../assets/images/Tick.png"),
+    rightIcon: require("../assets/images/warning.png"),
+  },
+];
       return (
         <View style={styles.screen}>
           {/* Scrollable content */}
@@ -78,29 +95,27 @@ export default function Appointments(){
               </View>
             ))}
       
-            {/* Quick Actions */}
-            <Text style={[styles.sectionTitle, styles.fontBold]}>Notifications & Reminders</Text>
-            <View style={styles.actionsContainer}>
-              <TouchableOpacity style={styles.actionCard}>
-                <Image source={require("../assets/images/Vector1.png")} />
-                <Text style={[styles.actionText, styles.fontRegular]}>Start Home Visit</Text>
-              </TouchableOpacity>
-      
-              <TouchableOpacity style={styles.actionCard}>
-                <Image source={require("../assets/images/house.png")} />
-                <Text style={[styles.actionText, styles.fontRegular]}>Add House Details</Text>
-              </TouchableOpacity>
-      
-              <TouchableOpacity style={styles.actionCard}>
-                <Image source={require("../assets/images/Vector.png")} />
-                <Text style={[styles.actionText, styles.fontRegular]}>VHWID</Text>
-              </TouchableOpacity>
-      
-              <TouchableOpacity style={styles.actionCard}>
-                <Image source={require("../assets/images/Group .png")} />
-                <Text style={[styles.actionText, styles.fontRegular]}>Reports</Text>
-              </TouchableOpacity>
-            </View>
+            <View style={{ paddingHorizontal: 16, paddingVertical: 10,flexDirection:"column" }}>
+      {appointments.map((item, index) => (
+        <View key={index} style={[styles.card, {flexDirection:"column", justifyContent:"flex-start"}]}>
+          <View style={styles.cardHeader}>
+            <Image source={item.icon} style={styles.icon} />
+            <Text style={styles.title}>{item.title}</Text>
+          </View>
+
+          <View style={styles.cardBody}>
+            <Text style={styles.info}>{`Scheduled ${item.time}`}</Text>
+            <View style={styles.dot} />
+            <Text style={styles.info}>{item.location}</Text>
+          </View>
+
+          {item.rightIcon && (
+            <Image source={item.rightIcon} style={styles.rightIcon} />
+          )}
+        </View>
+      ))}
+    </View>
+            
           </ScrollView>
       
           {/* Fixed Bottom Navigation */}
@@ -134,6 +149,59 @@ export default function Appointments(){
         shadowRadius: 3,
       },
       
+    card: {
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    padding: 12,
+    borderWidth:1,
+    borderColor:"#e7e2e2ff",
+    marginVertical: 8,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  cardHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginBottom: 8,
+  },
+  icon: {
+    width: 24,
+    height: 24,
+  },
+  title: {
+    fontFamily: "Poppins_700Bold",
+    fontSize: 16,
+    color: "#09111E",
+    textAlign: "left",
+  },
+  cardBody: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+  info: {
+    fontFamily: "Poppins_400Regular",
+    fontSize: 14,
+    color: "#555",
+    textAlign: "left",
+  },
+  dot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: "#555",
+  },
+  rightIcon: {
+    width: 20,
+    height: 20,
+    position: "absolute",
+    top: 12,
+    right: 12,
+  },
       
         fontRegular: { fontFamily: "Poppins_400Regular" },
         fontBold: { fontFamily: "Poppins_700Bold" },
