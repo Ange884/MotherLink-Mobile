@@ -40,19 +40,19 @@ export default function BottomNav() {
 </TouchableOpacity>
 
 <TouchableOpacity
-  onPress={() => {setActive("search");
-                 handlePress("search")
+  onPress={() => {setActive("child");
+                 handlePress("child")
 
   }
 }
-  style={[styles.navItem, active === "search" && styles.activeNavItem]}
+  style={[styles.navItem, active === "child" && styles.activeNavItem]}
 >
-  <Image source={require("../assets/images/data.png")} style={[
+  <Image source={require("../assets/images/child.png")} style={[
     styles.icon,
     { tintColor: active === "search" ? "#fff" : "#09111E" }, // dynamic tint
   ]} />
-  <Text style={[styles.label, active === "search" && styles.activeLabel]}>
-    Search
+  <Text style={[styles.label, active === "child" && styles.activeLabel]}>
+    Child
   </Text>
 </TouchableOpacity>
 
@@ -74,34 +74,34 @@ export default function BottomNav() {
 
 
 <TouchableOpacity
-  onPress={() => {setActive("notifications");
-                 handlePress("notifications");
+  onPress={() => {setActive("mother");
+                 handlePress("mother");
   }}
-  style={[styles.navItem, active === "notifications" && styles.activeNavItem]}
+  style={[styles.navItem, active === "mother" && styles.activeNavItem]}
 >
-  <Image source={require("../assets/images/notify.png")} style={[
+  <Image source={require("../assets/images/mother.png")} style={[
     styles.icon,
-    { tintColor: active === "notifications" ? "#fff" : "#09111E" }, // dynamic tint
+    { tintColor: active === "mother" ? "#fff" : "#09111E" }, // dynamic tint
   ]} />
   <Text
-    style={[styles.label, active === "notifications" && styles.activeLabel]}
+    style={[styles.label, active === "mother" && styles.activeLabel]}
   >
-    Alerts
+    Mother
   </Text>
 </TouchableOpacity>
 
 <TouchableOpacity
-  onPress={() => {setActive("profile");
-                 handlePress("settings");
+  onPress={() => {setActive("analytics");
+                 handlePress("analytics");
   }}
-  style={[styles.navItem, active === "profile" && styles.activeNavItem]}
+  style={[styles.navItem, active === "analytics" && styles.activeNavItem]}
 >
-  <Image source={require("../assets/images/settings.png")} style={[
+  <Image source={require("../assets/images/chop.png")} style={[
     styles.icon,
-    { tintColor: active === "profile" ? "#fff" : "#09111E" }, // dynamic tint
+    { tintColor: active === "analytics" ? "#fff" : "#09111E" }, // dynamic tint
   ]}/>
-  <Text style={[styles.label, active === "profile" && styles.activeLabel]}>
-    Profile
+  <Text style={[styles.label, active === "analytics" && styles.activeLabel]}>
+   Analytics
   </Text>
 </TouchableOpacity>
 
