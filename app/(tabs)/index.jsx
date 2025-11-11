@@ -42,6 +42,7 @@ export default function AppNavigator() {
         />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="appointments" component={Appointments} />
+        <Stack.Screen name="profile" component={ProfileSettingsScreen} />
         <Stack.Screen name="mother" component={MotherManagementScreen} />
         <Stack.Screen name="child" component={ChildManagementscreen} />
         <Stack.Screen name="analytics" component={AnalyticsScreen} />

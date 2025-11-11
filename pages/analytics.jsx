@@ -6,79 +6,86 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  Animated,
 } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import { Ionicons, Feather, AntDesign, FontAwesome5 } from "@expo/vector-icons";
 import BottomNav from "@/components/navbar";
+import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold } from "@expo-google-fonts/poppins";
 
 const screenWidth = Dimensions.get("window").width;
 
 const chartData = {
   labels: ["S", "M", "T", "W", "T", "F", "S"],
   datasets: [
-    {
-      data: [180, 220, 160, 200, 180, 160, 140],
-      color: () => "#4F46E5", // purple
-      strokeWidth: 2,
-    },
-    {
-      data: [120, 160, 200, 180, 160, 140, 120],
-      color: () => "#06B6D4", // cyan
-      strokeWidth: 2,
-    },
-    {
-      data: [80, 100, 140, 120, 100, 80, 60],
-      color: () => "#F59E0B", // amber
-      strokeWidth: 2,
-    },
+    { data: [180, 220, 160, 200, 180, 160, 140], color: () => "#4F46E5", strokeWidth: 2 },
+    { data: [120, 160, 200, 180, 160, 140, 120], color: () => "#06B6D4", strokeWidth: 2 },
+    { data: [80, 100, 140, 120, 100, 80, 60], color: () => "#F59E0B", strokeWidth: 2 },
   ],
   legend: ["Value 1", "Value 2", "Value 3"],
 };
 
+const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
+
 const AnalyticsScreen = () => {
   const [selectedPeriod, setSelectedPeriod] = useState("DAY");
 
+  const [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_700Bold,
+  });
+
+  if (!fontsLoaded) return null;
+
+  // Animation helper
+  const scaleValue = new Animated.Value(1);
+  const handlePressIn = () => {
+    Animated.spring(scaleValue, {
+      toValue: 0.95,
+      useNativeDriver: true,
+    }).start();
+  };
+  const handlePressOut = () => {
+    Animated.spring(scaleValue, {
+      toValue: 1,
+      friction: 3,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
     <View style={styles.container}>
-      {/* Header */}
-      {/* <View style={styles.header}>
-        <View style={styles.headerLeft}>
-          <TouchableOpacity style={styles.iconButton}>
-            <Ionicons name="chevron-back" size={22} color="#000" />
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Analytics</Text>
-        </View>
-        <TouchableOpacity style={styles.iconButton}>
-          <Ionicons name="notifications-outline" size={22} color="#000" />
-        </TouchableOpacity>
-      </View> */}
-
       <ScrollView contentContainerStyle={styles.scroll}>
         {/* Period Selector */}
         <View style={styles.periodContainer}>
           {["DAY", "WEEK", "MONTH", "YEAR"].map((period) => (
-            <TouchableOpacity
+            <AnimatedTouchable
               key={period}
+              onPressIn={handlePressIn}
+              onPressOut={handlePressOut}
               onPress={() => setSelectedPeriod(period)}
               style={[
                 styles.periodButton,
                 selectedPeriod === period && styles.periodButtonActive,
+                { transform: [{ scale: scaleValue }] },
               ]}
             >
               <Text
                 style={[
                   styles.periodText,
                   selectedPeriod === period && styles.periodTextActive,
+                  { fontFamily: selectedPeriod === period ? "Poppins_700Bold" : "Poppins_500Medium" },
                 ]}
               >
                 {period}
               </Text>
-            </TouchableOpacity>
+            </AnimatedTouchable>
           ))}
         </View>
 
         {/* Chart Section */}
-        <Text style={styles.sectionTitle}>Antenatal appointments</Text>
+        <Text style={[styles.sectionTitle, { fontFamily: "Poppins_700Bold" }]}>Antenatal appointments</Text>
         <View style={styles.chartCard}>
           <LineChart
             data={chartData}
@@ -88,14 +95,10 @@ const AnalyticsScreen = () => {
               backgroundGradientFrom: "#fff",
               backgroundGradientTo: "#fff",
               decimalPlaces: 0,
-              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(100, 100, 100, ${opacity})`,
-              propsForDots: {
-                r: "0",
-              },
-              propsForBackgroundLines: {
-                stroke: "#eee",
-              },
+              color: (opacity = 1) => `rgba(0,0,0,${opacity})`,
+              labelColor: (opacity = 1) => `rgba(100,100,100,${opacity})`,
+              propsForDots: { r: "0" },
+              propsForBackgroundLines: { stroke: "#eee" },
             }}
             withShadow={false}
             bezier
@@ -104,62 +107,52 @@ const AnalyticsScreen = () => {
         </View>
 
         {/* Attendance Overview */}
-        <Text style={styles.sectionTitle}>Attendance overview</Text>
+        <Text style={[styles.sectionTitle, { fontFamily: "Poppins_700Bold" }]}>Attendance overview</Text>
         <View style={styles.grid3}>
-          <View style={styles.card}>
-            <Text style={styles.cardLabel}>First mothers</Text>
-            <Text style={styles.cardValue}>567</Text>
-          </View>
-          <View style={styles.card}>
-            <Text style={styles.cardLabel}>Third children</Text>
-            <Text style={styles.cardValue}>400</Text>
-          </View>
-          <View style={styles.card}>
-            <Text style={styles.cardLabel}>ANC one time</Text>
-            <Text style={styles.cardValue}>100</Text>
-          </View>
+          {[
+            { label: "First mothers", value: 567 },
+            { label: "Third children", value: 400 },
+            { label: "ANC one time", value: 100 },
+          ].map((item, index) => (
+            <AnimatedTouchable
+              key={index}
+              onPressIn={handlePressIn}
+              onPressOut={handlePressOut}
+              style={[styles.card, { transform: [{ scale: scaleValue }] }]}
+            >
+              <Text style={[styles.cardLabel, { fontFamily: "Poppins_500Medium" }]}>{item.label}</Text>
+              <Text style={[styles.cardValue, { fontFamily: "Poppins_700Bold" }]}>{item.value}</Text>
+            </AnimatedTouchable>
+          ))}
         </View>
 
         {/* Emergency Overview */}
-        <Text style={styles.sectionTitle}>Emergency overview</Text>
+        <Text style={[styles.sectionTitle, { fontFamily: "Poppins_700Bold" }]}>Emergency overview</Text>
         <View style={styles.grid2}>
-          <View style={styles.emergencyCard}>
-            <View style={[styles.iconWrapper, { backgroundColor: "#fee2e2" }]}>
-              <Feather name="activity" size={18} color="#ef4444" />
-            </View>
-            <Text style={styles.emergencyValue}>5%</Text>
-            <Text style={styles.emergencyLabel}>Total emergencies</Text>
-          </View>
-
-          <View style={styles.emergencyCard}>
-            <View style={[styles.iconWrapper, { backgroundColor: "#f3e8ff" }]}>
-              <AntDesign name="heart" size={18} color="#a855f7" />
-            </View>
-            <Text style={styles.emergencyValue}>57%</Text>
-            <Text style={styles.emergencyLabel}>Labor pain</Text>
-          </View>
-
-          <View style={styles.emergencyCard}>
-            <View style={[styles.iconWrapper, { backgroundColor: "#dbeafe" }]}>
-              <FontAwesome5 name="child" size={16} color="#3b82f6" />
-            </View>
-            <Text style={styles.emergencyValue}>20</Text>
-            <Text style={styles.emergencyLabel}>Child emergencies</Text>
-          </View>
-
-          <View style={styles.emergencyCard}>
-            <View style={[styles.iconWrapper, { backgroundColor: "#cffafe" }]}>
-              <Feather name="activity" size={18} color="#06b6d4" />
-            </View>
-            <Text style={styles.emergencyValue}>40</Text>
-            <Text style={styles.emergencyLabel}>Mother emergencies</Text>
-          </View>
+          {[
+            { label: "Total emergencies", value: "5%", icon: <Feather name="activity" size={18} color="#ef4444" />, bg: "#fee2e2" },
+            { label: "Labor pain", value: "57%", icon: <AntDesign name="heart" size={18} color="#a855f7" />, bg: "#f3e8ff" },
+            { label: "Child emergencies", value: "20", icon: <FontAwesome5 name="child" size={16} color="#3b82f6" />, bg: "#dbeafe" },
+            { label: "Mother emergencies", value: "40", icon: <Feather name="activity" size={18} color="#06b6d4" />, bg: "#cffafe" },
+          ].map((item, index) => (
+            <AnimatedTouchable
+              key={index}
+              onPressIn={handlePressIn}
+              onPressOut={handlePressOut}
+              style={[styles.emergencyCard, { transform: [{ scale: scaleValue }] }]}
+            >
+              <View style={[styles.iconWrapper, { backgroundColor: item.bg }]}>{item.icon}</View>
+              <Text style={[styles.emergencyValue, { fontFamily: "Poppins_700Bold" }]}>{item.value}</Text>
+              <Text style={[styles.emergencyLabel, { fontFamily: "Poppins_500Medium" }]}>{item.label}</Text>
+            </AnimatedTouchable>
+          ))}
         </View>
       </ScrollView>
+
       {/* Fixed Bottom Navigation */}
-          <View style={styles.fixedBottom}>
-            <BottomNav />
-          </View>
+      <View style={styles.fixedBottom}>
+        <BottomNav />
+      </View>
     </View>
   );
 };
@@ -167,150 +160,23 @@ const AnalyticsScreen = () => {
 export default AnalyticsScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F9FAFB",
-  },
-
-  fixedBottom: {
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  right: 0,
-  backgroundColor: "#fff",
-  borderTopWidth: 1,
-  borderTopColor: "#ddd",
-  elevation: 10,
-  shadowColor: "#000",
-  shadowOffset: { width: 0, height: -2 },
-  shadowOpacity: 0.1,
-  shadowRadius: 3,
-},
-
-
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: "#fff",
-    borderBottomWidth: 1,
-    borderColor: "#E5E7EB",
-  },
-  headerLeft: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  iconButton: {
-    padding: 4,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-  },
-  scroll: {
-    paddingHorizontal: 16,
-    paddingBottom: 80,
-  },
-  periodContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginVertical: 16,
-  },
-  periodButton: {
-    borderRadius: 20,
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    backgroundColor: "#E5E7EB",
-  },
-  periodButtonActive: {
-    backgroundColor: "#4F46E5",
-  },
-  periodText: {
-    fontSize: 12,
-    fontWeight: "500",
-    color: "#6B7280",
-  },
-  periodTextActive: {
-    color: "#fff",
-  },
-  chartCard: {
-    backgroundColor: "#fff",
-    borderRadius: 16,
-    padding: 8,
-    marginBottom: 24,
-    elevation: 2,
-  },
-  sectionTitle: {
-    fontSize: 14,
-    fontWeight: "600",
-    marginBottom: 8,
-  },
-  grid3: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 24,
-  },
-  grid2: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-  },
-  card: {
-    flex: 1,
-    backgroundColor: "#fff",
-    borderRadius: 12,
-    padding: 12,
-    alignItems: "center",
-    marginHorizontal: 4,
-    elevation: 1,
-  },
-  cardLabel: {
-    fontSize: 12,
-    color: "#6B7280",
-  },
-  cardValue: {
-    fontSize: 22,
-    fontWeight: "700",
-    color: "#111827",
-  },
-  emergencyCard: {
-    width: "48%",
-    backgroundColor: "#fff",
-    borderRadius: 12,
-    padding: 12,
-    marginBottom: 12,
-    elevation: 1,
-  },
-  iconWrapper: {
-    width: 40,
-    height: 40,
-    borderRadius: 8,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 8,
-  },
-  emergencyValue: {
-    fontSize: 24,
-    fontWeight: "700",
-  },
-  emergencyLabel: {
-    fontSize: 12,
-    color: "#6B7280",
-  },
-  bottomNav: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    paddingVertical: 12,
-    borderTopWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#fff",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
+  container: { flex: 1, backgroundColor: "#F9FAFB" },
+  scroll: { paddingHorizontal: 16, paddingBottom: 100 },
+  periodContainer: { flexDirection: "row", justifyContent: "space-between", marginVertical: 16 },
+  periodButton: { borderRadius: 20, paddingHorizontal: 14, paddingVertical: 6, backgroundColor: "#E5E7EB" },
+  periodButtonActive: { backgroundColor: "#09111E" },
+  periodText: { fontSize: 12, color: "#6B7280" },
+  periodTextActive: { color: "#fff" },
+  chartCard: { backgroundColor: "#fff", borderRadius: 16, padding: 8, marginBottom: 24, elevation: 2 },
+  sectionTitle: { fontSize: 14, color: "#111827", marginBottom: 8 },
+  grid3: { flexDirection: "row", justifyContent: "space-between", marginBottom: 24 },
+  grid2: { flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" },
+  card: { flex: 1, backgroundColor: "#fff", borderRadius: 12, padding: 12, alignItems: "center", marginHorizontal: 4, elevation: 1 },
+  cardLabel: { fontSize: 12, color: "#6B7280" },
+  cardValue: { fontSize: 22, color: "#111827" },
+  emergencyCard: { width: "48%", backgroundColor: "#fff", borderRadius: 12, padding: 12, marginBottom: 12, elevation: 1, alignItems: "center" },
+  iconWrapper: { width: 40, height: 40, borderRadius: 8, alignItems: "center", justifyContent: "center", marginBottom: 8 },
+  emergencyValue: { fontSize: 24, color: "#111827" },
+  emergencyLabel: { fontSize: 12, color: "#6B7280" },
+  fixedBottom: { position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: "#fff", borderTopWidth: 1, borderTopColor: "#ddd", elevation: 10, shadowColor: "#000", shadowOffset: { width: 0, height: -2 }, shadowOpacity: 0.1, shadowRadius: 3 },
 });

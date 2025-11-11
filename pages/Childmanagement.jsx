@@ -50,7 +50,14 @@ const ChildManagementScreen = () => {
           <View style={styles.notificationContainer}>
             <Ionicons name="notifications-outline" size={24} color="#fff" />
             {/* <View style={styles.notificationDot} /> */}
-            <Image source={require("../assets/images/white.png")} style={styles.notificationImage}/>
+            <TouchableOpacity
+             onPress={() => navigation.navigate("profile")}
+             >
+           <Image
+              source={require("../assets/images/white.png")}
+                style={styles.notificationImage}
+            />
+           </TouchableOpacity>
           </View>
         </View>
 
