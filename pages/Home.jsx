@@ -16,7 +16,7 @@ const HomeScreen = () => {
 return (
   <View style={styles.screen}>
     {/* Scrollable content */}
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom:90}}>
       {/* Header */}
       <View style={styles.header}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -146,7 +146,7 @@ return (
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", paddingHorizontal: 16 },
+  container: { flex: 1, backgroundColor: "#fff", paddingHorizontal: 16,marginBottom:10 },
   screen: {
   flex: 1,
   backgroundColor: "#fff",
