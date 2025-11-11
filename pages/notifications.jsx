@@ -30,12 +30,12 @@ const NotificationsScreen = () => {
     { name: "Ndayambaje John", detail: "Due: 16:00, Kicukiro Sector", type: "Missed" },
      { name: "Iradukunda Alice", detail: "Due: 09:00, Nyamata Sector", type: "All" },
       { name: "Iradukunda Alice", detail: "Due: 09:00, Nyamata Sector", type: "All" },
+      { name: "Mugisha Eric", detail: "Due: 10:30, Kigali Sector", type: "type" },
+      { name: "Mugisha Eric", detail: "Due: 10:30, Kigali Sector", type: "date" },
       { name: "Mugisha Eric", detail: "Due: 10:30, Kigali Sector", type: "Missed" },
-      { name: "Mugisha Eric", detail: "Due: 10:30, Kigali Sector", type: "Missed" },
-      { name: "Mugisha Eric", detail: "Due: 10:30, Kigali Sector", type: "Missed" },
-      { name: "Irakoze Ange", detail: "Due: 14:15, Gatsibo Sector", type: "Completed" },
-      { name: "Irakoze Ange", detail: "Due: 14:15, Gatsibo Sector", type: "Completed" },
-      { name: "Irakoze Ange", detail: "Due: 14:15, Gatsibo Sector", type: "Completed" },
+      { name: "Irakoze Ange", detail: "Due: 14:15, Gatsibo Sector", type: "date" },
+      { name: "Irakoze Ange", detail: "Due: 14:15, Gatsibo Sector", type: "type" },
+      { name: "Irakoze Ange", detail: "Due: 14:15, Gatsibo Sector", type: "type" },
   ];
 
   const filtered = activeTab === "All" ? notifications : notifications.filter(n => n.type === activeTab);
@@ -65,7 +65,7 @@ const NotificationsScreen = () => {
           >
             <Text
               style={[
-                styles.tabText,
+                styles.tabText,{fontFamily:"Poppins_700Bold"},
                 activeTab === tab && styles.activeTabText,
               ]}
             >
