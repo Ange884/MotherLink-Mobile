@@ -42,19 +42,19 @@ export default function Appointments(){
             <Text style={[styles.sectionTitle, styles.fontBold]}>Overview</Text>
             <View style={styles.overviewContainer}>
               <View style={styles.overviewCard}>
-                <Image source={require("../assets/images/Group1.png")} />
-                <Text style={[styles.cardTitle, styles.fontBold]}>Total Houses</Text>
+                <Image source={require("../assets/images/camm.png")} />
+                <Text style={[styles.cardTitle, styles.fontBold]}>UpComing</Text>
+                <Text style={[styles.cardCount, styles.fontBold]}>50</Text>
+              </View>
+              <View style={styles.overviewCard}>
+                <Image source={require("../assets/images/dash.png")} />
+                <Text style={[styles.cardTitle, styles.fontBold]}>Missed</Text>
                 <Text style={[styles.cardCount, styles.fontBold]}>120</Text>
               </View>
               <View style={styles.overviewCard}>
-                <Image source={require("../assets/images/Group2.png")} />
-                <Text style={[styles.cardTitle, styles.fontBold]}>Total Mothers</Text>
-                <Text style={[styles.cardCount, styles.fontBold]}>534</Text>
-              </View>
-              <View style={styles.overviewCard}>
-                <Image source={require("../assets/images/Group4.png")} />
-                <Text style={[styles.cardTitle, styles.fontBold]}>Total Children</Text>
-                <Text style={[styles.cardCount, styles.fontBold]}>620</Text>
+                <Image source={require("../assets/images/Tick.png")} />
+                <Text style={[styles.cardTitle, styles.fontBold]}>Completed</Text>
+                <Text style={[styles.cardCount, styles.fontBold]}>8</Text>
               </View>
             </View>
       
@@ -64,7 +64,7 @@ export default function Appointments(){
               <Text style={[styles.seeAll, styles.fontBold]}>See all</Text>
             </View>
       
-            {[1, 2, 3].map((_, i) => (
+            {[1, 2, 3,4,5].map((_, i) => (
               <View key={i} style={styles.appointmentCard}>
                 <View>
                   <Text style={[styles.appointmentName, styles.fontBold]}>Uwase Claudine</Text>
@@ -79,7 +79,7 @@ export default function Appointments(){
             ))}
       
             {/* Quick Actions */}
-            <Text style={[styles.sectionTitle, styles.fontBold]}>Quick Actions</Text>
+            <Text style={[styles.sectionTitle, styles.fontBold]}>Notifications & Reminders</Text>
             <View style={styles.actionsContainer}>
               <TouchableOpacity style={styles.actionCard}>
                 <Image source={require("../assets/images/Vector1.png")} />
