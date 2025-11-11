@@ -49,7 +49,7 @@ export default function BottomNav() {
 >
   <Image source={require("../assets/images/child.png")} style={[
     styles.icon,
-    { tintColor: active === "search" ? "#fff" : "#09111E" }, // dynamic tint
+    { tintColor: active === "child" ? "#fff" : "#09111E" }, // dynamic tint
   ]} />
   <Text style={[styles.label, active === "child" && styles.activeLabel]}>
     Child

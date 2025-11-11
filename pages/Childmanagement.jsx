@@ -22,9 +22,9 @@ const ChildManagementScreen = () => {
 
   // Summary cards data
   const summaryCards = [
-    { title: "Total mothers", count: "128", icon: "people-outline" },
-    { title: "Pregnant", count: "514", icon: "person-outline" },
-    { title: "Mothers", count: "8", icon: "people-circle-outline" },
+    { title: "Total children", count: "128", icon: "people-outline" },
+    { title: "Infants", count: "514", icon: "person-outline" },
+    { title: "Toddlers", count: "8", icon: "people-circle-outline" },
   ];
 
   // Today's appointments data
@@ -46,9 +46,10 @@ const ChildManagementScreen = () => {
         {/* Header */}
         <View style={styles.header}>
           <Ionicons name="menu" size={28} color="#fff" />
-          <Text style={[styles.headerTitle, styles.fontBold]}>Mother management</Text>
+          <Text style={[styles.headerTitle, styles.fontBold]}>Child management</Text>
           <View style={styles.notificationContainer}>
             <Ionicons name="notifications-outline" size={24} color="#fff" />
+            <Image source={require("../assets/images/dash.png")}/>
             <View style={styles.notificationDot} />
           </View>
         </View>
@@ -113,9 +114,10 @@ const ChildManagementScreen = () => {
         </View>
 
         {/* Mother Card */}
+        <View>
         <View style={styles.motherCard}>
           <Image
-            source={require("../assets/images/logo.png")}
+            source={require("../assets/images/mariza.png")}
             style={styles.profileImage}
           />
           <View style={[styles.motherInfo,]}>
@@ -143,6 +145,42 @@ const ChildManagementScreen = () => {
               </TouchableOpacity>
             </View>
           </View>
+          </View>
+
+          <View style={styles.motherCard}>
+          <Image
+            source={require("../assets/images/mariza.png")}
+            style={styles.profileImage}
+          />
+          <View style={[styles.motherInfo,]}>
+            <Text style={[styles.motherName, styles.fontBold]}>Nziza Ange</Text>
+            <Text style={[styles.motherId, styles.fontRegular]}>ID: CL-076</Text>
+            <Text style={[styles.motherDetail, styles.fontRegular]}>
+              Stage: 6 months ( trimester 2)
+            </Text>
+            <Text style={[styles.motherDetail, styles.fontRegular]}>
+              Health center: Mukamira Health center
+            </Text>
+            <Text style={[styles.motherDetail, styles.fontRegular]}>
+              Location: Mukamira
+            </Text>
+            <View style={styles.motherButtons}>
+              <TouchableOpacity style={styles.viewDetailsButton}>
+                <Text style={[styles.viewDetailsButtonText, styles.fontRegular]}>
+                  View details
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.emergencyButton}>
+                <Text style={[styles.emergencyButtonText, styles.fontRegular]}>
+                  Record emergency
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          </View>
+          
+
         </View>
       </ScrollView>
 
@@ -185,6 +223,8 @@ const styles = StyleSheet.create({
   },
   notificationContainer: {
     position: "relative",
+    flexDirection:"row",
+    
   },
   notificationDot: {
     position: "absolute",
