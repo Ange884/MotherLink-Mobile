@@ -17,6 +17,8 @@ import Appointments from "../../pages/appointments";
 import MotherManagementScreen from "../../pages/mothermanagement.jsx";
 import NotificationsScreen from "../../pages/notifications.jsx";
 import  Settings  from "../../pages/settings.jsx";
+import  AnalyticsScreen from "../../pages/analytics.jsx";
+import ChildManagementscreen from "../../pages/Childmanagement.jsx";
 
 
 const Stack = createNativeStackNavigator();
@@ -42,8 +44,8 @@ export default function AppNavigator() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="appointments" component={Appointments} />
         <Stack.Screen name="mother" component={MotherManagementScreen} />
-        <Stack.Screen name="child" component={} />
-        <Stack.Screen name="analytics" component={Settings} />
+        <Stack.Screen name="child" component={ChildManagementscreen} />
+        <Stack.Screen name="analytics" component={AnalyticsScreen} />
         <Stack.Screen 
           name="ForgotPassword" 
           component={ForgotPasswordScreen} 
