@@ -49,8 +49,8 @@ const ChildManagementScreen = () => {
           <Text style={[styles.headerTitle, styles.fontBold]}>Child management</Text>
           <View style={styles.notificationContainer}>
             <Ionicons name="notifications-outline" size={24} color="#fff" />
-            <Image source={require("../assets/images/dash.png")}/>
-            <View style={styles.notificationDot} />
+            {/* <View style={styles.notificationDot} /> */}
+            <Image source={require("../assets/images/white.png")} style={styles.notificationImage}/>
           </View>
         </View>
 
@@ -224,7 +224,10 @@ const styles = StyleSheet.create({
   notificationContainer: {
     position: "relative",
     flexDirection:"row",
-    
+    gap:8,
+    alignItems:"center"
+
+
   },
   notificationDot: {
     position: "absolute",
@@ -355,6 +358,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 13,
   },
+
   motherCard: {
     flexDirection: "row",
     backgroundColor: "#fff",

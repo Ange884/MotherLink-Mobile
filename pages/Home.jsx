@@ -23,7 +23,11 @@ return (
           <Ionicons name="menu" size={28} color="#fff" />
           <Text style={[styles.headerText, styles.fontRegular]}>Hi Nziza!</Text>
         </View>
-        <Ionicons name="notifications-outline" size={24} color="#fff" />
+        <View style={styles.notificationContainer}>
+                    <Ionicons name="notifications-outline" size={24} color="#fff" />
+                    {/* <View style={styles.notificationDot} /> */}
+                    <Image source={require("../assets/images/white.png")} style={styles.notificationImage}/>
+                  </View>
       </View>
 
       {/* Search Bar */}
@@ -170,6 +174,18 @@ fixedBottom: {
 
   fontRegular: { fontFamily: "Poppins_400Regular" },
   fontBold: { fontFamily: "Poppins_700Bold" },
+
+  notificationContainer: {
+  flexDirection: "row",
+  alignItems: "center",   // ensures vertical alignment
+  justifyContent: "center",
+  gap: 8,                 // space between icons (or use marginRight)
+},
+notificationImage: {
+  width: 18,
+  height: 18,
+  resizeMode: "contain",
+},
 
   header: {
     flexDirection: "row",
