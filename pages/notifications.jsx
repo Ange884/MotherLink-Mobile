@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   tabBtn: {
     paddingVertical: 8,
     paddingHorizontal: 20,
-    borderRadius: 20,
+    borderRadius: 7,
     backgroundColor: "#E8E9EB",
   },
   activeTabBtn: {

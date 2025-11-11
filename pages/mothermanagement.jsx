@@ -118,8 +118,8 @@ const MotherManagementScreen = () => {
             source={require("../assets/images/logo.png")}
             style={styles.profileImage}
           />
-          <View style={styles.motherInfo}>
-            <Text style={[styles.motherName, styles.fontBold]}>Bonnie Umurerwa</Text>
+          <View style={[styles.motherInfo,]}>
+            <Text style={[styles.motherName, styles.fontBold]}>Nziza Ange</Text>
             <Text style={[styles.motherId, styles.fontRegular]}>ID: CL-076</Text>
             <Text style={[styles.motherDetail, styles.fontRegular]}>
               Stage: 6 months ( trimester 2)

@@ -14,7 +14,7 @@ import Signup2screen from "../../pages/sign-up2.jsx";
 import Signup3screen from "../../pages/sign-up3.jsx";
 import Home from "../../pages/Home.jsx"
 import Appointments from "../../pages/appointments";
-import Search from "../../pages/search.jsx";
+import MotherManagementScreen from "../../pages/mothermanagement.jsx";
 import NotificationsScreen from "../../pages/notifications.jsx";
 import  Settings  from "../../pages/settings.jsx";
 
@@ -41,7 +41,7 @@ export default function AppNavigator() {
         />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="appointments" component={Appointments} />
-        <Stack.Screen name="search" component={Search} />
+        <Stack.Screen name="search" component={MotherManagementScreen} />
         <Stack.Screen name="notifications" component={NotificationsScreen} />
         <Stack.Screen name="settings" component={Settings} />
         <Stack.Screen 
