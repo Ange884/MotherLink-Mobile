@@ -13,8 +13,10 @@ import Signup1screen from "../../pages/sign-up1.jsx";
 import Signup2screen from "../../pages/sign-up2.jsx";
 import Signup3screen from "../../pages/sign-up3.jsx";
 import Home from "../../pages/Home.jsx"
-
-
+import Appointments from "../../pages/appointments";
+import Search from "../../pages/search.jsx";
+import Notifications from "../../pages/notifications.jsx";
+import  Settings  from "../../pages/settings.jsx";
 
 
 const Stack = createNativeStackNavigator();
@@ -37,6 +39,11 @@ export default function AppNavigator() {
           component={LandingScreen} 
           options={{ headerShown: false }} 
         />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Appointments" component={Appointments} />
+        <Stack.Screen name="Search" component={Search} />
+        <Stack.Screen name="Notifications" component={Notifications} />
+        <Stack.Screen name="settings" component={Settings} />
         <Stack.Screen 
           name="ForgotPassword" 
           component={ForgotPasswordScreen} 
