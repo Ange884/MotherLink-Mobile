@@ -1,15 +1,26 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Text, Image,navigation } from "react-native";
+import { useFonts, Poppins_400Regular, Poppins_600SemiBold } from "@expo-google-fonts/poppins";
 
-export default function BottomNav() {
+export default function BottomNav({navigation}) {
   const [active, setActive] = useState("home");
+   const [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_600SemiBold,
+  });
 
+  const handlePress = (screenName) => {
+    setActive(screenName);
+    navigation.navigate(screenName);
+  };
   return (
     <View style={styles.container}>
       {/* Bottom Navigation Bar */}
       <View style={styles.navBar}>
         <TouchableOpacity
-  onPress={() => setActive("home")}
+  onPress={() =>{ setActive("home");
+              handlePress("home")}
+  }
   style={[styles.navItem, active === "home" && styles.activeNavItem]}
 >
   <Image source={require("../assets/images/Home.png")} style={[
@@ -22,7 +33,11 @@ export default function BottomNav() {
 </TouchableOpacity>
 
 <TouchableOpacity
-  onPress={() => setActive("search")}
+  onPress={() => {setActive("search");
+                 handlePress("search")
+
+  }
+}
   style={[styles.navItem, active === "search" && styles.activeNavItem]}
 >
   <Image source={require("../assets/images/data.png")} style={[
@@ -123,6 +138,7 @@ label: {
   color: "#09111E",
   fontSize: 12,
   marginTop: 4,
+  fontFamily: "Poppins_400Regular",
 },
 
 activeLabel: {

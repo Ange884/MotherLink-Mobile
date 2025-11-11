@@ -15,6 +15,8 @@ import Signup3screen from "../../pages/sign-up3.jsx";
 import Home from "../../pages/Home.jsx"
 
 
+
+
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {

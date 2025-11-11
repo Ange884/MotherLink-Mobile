@@ -13,8 +13,9 @@ const HomeScreen = () => {
   if (!fontsLoaded) {
     return null; // Wait for fonts to load
   }
-
-  return (
+return (
+  <View style={styles.screen}>
+    {/* Scrollable content */}
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Header */}
       <View style={styles.header}>
@@ -37,64 +38,60 @@ const HomeScreen = () => {
 
       {/* Week Calendar */}
       <View style={styles.calendar}>
-  <Text style={[styles.calendarHeader, styles.fontBold]}>August 2024</Text>
-
-  <View style={styles.daysRow}>
-    {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"].map((day, index) => (
-      <View
-        key={index}
-        style={[
-          styles.dayBox,
-          day === "Wed" && styles.activeDayBox, // active day
-        ]}
-      >
-        <Text
-          style={[
-            styles.dayText,
-            styles.fontRegular,
-            day === "Wed" && styles.activeDayText,
-          ]}
-        >
-          {day}
-        </Text>
-        <Text
-          style={[
-            styles.dateText,
-            styles.fontBold,
-            day === "Wed" && styles.activeDateText,
-          ]}
-        >
-          {6 + index}
-        </Text>
+        <Text style={[styles.calendarHeader, styles.fontBold]}>August 2024</Text>
+        <View style={styles.daysRow}>
+          {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"].map((day, index) => (
+            <View
+              key={index}
+              style={[
+                styles.dayBox,
+                day === "Wed" && styles.activeDayBox, // active day
+              ]}
+            >
+              <Text
+                style={[
+                  styles.dayText,
+                  styles.fontRegular,
+                  day === "Wed" && styles.activeDayText,
+                ]}
+              >
+                {day}
+              </Text>
+              <Text
+                style={[
+                  styles.dateText,
+                  styles.fontBold,
+                  day === "Wed" && styles.activeDateText,
+                ]}
+              >
+                {6 + index}
+              </Text>
+            </View>
+          ))}
+        </View>
       </View>
-    ))}
-  </View>
-</View>
 
-      {/* Overview Section */}
+      {/* Overview */}
       <Text style={[styles.sectionTitle, styles.fontBold]}>Overview</Text>
       <View style={styles.overviewContainer}>
         <View style={styles.overviewCard}>
-          <Image 
-          source={require("../assets/images/Group1.png")} size={28} color="#09111E" />
+          <Image source={require("../assets/images/Group1.png")} />
           <Text style={[styles.cardTitle, styles.fontBold]}>Total Houses</Text>
           <Text style={[styles.cardCount, styles.fontBold]}>120</Text>
         </View>
         <View style={styles.overviewCard}>
-          <Image 
-          source={require("../assets/images/Group2.png")} size={28} color="#09111E" />
+          <Image source={require("../assets/images/Group2.png")} />
           <Text style={[styles.cardTitle, styles.fontBold]}>Total Mothers</Text>
           <Text style={[styles.cardCount, styles.fontBold]}>534</Text>
         </View>
         <View style={styles.overviewCard}>
-          <Image 
-          source={require("../assets/images/Group4.png")} size={28} color="#09111E" />
+          <Image source={require("../assets/images/Group4.png")} />
           <Text style={[styles.cardTitle, styles.fontBold]}>Total Children</Text>
           <Text style={[styles.cardCount, styles.fontBold]}>620</Text>
         </View>
       </View>
 
-      {/* Today's Appointment */}
+      {/* Appointments */}
       <View style={styles.sectionHeader}>
         <Text style={[styles.sectionTitle, styles.fontBold]}>Today's Appointment</Text>
         <Text style={[styles.seeAll, styles.fontBold]}>See all</Text>
@@ -118,37 +115,58 @@ const HomeScreen = () => {
       <Text style={[styles.sectionTitle, styles.fontBold]}>Quick Actions</Text>
       <View style={styles.actionsContainer}>
         <TouchableOpacity style={styles.actionCard}>
-          <Image 
-          source={require("../assets/images/Vector1.png")} size={28} color="#09111E" />
+          <Image source={require("../assets/images/Vector1.png")} />
           <Text style={[styles.actionText, styles.fontRegular]}>Start Home Visit</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.actionCard}>
-          <Image 
-          source={require("../assets/images/house.png")} size={28} color="#09111E" />
+          <Image source={require("../assets/images/house.png")} />
           <Text style={[styles.actionText, styles.fontRegular]}>Add House Details</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.actionCard}>
-          <Image 
-          source={require("../assets/images/Vector.png")} size={28} color="#09111E" />
+          <Image source={require("../assets/images/Vector.png")} />
           <Text style={[styles.actionText, styles.fontRegular]}>VHWID</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.actionCard}>
-          <Image 
-          source={require("../assets/images/Group .png")} size={28} color="#09111E" />
+          <Image source={require("../assets/images/Group .png")} />
           <Text style={[styles.actionText, styles.fontRegular]}>Reports</Text>
         </TouchableOpacity>
       </View>
-
-      <BottomNav />
     </ScrollView>
-  );
+
+    {/* Fixed Bottom Navigation */}
+    <View style={styles.fixedBottom}>
+      <BottomNav />
+    </View>
+  </View>
+);
+
 };
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff", paddingHorizontal: 16 },
+  screen: {
+  flex: 1,
+  backgroundColor: "#fff",
+},
+
+fixedBottom: {
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  right: 0,
+  backgroundColor: "#fff",
+  borderTopWidth: 1,
+  borderTopColor: "#ddd",
+  elevation: 10,
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: -2 },
+  shadowOpacity: 0.1,
+  shadowRadius: 3,
+},
+
 
   fontRegular: { fontFamily: "Poppins_400Regular" },
   fontBold: { fontFamily: "Poppins_700Bold" },
