@@ -12,7 +12,10 @@ export default function BottomNav() {
   onPress={() => setActive("home")}
   style={[styles.navItem, active === "home" && styles.activeNavItem]}
 >
-  <Image source={require("../assets/images/Home.png")} style={styles.icon} />
+  <Image source={require("../assets/images/Home.png")} style={[
+    styles.icon,
+    { tintColor: active === "home" ? "#fff" : "#09111E" }, // dynamic tint
+  ]} />
   <Text style={[styles.label, active === "home" && styles.activeLabel]}>
     Home
   </Text>
@@ -22,7 +25,10 @@ export default function BottomNav() {
   onPress={() => setActive("search")}
   style={[styles.navItem, active === "search" && styles.activeNavItem]}
 >
-  <Image source={require("../assets/images/data.png")} style={styles.icon} />
+  <Image source={require("../assets/images/data.png")} style={[
+    styles.icon,
+    { tintColor: active === "search" ? "#fff" : "#09111E" }, // dynamic tint
+  ]} />
   <Text style={[styles.label, active === "search" && styles.activeLabel]}>
     Search
   </Text>
@@ -32,7 +38,10 @@ export default function BottomNav() {
   onPress={() => setActive("add")}
   style={[styles.navItem, active === "add" && styles.activeNavItem]}
 >
-  <Image source={require("../assets/images/appoint.png")} style={styles.icon} />
+  <Image source={require("../assets/images/appoint.png")} style={[
+    styles.icon,
+    { tintColor: active === "add" ? "#fff" : "#09111E" }, // dynamic tint
+  ]} />
   <Text style={[styles.label, active === "add" && styles.activeLabel]}>
     Add
   </Text>
@@ -42,7 +51,10 @@ export default function BottomNav() {
   onPress={() => setActive("notifications")}
   style={[styles.navItem, active === "notifications" && styles.activeNavItem]}
 >
-  <Image source={require("../assets/images/notify.png")} style={styles.icon} />
+  <Image source={require("../assets/images/notify.png")} style={[
+    styles.icon,
+    { tintColor: active === "notifications" ? "#fff" : "#09111E" }, // dynamic tint
+  ]} />
   <Text
     style={[styles.label, active === "notifications" && styles.activeLabel]}
   >
@@ -54,7 +66,10 @@ export default function BottomNav() {
   onPress={() => setActive("profile")}
   style={[styles.navItem, active === "profile" && styles.activeNavItem]}
 >
-  <Image source={require("../assets/images/settings.png")} style={styles.icon} />
+  <Image source={require("../assets/images/settings.png")} style={[
+    styles.icon,
+    { tintColor: active === "profile" ? "#fff" : "#09111E" }, // dynamic tint
+  ]}/>
   <Text style={[styles.label, active === "profile" && styles.activeLabel]}>
     Profile
   </Text>
@@ -84,6 +99,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3,
   },
+
+  icon: {
+  width: 24,
+  height: 24,
+  resizeMode: "contain",
+},
+
   navItem: {
   alignItems: "center",
   justifyContent: "center",
@@ -98,12 +120,12 @@ activeNavItem: {
 },
 
 label: {
-  color: "#000",
+  color: "#09111E",
   fontSize: 12,
   marginTop: 4,
 },
 
 activeLabel: {
-  color: "#09111E", // <-- change text color when active
+  color: "#fff", // <-- change text color when active
 },
 });
