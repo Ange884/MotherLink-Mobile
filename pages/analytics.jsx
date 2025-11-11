@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import { Ionicons, Feather, AntDesign, FontAwesome5 } from "@expo/vector-icons";
+import BottomNav from "@/components/navbar";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -40,7 +41,7 @@ const AnalyticsScreen = () => {
   return (
     <View style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <View style={styles.headerLeft}>
           <TouchableOpacity style={styles.iconButton}>
             <Ionicons name="chevron-back" size={22} color="#000" />
@@ -50,7 +51,7 @@ const AnalyticsScreen = () => {
         <TouchableOpacity style={styles.iconButton}>
           <Ionicons name="notifications-outline" size={22} color="#000" />
         </TouchableOpacity>
-      </View>
+      </View> */}
 
       <ScrollView contentContainerStyle={styles.scroll}>
         {/* Period Selector */}
@@ -155,25 +156,10 @@ const AnalyticsScreen = () => {
           </View>
         </View>
       </ScrollView>
-
-      {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity>
-          <Ionicons name="home-outline" size={22} color="#000" />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Feather name="activity" size={22} color="#000" />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Ionicons name="people-outline" size={22} color="#000" />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <AntDesign name="hearto" size={22} color="#000" />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Feather name="trending-up" size={22} color="#000" />
-        </TouchableOpacity>
-      </View>
+      {/* Fixed Bottom Navigation */}
+          <View style={styles.fixedBottom}>
+            <BottomNav />
+          </View>
     </View>
   );
 };
@@ -185,6 +171,23 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F9FAFB",
   },
+
+  fixedBottom: {
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  right: 0,
+  backgroundColor: "#fff",
+  borderTopWidth: 1,
+  borderTopColor: "#ddd",
+  elevation: 10,
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: -2 },
+  shadowOpacity: 0.1,
+  shadowRadius: 3,
+},
+
+
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
