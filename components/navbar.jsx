@@ -8,30 +8,58 @@ export default function BottomNav() {
     <View style={styles.container}>
       {/* Bottom Navigation Bar */}
       <View style={styles.navBar}>
-        <TouchableOpacity onPress={() => setActive("home")} style={styles.navItem}>
-          <Image source={require("../assets/images/Home.png")} style={styles.icon} />
-          <Text style={[styles.label, active === "home" && styles.activeLabel]}>Home</Text>
-        </TouchableOpacity>
+        <TouchableOpacity
+  onPress={() => setActive("home")}
+  style={[styles.navItem, active === "home" && styles.activeNavItem]}
+>
+  <Image source={require("../assets/images/Home.png")} style={styles.icon} />
+  <Text style={[styles.label, active === "home" && styles.activeLabel]}>
+    Home
+  </Text>
+</TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setActive("search")} style={styles.navItem}>
-          <Image source={require("../assets/images/data.png")} style={styles.icon} />
-          <Text style={[styles.label, active === "search" && styles.activeLabel]}>Search</Text>
-        </TouchableOpacity>
+<TouchableOpacity
+  onPress={() => setActive("search")}
+  style={[styles.navItem, active === "search" && styles.activeNavItem]}
+>
+  <Image source={require("../assets/images/data.png")} style={styles.icon} />
+  <Text style={[styles.label, active === "search" && styles.activeLabel]}>
+    Search
+  </Text>
+</TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setActive("add")} style={styles.navItem}>
-          <Image source={require("../assets/images/appoint.png")} style={styles.icon} />
-          <Text style={[styles.label, active === "add" && styles.activeLabel]}>Add</Text>
-        </TouchableOpacity>
+<TouchableOpacity
+  onPress={() => setActive("add")}
+  style={[styles.navItem, active === "add" && styles.activeNavItem]}
+>
+  <Image source={require("../assets/images/appoint.png")} style={styles.icon} />
+  <Text style={[styles.label, active === "add" && styles.activeLabel]}>
+    Add
+  </Text>
+</TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setActive("notifications")} style={styles.navItem}>
-          <Image source={require("../assets/images/notify.png")} style={styles.icon} />
-          <Text style={[styles.label, active === "notifications" && styles.activeLabel]}>Alerts</Text>
-        </TouchableOpacity>
+<TouchableOpacity
+  onPress={() => setActive("notifications")}
+  style={[styles.navItem, active === "notifications" && styles.activeNavItem]}
+>
+  <Image source={require("../assets/images/notify.png")} style={styles.icon} />
+  <Text
+    style={[styles.label, active === "notifications" && styles.activeLabel]}
+  >
+    Alerts
+  </Text>
+</TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setActive("profile")} style={styles.navItem}>
-          <Image source={require("../assets/images/settings.png")} style={styles.icon} />
-          <Text style={[styles.label, active === "profile" && styles.activeLabel]}>Profile</Text>
-        </TouchableOpacity>
+<TouchableOpacity
+  onPress={() => setActive("profile")}
+  style={[styles.navItem, active === "profile" && styles.activeNavItem]}
+>
+  <Image source={require("../assets/images/settings.png")} style={styles.icon} />
+  <Text style={[styles.label, active === "profile" && styles.activeLabel]}>
+    Profile
+  </Text>
+</TouchableOpacity>
+
       </View>
     </View>
   );
@@ -57,20 +85,25 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   navItem: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  icon: {
-    width: 24,
-    height: 24,
-    marginBottom: 2,
-  },
-  label: {
-    fontSize: 10,
-    color: "#999",
-  },
-  activeLabel: {
-    color: "#09111E",
-    fontWeight: "bold",
-  },
+  alignItems: "center",
+  justifyContent: "center",
+  paddingVertical: 8,
+  paddingHorizontal: 14,
+  borderRadius: 12,
+  backgroundColor: "#fff", // normal background
+},
+
+activeNavItem: {
+  backgroundColor: "#09111E", // <-- active background
+},
+
+label: {
+  color: "#000",
+  fontSize: 12,
+  marginTop: 4,
+},
+
+activeLabel: {
+  color: "#09111E", // <-- change text color when active
+},
 });
