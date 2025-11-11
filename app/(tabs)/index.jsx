@@ -15,10 +15,9 @@ import Signup3screen from "../../pages/sign-up3.jsx";
 import Home from "../../pages/Home.jsx"
 import Appointments from "../../pages/appointments";
 import MotherManagementScreen from "../../pages/mothermanagement.jsx";
-import NotificationsScreen from "../../pages/notifications.jsx";
-import  Settings  from "../../pages/settings.jsx";
 import  AnalyticsScreen from "../../pages/analytics.jsx";
 import ChildManagementscreen from "../../pages/Childmanagement.jsx";
+import ProfileSettingsScreen from "../../pages/Profile.jsx";
 
 
 const Stack = createNativeStackNavigator();
