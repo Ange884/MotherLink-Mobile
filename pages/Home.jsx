@@ -20,9 +20,9 @@ const HomeScreen = ({ navigation }) => {
     Poppins_700Bold,
   });
 
-  if (!fontsLoaded) return null;
-
   const [visibleForm, setVisibleForm] = useState(null);
+
+  if (!fontsLoaded) return null;
 
   const closeModal = () => setVisibleForm(null);
 
