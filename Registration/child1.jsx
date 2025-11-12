@@ -164,7 +164,8 @@ export default function RegisterChild({ navigation }) {
           />
         </View>
 
-         <Text style= {{padding:"20"}}>Location</Text>
+         <Text style= {{margin:15, fontSize:15, fontFamily:"Poppins_700Bold"}}>Location</Text>
+
         <View style={styles.fieldset}>
           <Text
             style={[
@@ -189,10 +190,83 @@ export default function RegisterChild({ navigation }) {
             onBlur={() => setFocusedField(null)}
           />
         </View>
+        <View style={styles.fieldset}>
+          <Text
+            style={[
+              styles.legend,
+              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
+            ]}
+          >
+            Marital Status
+          </Text>
+          <TextInput
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            style={[
+              styles.input,
+              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
+            ]}
+            placeholder="Confirm your password"
+            placeholderTextColor="#09111E"
+            underlineColorAndroid="transparent"
+            selectionColor="#09111E"
+            onFocus={() => setFocusedField("confirm")}
+            onBlur={() => setFocusedField(null)}
+          />
+        </View>
+        <View style={styles.fieldset}>
+          <Text
+            style={[
+              styles.legend,
+              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
+            ]}
+          >
+            Marital Status
+          </Text>
+          <TextInput
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            style={[
+              styles.input,
+              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
+            ]}
+            placeholder="Confirm your password"
+            placeholderTextColor="#09111E"
+            underlineColorAndroid="transparent"
+            selectionColor="#09111E"
+            onFocus={() => setFocusedField("confirm")}
+            onBlur={() => setFocusedField(null)}
+          />
+        </View>
+        <View style={styles.fieldset}>
+          <Text
+            style={[
+              styles.legend,
+              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
+            ]}
+          >
+            Marital Status
+          </Text>
+          <TextInput
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            style={[
+              styles.input,
+              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
+            ]}
+            placeholder="Confirm your password"
+            placeholderTextColor="#09111E"
+            underlineColorAndroid="transparent"
+            selectionColor="#09111E"
+            onFocus={() => setFocusedField("confirm")}
+            onBlur={() => setFocusedField(null)}
+          />
+        </View>
+
         {/* Button */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("register2")}
+          onPress={() => navigation.navigate("child2")}
         >
           <Text
             style={[
