@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useFonts, Poppins_400Regular,Poppins_700Bold } from "@expo-google-fonts/poppins";
 
-export default function HomeVisitScreen({ navigation }) {
+export default function HomeVisitscreen2({ navigation }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular,Poppins_700Bold });
 
   const [email, setEmail] = useState("");
@@ -23,7 +23,7 @@ export default function HomeVisitScreen({ navigation }) {
     <View style={styles.container}>
 
       <Text style={[styles.subtitle, { fontFamily: "Poppins_400Regular" }]}>
-        Start Home visit
+        Start Home Visit
       </Text>
 
       {/* Email Fieldset */}
@@ -33,7 +33,27 @@ export default function HomeVisitScreen({ navigation }) {
           { borderColor: focusedField === "email" ? "#1048C5" : "#09111E" },
         ]}
       >
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Select House</Text>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Blood pressure</Text>
+        <TextInput
+          value={email}
+          onChangeText={setEmail}
+          style={[styles.input, { fontFamily: "Poppins_400Regular",fontWeight:"600"  }]}
+          placeholder="Enter your full names"
+          placeholderTextColor="#09111E"
+          underlineColorAndroid="transparent"
+          selectionColor="#09111E"
+          onFocus={() => setFocusedField("email")}
+          onBlur={() => setFocusedField(null)}
+        />
+      </View>
+
+<View
+        style={[
+          styles.fieldset,
+          { borderColor: focusedField === "email" ? "#1048C5" : "#09111E" },
+        ]}
+      >
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Pulse rate</Text>
         <TextInput
           value={email}
           onChangeText={setEmail}
@@ -53,7 +73,7 @@ export default function HomeVisitScreen({ navigation }) {
           styles.fieldset         
         ]}
       >
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Visit date</Text>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Swelling</Text>
         <TextInput
           value={password}
           onChangeText={setPassword}
@@ -74,7 +94,7 @@ export default function HomeVisitScreen({ navigation }) {
           styles.fieldset,
         ]}
       >
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Visit type</Text>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Height</Text>
         <TextInput
           value={confirmPassword}
           onChangeText={setConfirmPassword}
@@ -89,7 +109,27 @@ export default function HomeVisitScreen({ navigation }) {
          
       </View>
 
-      <TouchableOpacity style={styles.button} onPress={navigation.navigate("visit2")}>
+<View
+        style={[
+          styles.fieldset,
+        ]}
+      >
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Weight</Text>
+        <TextInput
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          style={[styles.input, { fontFamily: "Poppins_400Regular" ,fontWeight:"600"}]}
+          placeholder="Confirm your password"
+          placeholderTextColor="#09111E"
+          underlineColorAndroid="transparent"
+          selectionColor="#09111E"
+          onFocus={() => setFocusedField("confirm")}
+          onBlur={() => setFocusedField(null)}
+        />
+         
+      </View>
+
+      <TouchableOpacity style={styles.button}>
         <Text
           style={[styles.buttonText, { fontFamily: "Poppins_400Regular" ,fontWeight:200}]}
         >
