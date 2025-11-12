@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   headerSection: {
-    width: "85%",
+    width: "90%",
     backgroundColor: "#0B0F2F",
     paddingTop: 60,
     paddingBottom: 35,
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     marginLeft: 35,
   },
   headerContent: {
-    width: 300,
+    width: 330,
     alignItems: "center",
   },
   progressContainer: {
@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
     color: "#09111E",
   },
   fieldset: {
-    width: "100%",
+    width: "90%",
     maxWidth: 300,
     borderWidth: 1.5,
     borderColor: "#000",
