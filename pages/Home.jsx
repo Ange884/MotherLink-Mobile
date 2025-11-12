@@ -3,6 +3,7 @@ import { useFonts, Poppins_400Regular, Poppins_700Bold } from '@expo-google-font
 import BottomNav from "../components/navbar.jsx";
 import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity,Image } from "react-native";
 import { Ionicons, Feather } from "@expo/vector-icons";
+import HomeVisitForm from "../subpages/HomeVisitPage.jsx";
 
 const HomeScreen = ({navigation}) => {
   const [fontsLoaded] = useFonts({
@@ -13,6 +14,21 @@ const HomeScreen = ({navigation}) => {
   if (!fontsLoaded) {
     return null; // Wait for fonts to load
   }
+
+   const [visibleForm, setVisibleForm] = useState(null); // which form to show
+
+  const closeModal = () => setVisibleForm(null);
+  
+  const renderForm = () => {
+    switch (visibleForm) {
+      case "home": return <HomeVisitForm onClose={closeModal} />;
+      case "house": return <HouseDetailsForm onClose={closeModal} />;
+      case "vhwid": return <VHWIDForm onClose={closeModal} />;
+      case "reports": return <ReportsForm onClose={closeModal} />;
+      default: return null;
+    }
+  };
+
 return (
   <View style={styles.screen}>
     {/* Scrollable content */}
@@ -125,24 +141,24 @@ return (
       {/* Quick Actions */}
       <Text style={[styles.sectionTitle, styles.fontBold]}>Quick Actions</Text>
       <View style={styles.actionsContainer}>
-        <TouchableOpacity style={styles.actionCard}>
+        <TouchableOpacity style={styles.actionCard} onPress={() => setVisibleForm("home")}>
           <Image source={require("../assets/images/Vector1.png")} />
-          <Text style={[styles.actionText, styles.fontRegular]}>Start Home Visit</Text>
+          <Text style={styles.actionText}>Start Home Visit</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.actionCard}>
+        <TouchableOpacity style={styles.actionCard} onPress={() => setVisibleForm("house")}>
           <Image source={require("../assets/images/house.png")} />
-          <Text style={[styles.actionText, styles.fontRegular]}>Add House Details</Text>
+          <Text style={styles.actionText}>Add House Details</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.actionCard}>
+        <TouchableOpacity style={styles.actionCard} onPress={() => setVisibleForm("vhwid")}>
           <Image source={require("../assets/images/Vector.png")} />
-          <Text style={[styles.actionText, styles.fontRegular]}>VHWID</Text>
+          <Text style={styles.actionText}>VHWID</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.actionCard}>
+        <TouchableOpacity style={styles.actionCard} onPress={() => setVisibleForm("reports")}>
           <Image source={require("../assets/images/Group .png")} />
-          <Text style={[styles.actionText, styles.fontRegular]}>Reports</Text>
+          <Text style={styles.actionText}>Reports</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
