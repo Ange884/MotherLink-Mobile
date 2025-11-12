@@ -1,100 +1,132 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, StyleSheet, Text, Image} from "react-native";
-import { useFonts, Poppins_400Regular, Poppins_600SemiBold } from "@expo-google-fonts/poppins";
+import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
+import {
+  useFonts,
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+} from "@expo-google-fonts/poppins";
 import { useNavigation } from "@react-navigation/native";
 
 export default function BottomNav() {
-  const [active, setActive] = useState("home");
-   const navigation = useNavigation();
-   const [fontsLoaded] = useFonts({
+  const [active, setActive] = useState("Home");
+  const navigation = useNavigation();
+
+  const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_600SemiBold,
   });
 
-  const handlePress = (buttonName, screenName) => {
-  setActive(buttonName);
-  navigation.navigate(screenName);
-};
+  // Wait until fonts are loaded
+  if (!fontsLoaded) {
+    return null;
+  }
 
+  const handlePress = (buttonName, screenName) => {
+    setActive(buttonName);
+    navigation.navigate(screenName);
+  };
 
   return (
     <View style={styles.container}>
-      {/* Bottom Navigation Bar */}
       <View style={styles.navBar}>
+
+        {/* HOME */}
         <TouchableOpacity
-  onPress={() =>handlePress("home","home")
-  }
-  style={[styles.navItem, active === "home" && styles.activeNavItem]}
->
-  <Image source={require("../assets/images/Home.png")} style={[
-    styles.icon,
-    { tintColor: active === "home" ? "#fff" : "#09111E" }, // dynamic tint
-  ]} />
-  <Text style={[styles.label, active === "home" && styles.activeLabel]}>
-    Home
-  </Text>
-</TouchableOpacity>
+          onPress={() => handlePress("Home", "Home")}
+          style={[styles.navItem, active === "Home" && styles.activeNavItem]}
+        >
+          <Image
+            source={require("../assets/images/Home.png")}
+            style={[
+              styles.icon,
+              { tintColor: active === "Home" ? "#fff" : "#09111E" },
+            ]}
+          />
+          <Text style={[styles.label, active === "Home" && styles.activeLabel]}>
+            Home
+          </Text>
+        </TouchableOpacity>
 
-<TouchableOpacity
-  onPress={() => 
-handlePress("child","child")
-}
-  style={[styles.navItem, active === "child" && styles.activeNavItem]}
->
-  <Image source={require("../assets/images/child.png")} style={[
-    styles.icon,
-    { tintColor: active === "child" ? "#fff" : "#09111E" }, // dynamic tint
-  ]} />
-  <Text style={[styles.label, active === "child" && styles.activeLabel]}>
-    Child
-  </Text>
-</TouchableOpacity>
+        {/* CHILD */}
+        <TouchableOpacity
+          onPress={() => handlePress("Child", "child")}
+          style={[styles.navItem, active === "Child" && styles.activeNavItem]}
+        >
+          <Image
+            source={require("../assets/images/child.png")}
+            style={[
+              styles.icon,
+              { tintColor: active === "Child" ? "#fff" : "#09111E" },
+            ]}
+          />
+          <Text style={[styles.label, active === "Child" && styles.activeLabel]}>
+            Child
+          </Text>
+        </TouchableOpacity>
 
-<TouchableOpacity
-  onPress={() => handlePress("add", "appointments")}
-  style={[styles.navItem, active === "add" && styles.activeNavItem]}
->
-  <Image
-    source={require("../assets/images/appoint.png")}
-    style={[
-      styles.icon,
-      { tintColor: active === "add" ? "#fff" : "#09111E" },
-    ]}
-  />
-  <Text style={[styles.label, active === "add" && styles.activeLabel]}>
-    Appointments
-  </Text>
-</TouchableOpacity>
+        {/* APPOINTMENTS */}
+        <TouchableOpacity
+          onPress={() => handlePress("Appointments", "appointments")}
+          style={[
+            styles.navItem,
+            active === "Appointments" && styles.activeNavItem,
+          ]}
+        >
+          <Image
+            source={require("../assets/images/appoint.png")}
+            style={[
+              styles.icon,
+              { tintColor: active === "Appointments" ? "#fff" : "#09111E" },
+            ]}
+          />
+          <Text
+            style={[
+              styles.label,
+              active === "Appointments" && styles.activeLabel,
+            ]}
+          >
+            Appointments
+          </Text>
+        </TouchableOpacity>
 
+        {/* MOTHER */}
+        <TouchableOpacity
+          onPress={() => handlePress("Mother", "mother")}
+          style={[styles.navItem, active === "Mother" && styles.activeNavItem]}
+        >
+          <Image
+            source={require("../assets/images/mother.png")}
+            style={[
+              styles.icon,
+              { tintColor: active === "Mother" ? "#fff" : "#09111E" },
+            ]}
+          />
+          <Text style={[styles.label, active === "Mother" && styles.activeLabel]}>
+            Mother
+          </Text>
+        </TouchableOpacity>
 
-<TouchableOpacity
-  onPress={() => 
-                 handlePress("mother","mother")}
-  style={[styles.navItem, active === "mother" && styles.activeNavItem]}
->
-  <Image source={require("../assets/images/mother.png")} style={[
-    styles.icon,
-    { tintColor: active === "mother" ? "#fff" : "#09111E" }, // dynamic tint
-  ]} />
-  <Text
-    style={[styles.label, active === "mother" && styles.activeLabel]}
-  >
-    Mother
-  </Text>
-</TouchableOpacity>
-
-<TouchableOpacity
-  onPress={() => handlePress("analytics","analytics")}
-  style={[styles.navItem, active === "analytics" && styles.activeNavItem]}
->
-  <Image source={require("../assets/images/chop.png")} style={[
-    styles.icon,
-    { tintColor: active === "analytics" ? "#fff" : "#09111E" }, // dynamic tint
-  ]}/>
-  <Text style={[styles.label, active === "analytics" && styles.activeLabel]}>
-   Analytics
-  </Text>
-</TouchableOpacity>
+        {/* ANALYTICS */}
+        <TouchableOpacity
+          onPress={() => handlePress("Analytics", "analytics")}
+          style={[
+            styles.navItem,
+            active === "Analytics" && styles.activeNavItem,
+          ]}
+        >
+          <Image
+            source={require("../assets/images/chop.png")}
+            style={[
+              styles.icon,
+              { tintColor: active === "Analytics" ? "#fff" : "#09111E" },
+            ]}
+          />
+          <Text
+            style={[styles.label, active === "Analytics" && styles.activeLabel]}
+          >
+            Analytics
+          </Text>
+        </TouchableOpacity>
 
       </View>
     </View>
@@ -104,7 +136,7 @@ handlePress("child","child")
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-end", // push navbar to bottom
+    justifyContent: "flex-end",
   },
   navBar: {
     flexDirection: "row",
@@ -114,40 +146,35 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderTopWidth: 1,
     borderTopColor: "#ddd",
-    elevation: 5, // shadow on Android
-    shadowColor: "#000", // shadow on iOS
+    elevation: 5,
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
   },
-
   icon: {
-  width: 24,
-  height: 24,
-  resizeMode: "contain",
-},
-
+    width: 24,
+    height: 24,
+    resizeMode: "contain",
+  },
   navItem: {
-  alignItems: "center",
-  justifyContent: "center",
-  paddingVertical: 8,
-  paddingHorizontal: 14,
-  borderRadius: 12,
-  backgroundColor: "#fff", // normal background
-},
-
-activeNavItem: {
-  backgroundColor: "#09111E", // <-- active background
-},
-
-label: {
-  color: "#09111E",
-  fontSize: 12,
-  marginTop: 4,
-  fontFamily: "Poppins_400Regular",
-},
-
-activeLabel: {
-  color: "#fff", // <-- change text color when active
-},
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+    borderRadius: 12,
+    backgroundColor: "#fff",
+  },
+  activeNavItem: {
+    backgroundColor: "#09111E",
+  },
+  label: {
+    color: "#09111E",
+    fontSize: 12,
+    marginTop: 4,
+    fontFamily: "Poppins_400Regular",
+  },
+  activeLabel: {
+    color: "#fff",
+  },
 });
