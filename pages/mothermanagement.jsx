@@ -48,8 +48,14 @@ const MotherManagementScreen = ({navigation}) => {
           <Ionicons name="menu" size={28} color="#fff" />
           <Text style={[styles.headerTitle, styles.fontBold]}>Mother management</Text>
           <View style={styles.notificationContainer}>
-                      <Ionicons name="notifications-outline" size={24} color="#fff" />
-                      {/* <View style={styles.notificationDot} /> */}
+                      <TouchableOpacity
+                           onPress={() => navigation.navigate("notifications")}
+                            >
+                           <Image
+                                source={require("../assets/images/notii.png")}
+                                style={styles.notificationImage}
+                                   />
+                               </TouchableOpacity>
                       <TouchableOpacity
                        onPress={() => navigation.navigate("profile")}
                        >

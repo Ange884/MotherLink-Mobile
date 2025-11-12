@@ -45,7 +45,14 @@ const HomeScreen = ({ navigation }) => {
           </View>
 
           <View style={styles.notificationContainer}>
-            <Ionicons name="notifications-outline" size={24} color="#fff" />
+            <TouchableOpacity
+                     onPress={() => navigation.navigate("notifications")}
+                      >
+                   <Image
+                     source={require("../assets/images/notii.png")}
+                     style={styles.notificationImage}
+                    />
+                                     </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate("profile")}>
               <Image
                 source={require("../assets/images/white.png")}
@@ -165,7 +172,7 @@ const HomeScreen = ({ navigation }) => {
 
           <TouchableOpacity
             style={styles.actionCard}
-            onPress={() => setVisibleForm("appointments")}
+            onPress={() => navigation.navigate("appointments")}
           >
             <Image source={require("../assets/images/Vector.png")} />
             <Text style={styles.actionText}>VHWID</Text>
@@ -173,7 +180,7 @@ const HomeScreen = ({ navigation }) => {
 
           <TouchableOpacity
             style={styles.actionCard}
-            onPress={() => setVisibleForm("reports")}
+            onPress={() => navigation.navigate("analytics")}
           >
             <Image source={require("../assets/images/Group .png")} />
             <Text style={styles.actionText}>Reports</Text>
@@ -217,8 +224,6 @@ const HomeScreen = ({ navigation }) => {
           onFinish={closeModal}
         />
       )}
-      {visibleForm === "appointments" && <Appointments onClose={closeModal} />}
-      {visibleForm === "reports" && <Reports onClose={closeModal} />}
     </BlurView>
   </TouchableOpacity>
 </Modal>
