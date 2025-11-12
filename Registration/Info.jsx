@@ -23,13 +23,13 @@ export default function InfoSection() {
           <View style={styles.progressContainer}>
             <View style={styles.step} />
             <View style={styles.step} />
-            <View style={[styles.step, styles.activeStep]} />
             <View style={styles.step} />
+            <View style={[styles.step, styles.activeStep]} />
           </View>
 
           {/* Step text */}
           <Text style={[styles.stepText, { fontFamily: "Poppins_400Regular" }]}>
-            Step 3 of 4
+            Step 4 of 4
           </Text>
 
           {/* Card */}
@@ -143,8 +143,8 @@ const styles = StyleSheet.create({
   // ===== PARAGRAPHS =====
   paragraphBox: {
     borderWidth: 1.5,
-    borderColor: "#09111E",
-    borderRadius: 0, // no radius
+    borderColor: "#878888ff",
+    borderRadius: 8, // no radius
     padding: 18,
     backgroundColor: "#FFFFFF",
     marginBottom: 25,
@@ -158,15 +158,15 @@ const styles = StyleSheet.create({
 
   termsBox: {
     borderWidth: 1.3,
-    borderColor: "#1E3A8A",
-    borderRadius: 0, // no radius
+    borderColor: "#bcbcc0ff",
+    borderRadius: 4, // no radius
     padding: 14,
     backgroundColor: "#F1F5FF",
     marginBottom: 30,
   },
   termsText: {
     fontSize: 13,
-    color: "#1E3A8A",
+    color: "#020d2cff",
     textAlign: "center",
   },
   highlight: {
