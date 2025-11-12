@@ -9,7 +9,7 @@ const appointments = [
   { date: "2025-12-10", time: "11:00 AM", type: "Follow-up", location: "Mukamira Health Center" },
 ];
 
-export default function AppointmentsContent() {
+export default function ChildAppointments() {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_700Bold,

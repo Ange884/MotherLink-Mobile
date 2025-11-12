@@ -3,13 +3,13 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
 
 const emergencies = [
-  { date: "2025-10-14", description: "Severe pain", status: "Received" },
-  { date: "2025-10-14", description: "Severe pain", status: "Received" },
-  { date: "2025-10-14", description: "Severe pain", status: "Received" },
-  { date: "2025-10-14", description: "Severe pain", status: "Received" },
+  { date: "2025-10-14", description: "Polio", status: "Completed" ,hospital:"Mukamira Health Post"},
+  { date: "2025-10-14", description: "BCG", status: "Completed" ,hospital:"Mukamira Health Post"},
+  { date: "2025-10-14", description: "Measles", status: "Completed",hospital:"Mukamira Health Post" },
+  { date: "2025-10-14", description: "BCG", status: "Completed" ,hospital:"Mukamira Health Post"},
 ];
 
-export default function EmergencyContent() {
+export default function ChildEmergency() {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_700Bold,
