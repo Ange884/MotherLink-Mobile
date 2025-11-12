@@ -125,7 +125,7 @@ const MotherManagementScreen = ({navigation}) => {
             style={styles.addMothersButton}
             onPress={() => navigation.navigate("register1")}
           >
-            <Text style={[styles.addMothersButtonText, styles.fontRegular]}>+ add mothers</Text>
+            <Text style={[styles.addMothersButtonText, styles.fontRegular]}>+ add mother</Text>
           </TouchableOpacity>
         </View>
 

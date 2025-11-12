@@ -122,8 +122,8 @@ const ChildManagementScreen = ({navigation}) => {
         {/* Registered Mothers Section */}
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, styles.fontBold]}>Registered mothers</Text>
-          <TouchableOpacity style={styles.addMothersButton}>
-            <Text style={[styles.addMothersButtonText, styles.fontRegular]}>+ add mothers</Text>
+          <TouchableOpacity style={styles.addMothersButton} onPress={() => navigation.navigate("child1")}>
+            <Text style={[styles.addMothersButtonText, styles.fontRegular]}>+ add Child</Text>
           </TouchableOpacity>
         </View>
 
