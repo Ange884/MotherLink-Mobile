@@ -11,22 +11,18 @@ export default function BottomNav() {
     Poppins_600SemiBold,
   });
 
-  const handlePress = (screenName) => {
-    setActive(screenName);
-    navigation.navigate(screenName);
-  };
-  const handleNav = (buttonName, screenName) => {
-  setActive(buttonName);           // styling
-  navigation.navigate(screenName); // navigation
+  const handlePress = (buttonName, screenName) => {
+  setActive(buttonName);
+  navigation.navigate(screenName);
 };
+
 
   return (
     <View style={styles.container}>
       {/* Bottom Navigation Bar */}
       <View style={styles.navBar}>
         <TouchableOpacity
-  onPress={() =>{ setActive("home");
-              handlePress("Home")}
+  onPress={() =>handlePress("home","home")
   }
   style={[styles.navItem, active === "home" && styles.activeNavItem]}
 >
@@ -40,10 +36,8 @@ export default function BottomNav() {
 </TouchableOpacity>
 
 <TouchableOpacity
-  onPress={() => {setActive("child");
-                 handlePress("child")
-
-  }
+  onPress={() => 
+handlePress("child","child")
 }
   style={[styles.navItem, active === "child" && styles.activeNavItem]}
 >
@@ -57,7 +51,7 @@ export default function BottomNav() {
 </TouchableOpacity>
 
 <TouchableOpacity
-  onPress={() => handleNav("add", "appointments")}
+  onPress={() => handlePress("add", "appointments")}
   style={[styles.navItem, active === "add" && styles.activeNavItem]}
 >
   <Image
@@ -74,9 +68,8 @@ export default function BottomNav() {
 
 
 <TouchableOpacity
-  onPress={() => {setActive("mother");
-                 handlePress("mother");
-  }}
+  onPress={() => 
+                 handlePress("mother","mother")}
   style={[styles.navItem, active === "mother" && styles.activeNavItem]}
 >
   <Image source={require("../assets/images/mother.png")} style={[
@@ -91,9 +84,7 @@ export default function BottomNav() {
 </TouchableOpacity>
 
 <TouchableOpacity
-  onPress={() => {setActive("analytics");
-                 handlePress("analytics");
-  }}
+  onPress={() => handlePress("analytics","analytics")}
   style={[styles.navItem, active === "analytics" && styles.activeNavItem]}
 >
   <Image source={require("../assets/images/chop.png")} style={[
