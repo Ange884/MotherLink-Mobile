@@ -114,7 +114,7 @@ const ChildManagementScreen = ({navigation}) => {
               </Text>
             </View>
             <TouchableOpacity style={styles.ancButton}>
-              <Text style={[styles.ancButtonText, styles.fontRegular]}>ANC</Text>
+              <Text style={[styles.ancButtonText, styles.fontRegular]}>Vaccine</Text>
             </TouchableOpacity>
           </View>
         ))}

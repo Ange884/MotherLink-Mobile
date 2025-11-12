@@ -7,21 +7,27 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import {
   useFonts,
   Poppins_400Regular,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
 
-export default function RegisterChild3({ navigation }) {
+export default function RegisterChild({ navigation }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_700Bold });
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [focusedField, setFocusedField] = useState(null);
+  const [healthCenter, setHealthCenter] = useState("");
+  const [healthInsurance, setHealthInsurance] = useState("");
+  const [bcgChecked, setBcgChecked] = useState([true, true, true, true]);
 
   if (!fontsLoaded) return null;
+
+  const toggleBcg = (index) => {
+    const newChecked = [...bcgChecked];
+    newChecked[index] = !newChecked[index];
+    setBcgChecked(newChecked);
+  };
 
   return (
     <ScrollView
@@ -39,183 +45,164 @@ export default function RegisterChild3({ navigation }) {
         <View style={styles.headerContent}>
           {/* Progress bar */}
           <View style={styles.progressContainer}>
+            <View style={[styles.step, ]} />
             <View style={styles.step} />
-            <View style={styles.step} />
-            <View style={[styles.step, styles.activeStep]} />
+            <View style={[styles.step,styles.activeStep]} />
             <View style={styles.step} />
           </View>
 
           {/* Step text */}
-          <Text style={[styles.stepText, {fontFamily: "Poppins_400Regular"}]}>Step 3 of 4</Text>
-
-          {/* Card */}
-          <View style={styles.card}>
-            <Text
-              style={[styles.cardText, { fontFamily: "Poppins_700Bold" }]}
-            >
-             Pregnancy Information
-            </Text>
-          </View>
+          <Text style={[styles.stepText, { fontFamily: "Poppins_400Regular" }]}>
+            Step 3 of 4
+          </Text>
         </View>
       </View>
 
       {/* === Form Fields === */}
       <View style={styles.formSection}>
-        {/* Email Fieldset */}
-        <View style={styles.fieldset}>
+        {/* Health Center Button */}
+        <TouchableOpacity style={styles.healthCenterButton}>
           <Text
             style={[
-              styles.legend,
-              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
+              styles.healthCenterButtonText,
+              { fontFamily: "Poppins_700Bold" },
             ]}
           >
-            Name
-          </Text>
-          <TextInput
-            value={email}
-            onChangeText={setEmail}
-            style={[
-              styles.input,
-              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
-            ]}
-            placeholder="Enter your email"
-            placeholderTextColor="#09111E"
-            underlineColorAndroid="transparent"
-            selectionColor="#09111E"
-            onFocus={() => setFocusedField("email")}
-            onBlur={() => setFocusedField(null)}
-          />
-        </View>
-
-        {/* Password Fieldset */}
-        <View style={styles.fieldset}>
-          <Text
-            style={[
-              styles.legend,
-              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
-            ]}
-          >
-            DOB
-          </Text>
-          <TextInput
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            style={[
-              styles.input,
-              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
-            ]}
-            placeholder="Enter your password"
-            placeholderTextColor="#09111E"
-            underlineColorAndroid="transparent"
-            selectionColor="#09111E"
-            onFocus={() => setFocusedField("password")}
-            onBlur={() => setFocusedField(null)}
-          />
-        </View>
-
-        {/* Confirm Password Fieldset */}
-        <View style={styles.fieldset}>
-          <Text
-            style={[
-              styles.legend,
-              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
-            ]}
-          >
-           Phone
-          </Text>
-          <TextInput
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            style={[
-              styles.input,
-              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
-            ]}
-            placeholder="Confirm your password"
-            placeholderTextColor="#09111E"
-            underlineColorAndroid="transparent"
-            selectionColor="#09111E"
-            onFocus={() => setFocusedField("confirm")}
-            onBlur={() => setFocusedField(null)}
-          />
-        </View>
-        <View style={styles.fieldset}>
-          <Text
-            style={[
-              styles.legend,
-              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
-            ]}
-          >
-           National Id
-          </Text>
-          <TextInput
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            style={[
-              styles.input,
-              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
-            ]}
-            placeholder="Confirm your password"
-            placeholderTextColor="#09111E"
-            underlineColorAndroid="transparent"
-            selectionColor="#09111E"
-            onFocus={() => setFocusedField("confirm")}
-            onBlur={() => setFocusedField(null)}
-          />
-        </View>
-        <View style={styles.fieldset}>
-          <Text
-            style={[
-              styles.legend,
-              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
-            ]}
-          >
-            Marital Status
-          </Text>
-          <TextInput
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            style={[
-              styles.input,
-              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
-            ]}
-            placeholder="Confirm your password"
-            placeholderTextColor="#09111E"
-            underlineColorAndroid="transparent"
-            selectionColor="#09111E"
-            onFocus={() => setFocusedField("confirm")}
-            onBlur={() => setFocusedField(null)}
-          />
-        </View>
-
-        {/* Button */}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("info")}
-        >
-          <Text
-            style={[
-              styles.buttonText,
-              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
-            ]}
-          >
-            Proceed
+            Health center
           </Text>
         </TouchableOpacity>
+
+        {/* Health Center Input */}
+        <View style={styles.fieldset}>
+          <Text
+            style={[
+              styles.legend,
+              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
+            ]}
+          >
+            Health center
+          </Text>
+          <TextInput
+            value={healthCenter}
+            onChangeText={setHealthCenter}
+            style={[
+              styles.input,
+              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
+            ]}
+            placeholder="Enter your full names"
+            placeholderTextColor="#09111E"
+            underlineColorAndroid="transparent"
+            selectionColor="#09111E"
+          />
+        </View>
+
+        {/* Health Insurance Input */}
+        <View style={styles.fieldset}>
+          <Text
+            style={[
+              styles.legend,
+              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
+            ]}
+          >
+            Health insurance
+          </Text>
+          <TextInput
+            value={healthInsurance}
+            onChangeText={setHealthInsurance}
+            style={[
+              styles.input,
+              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
+            ]}
+            placeholder="select relationship"
+            placeholderTextColor="#09111E"
+            underlineColorAndroid="transparent"
+            selectionColor="#09111E"
+          />
+        </View>
+
+        {/* Vaccination Status Section */}
+        <Text
+          style={[
+            styles.vaccinationTitle,
+            { fontFamily: "Poppins_700Bold" },
+          ]}
+        >
+          Vaccination status
+        </Text>
+
+        <View style={styles.vaccinationBox}>
+          {[0, 1, 2, 3].map((index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.checkboxRow}
+              onPress={() => toggleBcg(index)}
+            >
+              <View
+                style={[
+                  styles.checkbox,
+                  bcgChecked[index] && styles.checkboxChecked,
+                ]}
+              >
+                {bcgChecked[index] && (
+                  <Ionicons name="checkmark" size={16} color="#1E40AF" />
+                )}
+              </View>
+              <Text
+                style={[
+                  styles.checkboxLabel,
+                  { fontFamily: "Poppins_400Regular" },
+                ]}
+              >
+                BCG
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {/* Navigation Buttons */}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.previousButton}
+            onPress={() => {
+              if (navigation && navigation.goBack) {
+                navigation.goBack();
+              }
+            }}
+          >
+            <Text
+              style={[
+                styles.previousButtonText,
+                { fontFamily: "Poppins_400Regular" },
+              ]}
+            >
+              Previous
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.nextButton}
+            onPress={() => navigation.navigate("child2")}
+          >
+            <Text
+              style={[
+                styles.nextButtonText,
+                { fontFamily: "Poppins_400Regular" },
+              ]}
+            >
+              Next
+            </Text>
+            <Ionicons name="chevron-forward" size={18} color="#fff" />
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
 }
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   scrollContainer: {
     alignItems: "center",
     paddingBottom: 40,
-  },
-  container: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "#f8f8f8",
   },
   headerSection: {
     width: "100%",
@@ -258,35 +245,41 @@ export const styles = StyleSheet.create({
     fontSize: 13,
     marginBottom: 15,
   },
-  card: {
-    backgroundColor: "white",
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    width: "100%",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.15,
-    shadowRadius: 3,
-    elevation: 4,
-  },
-  cardText: {
-    fontSize: 15,
-    color: "#000",
-  },
   formSection: {
     alignItems: "center",
     marginTop: 25,
+    width: "100%",
+    paddingHorizontal: 20,
+  },
+  healthCenterButton: {
+    width: "100%",
+    maxWidth: 300,
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    alignItems: "center",
+    marginBottom: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  healthCenterButtonText: {
+    fontSize: 16,
+    color: "#09111E",
   },
   fieldset: {
-    width: 300,
+    width: "100%",
+    maxWidth: 300,
     borderWidth: 1.5,
     borderColor: "#000",
     borderRadius: 8,
     position: "relative",
     paddingTop: 10,
     marginVertical: 17,
+    backgroundColor: "#fff",
   },
   legend: {
     position: "absolute",
@@ -302,24 +295,78 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: "#09111E",
   },
-  signupText: {
+  vaccinationTitle: {
+    fontSize: 15,
+    color: "#09111E",
+    marginTop: 10,
+    marginBottom: 12,
+    alignSelf: "flex-start",
+    marginLeft: 10,
+  },
+  vaccinationBox: {
+    width: "100%",
+    maxWidth: 300,
+    backgroundColor: "#fff",
+    borderWidth: 1.5,
+    borderColor: "#000",
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 20,
+  },
+  checkboxRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 8,
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderWidth: 2,
+    borderColor: "#1E40AF",
+    borderRadius: 4,
+    marginRight: 12,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  checkboxChecked: {
+    backgroundColor: "#E0E7FF",
+  },
+  checkboxLabel: {
     fontSize: 14,
     color: "#09111E",
-    marginTop: 15,
   },
-  loginLink: {
-    color: "#063392",
-    fontWeight: "bold",
-  },
-  button: {
-    backgroundColor: "#09111E",
-    padding: 15,
+  buttonContainer: {
+    flexDirection: "row",
+    width: "100%",
+    maxWidth: 300,
+    justifyContent: "space-between",
     marginTop: 20,
+    gap: 12,
+  },
+  previousButton: {
+    flex: 1,
+    backgroundColor: "#fff",
+    borderWidth: 1.5,
+    borderColor: "#000",
+    paddingVertical: 15,
     borderRadius: 8,
-    width: 300,
     alignItems: "center",
   },
-  buttonText: {
+  previousButtonText: {
+    color: "#09111E",
+    fontSize: 16,
+  },
+  nextButton: {
+    flex: 1,
+    backgroundColor: "#0B0F2F",
+    paddingVertical: 15,
+    borderRadius: 8,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 6,
+  },
+  nextButtonText: {
     color: "#fff",
     fontSize: 16,
   },

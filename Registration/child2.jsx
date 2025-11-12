@@ -189,19 +189,42 @@ export default function RegisterChild2({ navigation }) {
         </View>
 
         {/* Button */}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("child3")}
-        >
-          <Text
-            style={[
-              styles.buttonText,
-              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
-            ]}
+        
+        {/* Navigation Buttons */}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.previousButton}
+            onPress={() => {
+              if (navigation && navigation.goBack) {
+                navigation.goBack();
+              }
+            }}
           >
-            Next
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={[
+                styles.previousButtonText,
+                { fontFamily: "Poppins_400Regular" },
+              ]}
+            >
+              Previous
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.nextButton}
+            onPress={() => navigation.navigate("child2")}
+          >
+            <Text
+              style={[
+                styles.nextButtonText,
+                { fontFamily: "Poppins_400Regular" },
+              ]}
+            >
+              Next
+            </Text>
+            <Ionicons name="chevron-forward" size={18} color="#fff" />
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
