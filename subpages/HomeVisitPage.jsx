@@ -1,15 +1,7 @@
-// components/HomeVisitForm.jsx
 import React from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
-import { useFonts, Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
 
 const HomeVisitForm = ({ onClose }) => {
-  const [fontsLoaded] = useFonts({
-    Poppins_400Regular,
-    Poppins_700Bold,
-  });
-  if (!fontsLoaded) return null;
-
   return (
     <View style={styles.card}>
       <Text style={[styles.title, { fontFamily: "Poppins_700Bold" }]}>Start Home Visit</Text>

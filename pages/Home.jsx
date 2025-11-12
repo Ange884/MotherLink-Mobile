@@ -1,229 +1,208 @@
-import React from "react";
-import { useFonts, Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';
-import BottomNav from "../components/navbar.jsx";
-import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity,Image } from "react-native";
+import React, { useState } from "react";
+import { 
+  View, Text, TextInput, StyleSheet, ScrollView, 
+  TouchableOpacity, Image, Modal 
+} from "react-native";
+import { useFonts, Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import { Ionicons, Feather } from "@expo/vector-icons";
+import { BlurView } from "expo-blur";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import BottomNav from "../components/navbar.jsx";
 import HomeVisitForm from "../subpages/HomeVisitPage.jsx";
 import Reports from "../subpages/reports.jsx";
 import Appointments from "../subpages/appointments.jsx";
 import AddHouseDetails from "../subpages/addHousedetails.jsx";
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_700Bold,
   });
 
-  if (!fontsLoaded) {
-    return null; // Wait for fonts to load
-  }
+  if (!fontsLoaded) return null;
 
-   const [visibleForm, setVisibleForm] = useState(null); // which form to show
+  const [visibleForm, setVisibleForm] = useState(null);
 
   const closeModal = () => setVisibleForm(null);
 
-  const renderForm = () => {
-    switch (visibleForm) {
-      case "home": return <HomeVisitForm onClose={closeModal} />;
-      case "house": return <AddHouseDetails onClose={closeModal} />;
-      case "appointments": return <Appointments onClose={closeModal} />;
-      case "reports": return <Reports onClose={closeModal} />;
-      default: return null;
-    }
-  };
+  return (
+    <SafeAreaView style={styles.screen}>
+      {/* Scrollable Content */}
+      <ScrollView
+        style={styles.container}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 90 }}
+      >
+        {/* Header */}
+        <View style={styles.header}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Ionicons name="menu" size={28} color="#fff" />
+            <Text style={[styles.headerText, styles.fontRegular]}>Hi Nziza!</Text>
+          </View>
 
-return (
-  <View style={styles.screen}>
-    {/* Scrollable content */}
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom:90}}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Ionicons name="menu" size={28} color="#fff" />
-          <Text style={[styles.headerText, styles.fontRegular]}>Hi Nziza!</Text>
+          <View style={styles.notificationContainer}>
+            <Ionicons name="notifications-outline" size={24} color="#fff" />
+            <TouchableOpacity onPress={() => navigation.navigate("profile")}>
+              <Image
+                source={require("../assets/images/white.png")}
+                style={styles.notificationImage}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.notificationContainer}>
-                    <Ionicons name="notifications-outline" size={24} color="#fff" />
-                    {/* <View style={styles.notificationDot} /> */}
-                    <TouchableOpacity
-                                 onPress={() => navigation.navigate("profile")}
-                                 >
-                               <Image
-                                  source={require("../assets/images/white.png")}
-                                    style={styles.notificationImage}
-                                />
-                               </TouchableOpacity>
-                  </View>
-      </View>
 
-      {/* Search Bar */}
-      <View style={styles.searchContainer}>
-        <Feather name="search" size={18} color="#777" style={{ marginRight: 6 }} />
-        <TextInput
-          placeholder="Search for anything"
-          placeholderTextColor="#777"
-          style={[styles.searchInput, styles.fontRegular]}
-        />
-      </View>
+        {/* Search Bar */}
+        <View style={styles.searchContainer}>
+          <Feather name="search" size={18} color="#777" style={{ marginRight: 6 }} />
+          <TextInput
+            placeholder="Search for anything"
+            placeholderTextColor="#777"
+            style={[styles.searchInput, styles.fontRegular]}
+          />
+        </View>
 
-      {/* Week Calendar */}
-      <View style={styles.calendar}>
-        <Text style={[styles.calendarHeader, styles.fontBold]}>August 2024</Text>
-        <View style={styles.daysRow}>
-          {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"].map((day, index) => (
-            <View
-              key={index}
-              style={[
-                styles.dayBox,
-                day === "Wed" && styles.activeDayBox, // active day
-              ]}
-            >
-              <Text
+        {/* Week Calendar */}
+        <View style={styles.calendar}>
+          <Text style={[styles.calendarHeader, styles.fontBold]}>August 2024</Text>
+          <View style={styles.daysRow}>
+            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"].map((day, index) => (
+              <View
+                key={index}
                 style={[
-                  styles.dayText,
-                  styles.fontRegular,
-                  day === "Wed" && styles.activeDayText,
+                  styles.dayBox,
+                  day === "Wed" && styles.activeDayBox, // active day
                 ]}
               >
-                {day}
+                <Text
+                  style={[
+                    styles.dayText,
+                    styles.fontRegular,
+                    day === "Wed" && styles.activeDayText,
+                  ]}
+                >
+                  {day}
+                </Text>
+                <Text
+                  style={[
+                    styles.dateText,
+                    styles.fontBold,
+                    day === "Wed" && styles.activeDateText,
+                  ]}
+                >
+                  {6 + index}
+                </Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        {/* Overview */}
+        <Text style={[styles.sectionTitle, styles.fontBold]}>Overview</Text>
+        <View style={styles.overviewContainer}>
+          <View style={styles.overviewCard}>
+            <Image source={require("../assets/images/Group1.png")} />
+            <Text style={[styles.cardTitle, styles.fontBold]}>Total Houses</Text>
+            <Text style={[styles.cardCount, styles.fontBold]}>120</Text>
+          </View>
+          <View style={styles.overviewCard}>
+            <Image source={require("../assets/images/Group2.png")} />
+            <Text style={[styles.cardTitle, styles.fontBold]}>Total Mothers</Text>
+            <Text style={[styles.cardCount, styles.fontBold]}>534</Text>
+          </View>
+          <View style={styles.overviewCard}>
+            <Image source={require("../assets/images/Group4.png")} />
+            <Text style={[styles.cardTitle, styles.fontBold]}>Total Children</Text>
+            <Text style={[styles.cardCount, styles.fontBold]}>620</Text>
+          </View>
+        </View>
+
+        {/* Appointments */}
+        <View style={styles.sectionHeader}>
+          <Text style={[styles.sectionTitle, styles.fontBold]}>
+            Today's Appointment
+          </Text>
+          <Text style={[styles.seeAll, styles.fontBold]}>See all</Text>
+        </View>
+
+        {[1, 2, 3].map((_, i) => (
+          <View key={i} style={styles.appointmentCard}>
+            <View>
+              <Text style={[styles.appointmentName, styles.fontBold]}>
+                Uwase Claudine
               </Text>
-              <Text
-                style={[
-                  styles.dateText,
-                  styles.fontBold,
-                  day === "Wed" && styles.activeDateText,
-                ]}
-              >
-                {6 + index}
+              <Text style={[styles.appointmentDetail, styles.fontRegular]}>
+                Due: 12:00, Mbarara Sector
               </Text>
             </View>
-          ))}
-        </View>
-      </View>
-
-      {/* Overview */}
-      <Text style={[styles.sectionTitle, styles.fontBold]}>Overview</Text>
-      <View style={styles.overviewContainer}>
-        <View style={styles.overviewCard}>
-          <Image source={require("../assets/images/Group1.png")} />
-          <Text style={[styles.cardTitle, styles.fontBold]}>Total Houses</Text>
-          <Text style={[styles.cardCount, styles.fontBold]}>120</Text>
-        </View>
-        <View style={styles.overviewCard}>
-          <Image source={require("../assets/images/Group2.png")} />
-          <Text style={[styles.cardTitle, styles.fontBold]}>Total Mothers</Text>
-          <Text style={[styles.cardCount, styles.fontBold]}>534</Text>
-        </View>
-        <View style={styles.overviewCard}>
-          <Image source={require("../assets/images/Group4.png")} />
-          <Text style={[styles.cardTitle, styles.fontBold]}>Total Children</Text>
-          <Text style={[styles.cardCount, styles.fontBold]}>620</Text>
-        </View>
-      </View>
-
-      {/* Appointments */}
-      <View style={styles.sectionHeader}>
-        <Text style={[styles.sectionTitle, styles.fontBold]}>Today's Appointment</Text>
-        <Text style={[styles.seeAll, styles.fontBold]}>See all</Text>
-      </View>
-
-      {[1, 2, 3].map((_, i) => (
-        <View key={i} style={styles.appointmentCard}>
-          <View>
-            <Text style={[styles.appointmentName, styles.fontBold]}>Uwase Claudine</Text>
-            <Text style={[styles.appointmentDetail, styles.fontRegular]}>
-              Due: 12:00, Mbarara Sector
-            </Text>
+            <TouchableOpacity style={styles.addBtn}>
+              <Text style={[styles.addBtnText, styles.fontRegular]}>Add</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.addBtn}>
-            <Text style={[styles.addBtnText, styles.fontRegular]}>Add</Text>
+        ))}
+
+        {/* Quick Actions */}
+        <Text style={[styles.sectionTitle, styles.fontBold]}>Quick Actions</Text>
+        <View style={styles.actionsContainer}>
+          <TouchableOpacity
+            style={styles.actionCard}
+            onPress={() => setVisibleForm("home")}
+          >
+            <Image source={require("../assets/images/Vector1.png")} />
+            <Text style={styles.actionText}>Start Home Visit</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionCard}
+            onPress={() => setVisibleForm("house")}
+          >
+            <Image source={require("../assets/images/house.png")} />
+            <Text style={styles.actionText}>Add House Details</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionCard}
+            onPress={() => setVisibleForm("appointments")}
+          >
+            <Image source={require("../assets/images/Vector.png")} />
+            <Text style={styles.actionText}>VHWID</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionCard}
+            onPress={() => setVisibleForm("reports")}
+          >
+            <Image source={require("../assets/images/Group .png")} />
+            <Text style={styles.actionText}>Reports</Text>
           </TouchableOpacity>
         </View>
-      ))}
+      </ScrollView>
 
-      {/* Quick Actions */}
-      <Text style={[styles.sectionTitle, styles.fontBold]}>Quick Actions</Text>
-      <View style={styles.actionsContainer}>
-        <TouchableOpacity style={styles.actionCard} onPress={() => setVisibleForm("home")}>
-          <Image source={require("../assets/images/Vector1.png")} />
-          <Text style={styles.actionText}>Start Home Visit</Text>
-        </TouchableOpacity>
+     <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
+  <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
+    <BlurView intensity={70} tint="light" style={styles.blurContent}>
+      {visibleForm === "home" && <HomeVisitForm onClose={closeModal} />}
+      {visibleForm === "house" && <AddHouseDetails onClose={closeModal} />}
+      {visibleForm === "appointments" && <Appointments onClose={closeModal} />}
+      {visibleForm === "reports" && <Reports onClose={closeModal} />}
+    </BlurView>
+  </TouchableOpacity>
+</Modal>
 
-        <TouchableOpacity style={styles.actionCard} onPress={() => setVisibleForm("house")}>
-          <Image source={require("../assets/images/house.png")} />
-          <Text style={styles.actionText}>Add House Details</Text>
-        </TouchableOpacity>
 
-        <TouchableOpacity style={styles.actionCard} onPress={() => setVisibleForm("appointments")}>
-          <Image source={require("../assets/images/Vector.png")} />
-          <Text style={styles.actionText}>VHWID</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.actionCard} onPress={() => setVisibleForm("reports")}>
-          <Image source={require("../assets/images/Group .png")} />
-          <Text style={styles.actionText}>Reports</Text>
-        </TouchableOpacity>
-
-        <Modal
-        transparent
-        animationType="fade"
-        visible={!!visibleForm}
-        onRequestClose={closeModal}
-      >
-        <BlurView intensity={70} tint="light" style={styles.blurContainer}>
-          {renderForm()}
-        </BlurView>
-      </Modal>
-      
+      {/* Fixed Bottom Navigation */}
+      <View style={styles.fixedBottom}>
+        <BottomNav />
       </View>
-    </ScrollView>
-
-    {/* Fixed Bottom Navigation */}
-    <View style={styles.fixedBottom}>
-      <BottomNav />
-    </View>
-  </View>
-);
-
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", paddingHorizontal: 16,marginBottom:10 },
-  screen: {
-  flex: 1,
-  backgroundColor: "#fff",
-},
-
-fixedBottom: {
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  right: 0,
-  backgroundColor: "#fff",
-  borderTopWidth: 1,
-  borderTopColor: "#ddd",
-  elevation: 10,
-  shadowColor: "#000",
-  shadowOffset: { width: 0, height: -2 },
-  shadowOpacity: 0.1,
-  shadowRadius: 3,
-},
-
-
+  screen: { flex: 1, backgroundColor: "#fff" },
+  container: { flex: 1, backgroundColor: "#fff", paddingHorizontal: 16 },
   fontRegular: { fontFamily: "Poppins_400Regular" },
   fontBold: { fontFamily: "Poppins_700Bold" },
-
-  notificationContainer: {
-  flexDirection: "row",
-  alignItems: "center",   // ensures vertical alignment
-  justifyContent: "center",
-  gap: 8,                 // space between icons (or use marginRight)
-},
-notificationImage: {
-  width: 18,
-  height: 18,
-  resizeMode: "contain",
-},
 
   header: {
     flexDirection: "row",
@@ -235,6 +214,13 @@ notificationImage: {
     marginTop: 20,
   },
   headerText: { color: "#fff", fontSize: 18, marginLeft: 8 },
+  notificationContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  notificationImage: { width: 18, height: 18, resizeMode: "contain" },
+
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -244,51 +230,39 @@ notificationImage: {
     marginTop: 14,
   },
   searchInput: { flex: 1, height: 40, color: "#000" },
+
   calendar: {
-  backgroundColor: "#f7f8fa",
-  borderRadius: 12,
-  paddingVertical: 12,
-  paddingHorizontal: 10,
-  marginTop: 18,
-},
-
-calendarHeader: {
-  fontSize: 16,
-  color: "#09111E",
-  marginBottom: 10,
-  marginLeft:10,
-  textAlign: "left", // <-- makes it aligned neatly like a title
-},
-
-daysRow: {
-  flexDirection: "row",
-  justifyContent: "space-between",
-  height:"60px",
-},
-
-dayBox: {
-  alignItems: "center",
-  justifyContent: "center",
-  width: 50,
-  paddingVertical: 6,
-  borderRadius: 10,
-  gap:6,
-},
-
-activeDayBox: {
-  backgroundColor: "#09111E",
-},
-
-dayText: { color: "#777", fontSize: 14 },
-activeDayText: { color: "#fff" },
-dateText: { color: "#000", fontSize: 14, fontWeight: "600" },
-activeDateText: { color: "#fff" },
+    backgroundColor: "#f7f8fa",
+    borderRadius: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    marginTop: 18,
+  },
+  calendarHeader: {
+    fontSize: 16,
+    color: "#09111E",
+    marginBottom: 10,
+    marginLeft: 10,
+  },
+  daysRow: { flexDirection: "row", justifyContent: "space-between" },
+  dayBox: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 50,
+    paddingVertical: 6,
+    borderRadius: 10,
+  },
+  activeDayBox: { backgroundColor: "#09111E" },
+  dayText: { color: "#777", fontSize: 14 },
+  activeDayText: { color: "#fff" },
+  dateText: { color: "#000", fontSize: 14, fontWeight: "600" },
+  activeDateText: { color: "#fff" },
 
   sectionTitle: {
     fontSize: 16,
     marginTop: 22,
     marginBottom: 8,
-    marginLeft:10,
+    marginLeft: 10,
     color: "#09111E",
   },
   overviewContainer: { flexDirection: "row", justifyContent: "space-between" },
@@ -302,6 +276,7 @@ activeDateText: { color: "#fff" },
   },
   cardTitle: { fontSize: 12, color: "#333", marginTop: 6 },
   cardCount: { fontSize: 16, marginTop: 4, color: "#09111E" },
+
   sectionHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -309,6 +284,7 @@ activeDateText: { color: "#fff" },
     marginTop: 20,
   },
   seeAll: { color: "#777", fontSize: 13 },
+
   appointmentCard: {
     backgroundColor: "#f7f8fa",
     borderRadius: 12,
@@ -327,6 +303,7 @@ activeDateText: { color: "#fff" },
     paddingVertical: 6,
   },
   addBtnText: { color: "#fff", fontSize: 13 },
+
   actionsContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -334,6 +311,12 @@ activeDateText: { color: "#fff" },
     marginTop: 10,
     marginBottom: 20,
   },
+  blurContent: {
+  backgroundColor: "rgba(255,255,255,0.9)",
+  borderRadius: 20,
+  padding: 20,
+},
+
   actionCard: {
     backgroundColor: "#f1f3f6",
     borderRadius: 14,
@@ -348,6 +331,21 @@ activeDateText: { color: "#fff" },
     color: "#09111E",
     textAlign: "center",
     marginTop: 8,
+  },
+  blurContainer: { flex: 1, justifyContent: "center", alignItems: "center" },
+  fixedBottom: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "#fff",
+    borderTopWidth: 1,
+    borderTopColor: "#ddd",
+    elevation: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
   },
 });
 
