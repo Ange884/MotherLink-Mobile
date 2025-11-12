@@ -28,6 +28,8 @@ import RegisterChild from "../../Registration/child1.jsx";
 import RegisterChild2 from "../../Registration/child2.jsx";
 import RegisterChild3 from "../../Registration/child3.jsx";
 import InfoChild from "../../Registration/ChildInfo.jsx";
+import motherProfileScreen from "../../pages/motherProfile.jsx";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -64,7 +66,8 @@ export default function AppNavigator() {
         <Stack.Screen name="child1" component={RegisterChild}/>
         <Stack.Screen name="child2" component={RegisterChild2}/>
         <Stack.Screen name="child3" component={RegisterChild3}/>
-        <Stack.Screen name="InfoChild" component={RegisterChild3}/>
+        <Stack.Screen name="InfoChild" component={InfoChild}/>
+        <Stack.Screen name="motherProfile" component={motherProfileScreen}/>
         <Stack.Screen 
           name="ForgotPassword" 
           component={ForgotPasswordScreen} 

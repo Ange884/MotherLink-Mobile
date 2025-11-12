@@ -81,7 +81,7 @@ const MotherProfileScreen = ({ navigation }) => {
           </TouchableOpacity>
 
           <View style={styles.profileContainer}>
-            <Image source={require("../assets/images/profile.png")} style={styles.avatar} />
+            <Image source={require("../assets/images/mariza.png")} style={styles.avatar} />
             <View style={styles.profileDetails}>
               <Text style={[styles.profileName, styles.fontBold]}>Jane Doe</Text>
               <Text style={[styles.profileId, styles.fontRegular]}>ML-077</Text>

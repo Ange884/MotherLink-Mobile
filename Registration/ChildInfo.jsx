@@ -15,7 +15,7 @@ export default function InfoChild() {
       {/* Header Section */}
       <View style={styles.headerSection}>
         <Text style={[styles.headerText, { fontFamily: "Poppins_700Bold" }]}>
-          Register mother
+          Register Child
         </Text>
 
         <View style={styles.headerContent}>

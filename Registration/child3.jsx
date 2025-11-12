@@ -32,7 +32,7 @@ export default function RegisterChild3({ navigation }) {
       {/* Header section */}
       <View style={styles.headerSection}>
         <Text style={[styles.headerText, { fontFamily: "Poppins_700Bold" }]}>
-          Register mother
+          Register child
         </Text>
 
         {/* Small centered header content */}

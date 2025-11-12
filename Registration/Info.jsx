@@ -1,8 +1,8 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView,navigation } from "react-native";
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
 
-export default function InfoSection() {
+export default function InfoSection({navigation}) {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_700Bold,
@@ -64,7 +64,7 @@ export default function InfoSection() {
       </View>
 
       {/* Continue Button */}
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() =>navigation.navigate("motherProfile")}>
         <Text style={[styles.buttonText, { fontFamily: "Poppins_700Bold" }]}>
           Accept & Continue
         </Text>
