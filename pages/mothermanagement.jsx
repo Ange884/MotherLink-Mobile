@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState}  from "react";
 import {
   View,
   Text,
@@ -7,10 +7,13 @@ import {
   StyleSheet,
   TextInput,
   Image,
+  Modal,
 } from "react-native";
+import { BlurView } from "expo-blur";
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import BottomNav from "../components/navbar.jsx";
+import MotherCard from "@/subpages/Upcoming.jsx";
 
 const MotherManagementScreen = ({navigation}) => {
   const [fontsLoaded] = useFonts({
@@ -18,7 +21,9 @@ const MotherManagementScreen = ({navigation}) => {
     Poppins_700Bold,
   });
 
-  if (!fontsLoaded) return null;
+  const [visibleForm, setVisibleForm] = useState(null);
+      if (!fontsLoaded) return null;
+      const closeModal = () => setVisibleForm(null);
 
   // Summary cards data
   const summaryCards = [
@@ -112,7 +117,7 @@ const MotherManagementScreen = ({navigation}) => {
                 {appointment.detail}
               </Text>
             </View>
-            <TouchableOpacity style={styles.ancButton}>
+            <TouchableOpacity style={styles.ancButton} onPress={() =>setVisibleForm("motherCard")}>
               <Text style={[styles.ancButtonText, styles.fontRegular]}>ANC</Text>
             </TouchableOpacity>
           </View>
@@ -132,7 +137,7 @@ const MotherManagementScreen = ({navigation}) => {
         {/* Mother Card */}
         <View style={styles.motherCard}>
           <Image
-            source={require("../assets/images/logo.png")}
+            source={require("../assets/images/mariza.png")}
             style={styles.profileImage}
           />
           <View style={[styles.motherInfo,]}>
@@ -162,6 +167,20 @@ const MotherManagementScreen = ({navigation}) => {
           </View>
         </View>
       </ScrollView>
+       <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
+                     <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
+                       <BlurView intensity={70} tint="light" style={styles.blurContent}>
+                        
+           <TouchableOpacity activeOpacity={1}>
+             <View style={styles.blurContent}>
+               {visibleForm === "motherCard" && <MotherCard />}
+             </View>
+           </TouchableOpacity>
+       
+       
+                       </BlurView>
+                     </TouchableOpacity>
+                   </Modal>
 
       {/* Fixed Bottom Navigation */}
       <View style={styles.fixedBottom}>
@@ -403,6 +422,18 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
+  },
+  blurContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 24,
+  },
+  blurContent: {
+    padding: 24,
+    borderRadius: 24,
+    overflow: "hidden",
+    backgroundColor: "rgba(255,255,255,0.85)",
   },
 });
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState}  from "react";
 import {
   View,
   Text,
@@ -7,11 +7,14 @@ import {
   StyleSheet,
   TextInput,
   Image,
-  useNavigate
+  useNavigate,
+  Modal,
 } from "react-native";
+import { BlurView } from "expo-blur";
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import BottomNav from "../components/navbar.jsx";
+import MotherCard from "@/subpages/Upcoming.jsx";
 
 const ChildManagementScreen = ({navigation}) => {
   const [fontsLoaded] = useFonts({
@@ -19,7 +22,9 @@ const ChildManagementScreen = ({navigation}) => {
     Poppins_700Bold,
   });
 
-  if (!fontsLoaded) return null;
+  const [visibleForm, setVisibleForm] = useState(null);
+      if (!fontsLoaded) return null;
+      const closeModal = () => setVisibleForm(null);
 
   // Summary cards data
   const summaryCards = [
@@ -113,7 +118,7 @@ const ChildManagementScreen = ({navigation}) => {
                 {appointment.detail}
               </Text>
             </View>
-            <TouchableOpacity style={styles.ancButton}>
+            <TouchableOpacity style={styles.ancButton} onPress={() => setVisibleForm("motherCard")}>
               <Text style={[styles.ancButtonText, styles.fontRegular]}>Vaccine</Text>
             </TouchableOpacity>
           </View>
@@ -197,6 +202,22 @@ const ChildManagementScreen = ({navigation}) => {
 
         </View>
       </ScrollView>
+
+       <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
+              <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
+                <BlurView intensity={70} tint="light" style={styles.blurContent}>
+                  <View style={styles.centeredContent}>
+    <TouchableOpacity activeOpacity={1}>
+      <View style={styles.blurContent}>
+        {visibleForm === "motherCard" && <MotherCard />}
+      </View>
+    </TouchableOpacity>
+  </View>
+
+                </BlurView>
+              </TouchableOpacity>
+            </Modal>
+            
 
       {/* Fixed Bottom Navigation */}
       <View style={styles.fixedBottom}>
@@ -450,6 +471,18 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
+  },
+  blurContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 24,
+  },
+  blurContent: {
+    padding: 24,
+    borderRadius: 24,
+    overflow: "hidden",
+    backgroundColor: "rgba(255,255,255,0.85)",
   },
 });
 

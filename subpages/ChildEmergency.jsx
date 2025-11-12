@@ -30,6 +30,7 @@ export default function ChildEmergency() {
           <View style={styles.emergencyLeft}>
             <Text style={[styles.emergencyDate, styles.fontRegular]}>{emergency.date}</Text>
             <Text style={[styles.emergencyDescription, styles.fontBold]}>{emergency.description}</Text>
+            <Text style={[styles.emergencyDate, styles.fontRegular]}>{emergency.hospital}</Text>
           </View>
           <View style={styles.statusTag}>
             <Text style={[styles.statusText, styles.fontRegular]}>{emergency.status}</Text>
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
   },
   emergencyDate: {
     fontSize: 13,
-    color: "#6B7280",
+    color: "#373838ff",
     marginBottom: 6,
   },
   emergencyDescription: {

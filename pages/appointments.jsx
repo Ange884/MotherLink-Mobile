@@ -1,8 +1,10 @@
-import React from "react";
+import React , {useState} from "react";
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';
 import BottomNav from "../components/navbar.jsx";
-import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity,Image } from "react-native";
+import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity,Image,Modal} from "react-native";
 import { Ionicons, Feather } from "@expo/vector-icons";
+import { BlurView } from "expo-blur";
+import MotherCard from "@/subpages/Upcoming.jsx";
 
 export default function Appointments({navigation}){
     const [fontsLoaded] = useFonts({
@@ -10,9 +12,10 @@ export default function Appointments({navigation}){
         Poppins_700Bold,
       });
     
-      if (!fontsLoaded) {
-        return null; // Wait for fonts to load
-      }
+      const [visibleForm, setVisibleForm] = useState(null);
+          if (!fontsLoaded) return null;
+          const closeModal = () => setVisibleForm(null);
+
 const appointments = [
   {
     type: "upcoming",
@@ -106,8 +109,8 @@ const appointments = [
                     Due: 12:00, Mbarara Sector
                   </Text>
                 </View>
-                <TouchableOpacity style={styles.addBtn}>
-                  <Text style={[styles.addBtnText, styles.fontRegular]}>Add</Text>
+                <TouchableOpacity style={styles.addBtn} onPress={()=>setVisibleForm("motherCard")}>
+                  <Text style={[styles.addBtnText, styles.fontRegular]}>ANC</Text>
                 </TouchableOpacity>
               </View>
             ))}
@@ -134,6 +137,17 @@ const appointments = [
     </View>
             
           </ScrollView>
+
+           <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
+                  <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
+                    <BlurView intensity={70} tint="light" style={styles.blurContent}>
+                      <TouchableOpacity activeOpacity={1} onPress={() => {}}>
+                        {visibleForm === "motherCard" && <MotherCard />}
+                      </TouchableOpacity>
+                    </BlurView>
+                  </TouchableOpacity>
+                </Modal>
+                
       
           {/* Fixed Bottom Navigation */}
           <View style={styles.fixedBottom}>
@@ -365,5 +379,17 @@ const appointments = [
           textAlign: "center",
           marginTop: 8,
         },
+        blurContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 24,
+  },
+  blurContent: {
+    padding: 24,
+    borderRadius: 24,
+    overflow: "hidden",
+    backgroundColor: "rgba(255,255,255,0.85)",
+  },
       });
       

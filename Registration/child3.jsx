@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   headerSection: {
-    width: "100%",
+    width: "85%",
     backgroundColor: "#0B0F2F",
     paddingTop: 60,
     paddingBottom: 35,
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
   formSection: {
     alignItems: "center",
     marginTop: 25,
-    width: "100%",
+    width: "90%",
     paddingHorizontal: 20,
   },
   healthCenterButton: {
