@@ -3,7 +3,7 @@ import React from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
 
-const HomeVisitForm = ({ onClose }) => {
+const Appointments = ({ onClose }) => {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_700Bold,
@@ -71,4 +71,4 @@ const styles = StyleSheet.create({
   cancel: { color: "#777", marginTop: 10 },
 });
 
-export default HomeVisitForm;
+export default Appointments;

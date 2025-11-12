@@ -4,6 +4,9 @@ import BottomNav from "../components/navbar.jsx";
 import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity,Image } from "react-native";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import HomeVisitForm from "../subpages/HomeVisitPage.jsx";
+import Reports from "../subpages/reports.jsx";
+import Appointments from "../subpages/appointments.jsx";
+import AddHouseDetails from "../subpages/addHousedetails.jsx";
 
 const HomeScreen = ({navigation}) => {
   const [fontsLoaded] = useFonts({
@@ -18,13 +21,13 @@ const HomeScreen = ({navigation}) => {
    const [visibleForm, setVisibleForm] = useState(null); // which form to show
 
   const closeModal = () => setVisibleForm(null);
-  
+
   const renderForm = () => {
     switch (visibleForm) {
       case "home": return <HomeVisitForm onClose={closeModal} />;
-      case "house": return <HouseDetailsForm onClose={closeModal} />;
-      case "vhwid": return <VHWIDForm onClose={closeModal} />;
-      case "reports": return <ReportsForm onClose={closeModal} />;
+      case "house": return <AddHouseDetails onClose={closeModal} />;
+      case "appointments": return <Appointments onClose={closeModal} />;
+      case "reports": return <Reports onClose={closeModal} />;
       default: return null;
     }
   };
@@ -151,7 +154,7 @@ return (
           <Text style={styles.actionText}>Add House Details</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.actionCard} onPress={() => setVisibleForm("vhwid")}>
+        <TouchableOpacity style={styles.actionCard} onPress={() => setVisibleForm("appointments")}>
           <Image source={require("../assets/images/Vector.png")} />
           <Text style={styles.actionText}>VHWID</Text>
         </TouchableOpacity>
@@ -160,6 +163,18 @@ return (
           <Image source={require("../assets/images/Group .png")} />
           <Text style={styles.actionText}>Reports</Text>
         </TouchableOpacity>
+
+        <Modal
+        transparent
+        animationType="fade"
+        visible={!!visibleForm}
+        onRequestClose={closeModal}
+      >
+        <BlurView intensity={70} tint="light" style={styles.blurContainer}>
+          {renderForm()}
+        </BlurView>
+      </Modal>
+      
       </View>
     </ScrollView>
 
