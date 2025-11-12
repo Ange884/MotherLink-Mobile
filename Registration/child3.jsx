@@ -181,7 +181,7 @@ export default function RegisterChild({ navigation }) {
 
           <TouchableOpacity
             style={styles.nextButton}
-            onPress={() => navigation.navigate("child2")}
+            onPress={() => navigation.navigate("InfoChild")}
           >
             <Text
               style={[

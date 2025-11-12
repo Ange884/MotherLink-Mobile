@@ -12,6 +12,8 @@ import {
   Poppins_400Regular,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
+import { Ionicons } from "@expo/vector-icons";
+
 
 export default function RegisterChild({ navigation }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_700Bold });

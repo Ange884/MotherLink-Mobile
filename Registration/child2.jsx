@@ -12,6 +12,7 @@ import {
   Poppins_400Regular,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function RegisterChild2({ navigation }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_700Bold });
@@ -212,7 +213,7 @@ export default function RegisterChild2({ navigation }) {
 
           <TouchableOpacity
             style={styles.nextButton}
-            onPress={() => navigation.navigate("child2")}
+            onPress={() => navigation.navigate("child3")}
           >
             <Text
               style={[
@@ -343,6 +344,41 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: {
+    color: "#fff",
+    fontSize: 16,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    width: "100%",
+    maxWidth: 300,
+    justifyContent: "space-between",
+    marginTop: 20,
+    gap: 12,
+  },
+  previousButton: {
+    flex: 1,
+    backgroundColor: "#fff",
+    borderWidth: 1.5,
+    borderColor: "#000",
+    paddingVertical: 15,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  previousButtonText: {
+    color: "#09111E",
+    fontSize: 16,
+  },
+  nextButton: {
+    flex: 1,
+    backgroundColor: "#0B0F2F",
+    paddingVertical: 15,
+    borderRadius: 8,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 6,
+  },
+  nextButtonText: {
     color: "#fff",
     fontSize: 16,
   },
