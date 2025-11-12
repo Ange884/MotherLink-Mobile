@@ -11,9 +11,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import BottomNav from "../components/navbar.jsx";
 import HomeVisitForm from "../subpages/HomeVisitPage.jsx";
 import VisitPage2 from "../subpages/VisitPage2.jsx";
+import VisitPage3 from "../subpages/visitPage3.jsx";
 import Reports from "../subpages/reports.jsx";
 import Appointments from "../subpages/appointments.jsx";
 import AddHouseDetails from "../subpages/addHousedetails.jsx";
+import HouseDetailsStep2 from "../subpages/HouseDetails2.jsx";
 
 const HomeScreen = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
@@ -192,9 +194,29 @@ const HomeScreen = ({ navigation }) => {
         <VisitPage2
           onClose={closeModal}
           onBack={() => setVisibleForm("home")}
+          onNext={() => setVisibleForm("homeStep3")}
         />
       )}
-      {visibleForm === "house" && <AddHouseDetails onClose={closeModal} />}
+      {visibleForm === "homeStep3" && (
+        <VisitPage3
+          onClose={closeModal}
+          onBack={() => setVisibleForm("homeStep2")}
+          onFinish={closeModal}
+        />
+      )}
+      {visibleForm === "house" && (
+        <AddHouseDetails
+          onClose={closeModal}
+          onNext={() => setVisibleForm("houseStep2")}
+        />
+      )}
+      {visibleForm === "houseStep2" && (
+        <HouseDetailsStep2
+          onClose={closeModal}
+          onBack={() => setVisibleForm("house")}
+          onFinish={closeModal}
+        />
+      )}
       {visibleForm === "appointments" && <Appointments onClose={closeModal} />}
       {visibleForm === "reports" && <Reports onClose={closeModal} />}
     </BlurView>

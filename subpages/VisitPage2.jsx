@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useFonts, Poppins_400Regular,Poppins_700Bold } from "@expo-google-fonts/poppins";
 
-export default function HomeVisitscreen2({ onClose, onBack }) {
+export default function HomeVisitscreen2({ onClose, onBack, onNext }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular,Poppins_700Bold });
 
   const [email, setEmail] = useState("");
@@ -134,6 +134,10 @@ export default function HomeVisitscreen2({ onClose, onBack }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
+          if (onNext) {
+            onNext();
+            return;
+          }
           if (onClose) {
             onClose();
           }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
 
-export default function AddHouseDetails({ onClose, onNext }) {
+export default function HouseDetailsStep2({ onClose, onBack, onFinish }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_700Bold });
 
   const [email, setEmail] = useState("");
@@ -15,6 +15,16 @@ export default function AddHouseDetails({ onClose, onNext }) {
   return (
     <View style={styles.container}>
 
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => {
+          if (onBack) {
+            onBack();
+          }
+        }}
+      >
+        <Text style={[styles.backText, { fontFamily: "Poppins_400Regular" }]}>Back</Text>
+      </TouchableOpacity>
       <Text style={[styles.subtitle, { fontFamily: "Poppins_400Regular" }]}>
         Add House Details
       </Text>
@@ -26,7 +36,7 @@ export default function AddHouseDetails({ onClose, onNext }) {
           { borderColor: focusedField === "email" ? "#1048C5" : "#09111E" },
         ]}
       >
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Names</Text>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>District</Text>
         <TextInput
           value={email}
           onChangeText={setEmail}
@@ -46,7 +56,7 @@ export default function AddHouseDetails({ onClose, onNext }) {
           styles.fieldset         
         ]}
       >
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Phone No</Text>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Sector</Text>
         <TextInput
           value={password}
           onChangeText={setPassword}
@@ -67,7 +77,7 @@ export default function AddHouseDetails({ onClose, onNext }) {
           styles.fieldset,
         ]}
       >
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Members No</Text>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Cell</Text>
         <TextInput
           value={confirmPassword}
           onChangeText={setConfirmPassword}
@@ -87,7 +97,7 @@ export default function AddHouseDetails({ onClose, onNext }) {
           styles.fieldset,
         ]}
       >
-        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Children No</Text>
+        <Text style={[styles.legend,{ fontFamily: "Poppins_400Regular",fontWeight:"600" }]}>Village</Text>
         <TextInput
           value={confirmPassword}
           onChangeText={setConfirmPassword}
@@ -105,8 +115,8 @@ export default function AddHouseDetails({ onClose, onNext }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          if (onNext) {
-            onNext();
+          if (onFinish) {
+            onFinish();
             return;
           }
           if (onClose) {
@@ -209,4 +219,12 @@ const styles = StyleSheet.create({
   },
   buttonText: { color: "#fff", fontWeight: "600", fontSize: 16 },
   forgotText: { color: "#09111E",fontSize:12 },
+  backButton: {
+    alignSelf: "flex-start",
+    marginBottom: 8,
+  },
+  backText: {
+    color: "#09111E",
+    fontSize: 12,
+  },
 });
