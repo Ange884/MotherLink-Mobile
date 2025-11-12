@@ -123,7 +123,7 @@ const MotherManagementScreen = ({navigation}) => {
           <Text style={[styles.sectionTitle, styles.fontBold]}>Registered mothers</Text>
           <TouchableOpacity
             style={styles.addMothersButton}
-            onPress={() => navigation.navigate("Firstmum")}
+            onPress={() => navigation.navigate("register1")}
           >
             <Text style={[styles.addMothersButtonText, styles.fontRegular]}>+ add mothers</Text>
           </TouchableOpacity>

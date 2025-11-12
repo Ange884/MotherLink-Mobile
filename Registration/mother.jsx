@@ -190,7 +190,7 @@ export default function RegisterMother({ navigation }) {
         {/* Button */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("signup2")}
+          onPress={() => navigation.navigate("register2")}
         >
           <Text
             style={[
@@ -198,7 +198,7 @@ export default function RegisterMother({ navigation }) {
               { fontFamily: "Poppins_400Regular", fontWeight: "600" },
             ]}
           >
-            Proceed
+            Next
           </Text>
         </TouchableOpacity>
       </View>

@@ -13,7 +13,7 @@ import {
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
 
-export default function RegisterMother({ navigation }) {
+export default function RegisterMother2({ navigation }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_700Bold });
 
   const [email, setEmail] = useState("");
@@ -39,21 +39,21 @@ export default function RegisterMother({ navigation }) {
         <View style={styles.headerContent}>
           {/* Progress bar */}
           <View style={styles.progressContainer}>
+            <View style={[styles.step]} />
             <View style={[styles.step, styles.activeStep]} />
-            <View style={styles.step} />
             <View style={styles.step} />
             <View style={styles.step} />
           </View>
 
           {/* Step text */}
-          <Text style={[styles.stepText, {fontFamily: "Poppins_400Regular"}]}>Step 1 of 4</Text>
+          <Text style={[styles.stepText, {fontFamily: "Poppins_400Regular"}]}>Step 2 of 4</Text>
 
           {/* Card */}
           <View style={styles.card}>
             <Text
               style={[styles.cardText, { fontFamily: "Poppins_700Bold" }]}
             >
-              Personal details
+             Location
             </Text>
           </View>
         </View>
@@ -191,7 +191,7 @@ export default function RegisterMother({ navigation }) {
         {/* Button */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("signup2")}
+          onPress={() => navigation.navigate("register3")}
         >
           <Text
             style={[
