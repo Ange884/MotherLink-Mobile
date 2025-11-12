@@ -187,6 +187,7 @@ export default function RegisterMother({ navigation }) {
             onBlur={() => setFocusedField(null)}
           />
         </View>
+
         {/* Button */}
         <TouchableOpacity
           style={styles.button}
