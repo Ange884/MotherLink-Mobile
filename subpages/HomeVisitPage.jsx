@@ -1,15 +1,8 @@
 import React, { useState } from "react";
-import {
-  View,
-  TextInput,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-} from "react-native";
+import { View, TextInput, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useFonts, Poppins_400Regular,Poppins_700Bold } from "@expo-google-fonts/poppins";
 
-export default function HomeVisitScreen({ navigation }) {
+export default function HomeVisitScreen({ onClose, onNext }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular,Poppins_700Bold });
 
   const [email, setEmail] = useState("");
@@ -89,7 +82,18 @@ export default function HomeVisitScreen({ navigation }) {
          
       </View>
 
-      <TouchableOpacity style={styles.button} onPress={navigation.navigate("visit2")}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          if (onNext) {
+            onNext();
+            return;
+          }
+          if (onClose) {
+            onClose();
+          }
+        }}
+      >
         <Text
           style={[styles.buttonText, { fontFamily: "Poppins_400Regular" ,fontWeight:200}]}
         >

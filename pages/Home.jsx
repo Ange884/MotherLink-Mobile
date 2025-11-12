@@ -10,6 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import BottomNav from "../components/navbar.jsx";
 import HomeVisitForm from "../subpages/HomeVisitPage.jsx";
+import VisitPage2 from "../subpages/VisitPage2.jsx";
 import Reports from "../subpages/reports.jsx";
 import Appointments from "../subpages/appointments.jsx";
 import AddHouseDetails from "../subpages/addHousedetails.jsx";
@@ -181,7 +182,18 @@ const HomeScreen = ({ navigation }) => {
      <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
   <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
     <BlurView intensity={70} tint="light" style={styles.blurContent}>
-      {visibleForm === "home" && <HomeVisitForm onClose={closeModal} />}
+      {visibleForm === "home" && (
+        <HomeVisitForm
+          onClose={closeModal}
+          onNext={() => setVisibleForm("homeStep2")}
+        />
+      )}
+      {visibleForm === "homeStep2" && (
+        <VisitPage2
+          onClose={closeModal}
+          onBack={() => setVisibleForm("home")}
+        />
+      )}
       {visibleForm === "house" && <AddHouseDetails onClose={closeModal} />}
       {visibleForm === "appointments" && <Appointments onClose={closeModal} />}
       {visibleForm === "reports" && <Reports onClose={closeModal} />}
