@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8f8f8",
   },
   headerSection: {
-    width: "100%",
+    width: "90%",
     backgroundColor: "#0B0F2F",
     paddingTop: 60,
     paddingBottom: 35,
@@ -355,9 +355,10 @@ const styles = StyleSheet.create({
   formSection: {
     alignItems: "center",
     marginTop: 25,
+    width:"90%",
   },
   fieldset: {
-    width: 300,
+    width: 330,
     borderWidth: 1.5,
     borderColor: "#000",
     borderRadius: 8,
@@ -393,7 +394,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginTop: 20,
     borderRadius: 8,
-    width: 300,
+    width: 330,
     alignItems: "center",
   },
   buttonText: {
