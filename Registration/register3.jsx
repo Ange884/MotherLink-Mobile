@@ -191,7 +191,7 @@ export default function RegisterMother3({ navigation }) {
         {/* Button */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("signup2")}
+          onPress={() => navigation.navigate("info")}
         >
           <Text
             style={[
@@ -207,7 +207,7 @@ export default function RegisterMother3({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   scrollContainer: {
     alignItems: "center",
     paddingBottom: 40,

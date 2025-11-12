@@ -23,6 +23,7 @@ import NotificationsScreen from "../../pages/notifications.jsx";
 import RegisterMother from "../../Registration/mother.jsx";
 import RegisterMother2 from "../../Registration/register2.jsx";
 import RegisterMother3 from "../../Registration/register3.jsx";
+import InfoSection from "../../Registration/Info.jsx";
 
 const Stack = createNativeStackNavigator();
 
@@ -55,6 +56,7 @@ export default function AppNavigator() {
         <Stack.Screen name="register1" component={RegisterMother}/>
         <Stack.Screen name="register2" component={RegisterMother2}/>
         <Stack.Screen name="register3" component={RegisterMother3}/>
+        <Stack.Screen name="info" component={InfoSection}/>
         <Stack.Screen 
           name="ForgotPassword" 
           component={ForgotPasswordScreen} 
