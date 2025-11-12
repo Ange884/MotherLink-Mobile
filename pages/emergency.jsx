@@ -14,54 +14,22 @@ import BottomNav from "../components/navbar.jsx";
 
 const tabs = ["Overview", "Appointments", "Emergencies"];
 
-const personalInfo = [
-  { label: "Names", value: "Carine Sanders" },
-  { label: "Age", value: "27 years" },
-  { label: "Phone number", value: "+250 7XXXXXXX" },
-  { label: "Insurance", value: "RSSB" },
-  { label: "Location", value: "Mukamira - Nyabihu" },
+const emergencies = [
+  { date: "2025-10-14", description: "Severe pain", status: "Received" },
+  { date: "2025-10-14", description: "Severe pain", status: "Received" },
+  { date: "2025-10-14", description: "Severe pain", status: "Received" },
+  { date: "2025-10-14", description: "Severe pain", status: "Received" },
 ];
 
-const pregnancyInfo = [
-  { label: "Stage", value: "6 months" },
-  { label: "EDD", value: "14-02-2026" },
-  { label: "Health center", value: "Mukamira HC" },
-  { label: "Last visit", value: "30-10-2025" },
-  { label: "Risk level", value: "Medium" },
-];
-
-const timeline = [
-  { label: "ANC 1", completed: true },
-  { label: "ANC 2", completed: true },
-  { label: "ANC 3", completed: true },
-  { label: "ANC 4", completed: false },
-];
-
-const MotherProfileScreen = ({ navigation }) => {
+const EmergencyScreen = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_600SemiBold,
     Poppins_700Bold,
   });
-  const [activeTab, setActiveTab] = useState("Overview");
+  const [activeTab, setActiveTab] = useState("Emergencies");
 
   if (!fontsLoaded) return null;
-
-  const renderInfoCard = (title, data) => (
-    <View style={styles.infoCard}>
-      <Text style={[styles.cardHeader, styles.fontBold]}>{title}</Text>
-      <View style={styles.divider} />
-      {data.map((item, index) => (
-        <TouchableOpacity key={`${item.label}-${index}`} style={styles.infoRow} activeOpacity={0.8}>
-          <View>
-            <Text style={[styles.infoLabel, styles.fontRegular]}>{item.label}</Text>
-            <Text style={[styles.infoValue, styles.fontBold]}>{item.value}</Text>
-          </View>
-          <Ionicons name="chevron-forward" size={18} color="#09111E" />
-        </TouchableOpacity>
-      ))}
-    </View>
-  );
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -84,7 +52,7 @@ const MotherProfileScreen = ({ navigation }) => {
           <Image source={require("../assets/images/mariza.png")} style={styles.avatar} />
           <View style={styles.profileDetails}>
             <Text style={[styles.profileName, styles.fontBold]}>Jane Doe</Text>
-            <Text style={[styles.profileId, styles.fontRegular]}>ML-077</Text>
+            <Text style={[styles.profileId, styles.fontRegular]}>MI-077</Text>
           </View>
         </View>
 
@@ -113,41 +81,23 @@ const MotherProfileScreen = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.contentWrapper}>
-          {renderInfoCard("Personal information", personalInfo)}
-          {renderInfoCard("Pregnancy information", pregnancyInfo)}
+          {/* Record Emergency Button */}
+          <TouchableOpacity style={styles.recordButton}>
+            <Text style={[styles.recordButtonText, styles.fontBold]}>Record emergency</Text>
+          </TouchableOpacity>
 
-          <View style={styles.timelineCard}>
-            <Text style={[styles.cardHeader, styles.fontBold]}>Care timeline</Text>
-            <View style={styles.divider} />
-            <View style={styles.timelineRow}>
-              {timeline.map((item, index) => (
-                <View key={item.label} style={styles.timelineItem}>
-                  <View
-                    style={[
-                      styles.timelineIcon,
-                      item.completed ? styles.timelineIconCompleted : styles.timelineIconPending,
-                    ]}
-                  >
-                    <Ionicons
-                      name={item.completed ? "checkmark" : "ellipsis-horizontal"}
-                      size={16}
-                      color={item.completed ? "#fff" : "#09111E"}
-                    />
-                  </View>
-                  <Text
-                    style={[
-                      styles.timelineLabel,
-                      styles.fontRegular,
-                      item.completed ? styles.timelineLabelCompleted : styles.timelineLabelPending,
-                    ]}
-                  >
-                    {item.label}
-                  </Text>
-                  {index !== timeline.length - 1 && <View style={styles.timelineConnector} />}
-                </View>
-              ))}
+          {/* Emergency List */}
+          {emergencies.map((emergency, index) => (
+            <View key={index} style={styles.emergencyCard}>
+              <View style={styles.emergencyLeft}>
+                <Text style={[styles.emergencyDate, styles.fontRegular]}>{emergency.date}</Text>
+                <Text style={[styles.emergencyDescription, styles.fontBold]}>{emergency.description}</Text>
+              </View>
+              <View style={styles.statusTag}>
+                <Text style={[styles.statusText, styles.fontRegular]}>{emergency.status}</Text>
+              </View>
             </View>
-          </View>
+          ))}
         </View>
       </ScrollView>
 
@@ -183,7 +133,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    marginTop: 200, // Adjust based on header height
+    marginTop: 200,
   },
   scrollContent: {
     paddingBottom: 100,
@@ -245,94 +195,54 @@ const styles = StyleSheet.create({
   },
   contentWrapper: {
     paddingHorizontal: 20,
+    paddingTop: 20,
     gap: 16,
-    marginTop: 10,
   },
-  infoCard: {
-    backgroundColor: "#fff",
-    borderRadius: 16,
-    padding: 16,
-    gap: 12,
-    shadowColor: "#0E1A2A",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-  cardHeader: {
-    fontSize: 16,
-    color: "#09111E",
-  },
-  divider: {
-    height: 1,
-    backgroundColor: "#EFF1F4",
-  },
-  infoRow: {
-    flexDirection: "row",
+  recordButton: {
+    backgroundColor: "#09111E",
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 12,
     alignItems: "center",
-    justifyContent: "space-between",
-    paddingVertical: 8,
+    marginBottom: 8,
   },
-  infoLabel: {
+  recordButtonText: {
+    color: "#fff",
+    fontSize: 16,
+  },
+  emergencyCard: {
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#E0E0E0",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  },
+  emergencyLeft: {
+    flex: 1,
+  },
+  emergencyDate: {
     fontSize: 13,
     color: "#6B7280",
-    marginBottom: 2,
+    marginBottom: 6,
   },
-  infoValue: {
+  emergencyDescription: {
     fontSize: 15,
     color: "#09111E",
   },
-  timelineCard: {
-    backgroundColor: "#fff",
-    borderRadius: 16,
-    padding: 16,
-    shadowColor: "#0E1A2A",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-  timelineRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 12,
-  },
-  timelineItem: {
-    flex: 1,
-    alignItems: "center",
-  },
-  timelineIcon: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  timelineIconCompleted: {
+  statusTag: {
     backgroundColor: "#09111E",
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 6,
+    alignSelf: "flex-start",
   },
-  timelineIconPending: {
-    backgroundColor: "#E5E7EB",
-  },
-  timelineLabel: {
+  statusText: {
+    color: "#fff",
     fontSize: 12,
-    marginTop: 6,
-  },
-  timelineLabelCompleted: {
-    color: "#09111E",
-  },
-  timelineLabelPending: {
-    color: "#9CA3AF",
-  },
-  timelineConnector: {
-    position: "absolute",
-    top: 22,
-    right: -25,
-    width: 50,
-    height: 2,
-    backgroundColor: "#E5E7EB",
-    zIndex: -1,
   },
   fixedBottom: {
     position: "absolute",
@@ -356,5 +266,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MotherProfileScreen;
-
+export default EmergencyScreen;
