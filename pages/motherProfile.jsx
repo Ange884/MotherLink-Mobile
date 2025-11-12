@@ -11,6 +11,8 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import BottomNav from "../components/navbar.jsx";
+import AppointmentsContent from "./appoint.jsx";
+import EmergencyContent from "./emergencyContent.jsx";
 
 const tabs = ["Overview", "Appointments", "Emergencies"];
 
@@ -112,43 +114,49 @@ const MotherProfileScreen = ({ navigation }) => {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.contentWrapper}>
-          {renderInfoCard("Personal information", personalInfo)}
-          {renderInfoCard("Pregnancy information", pregnancyInfo)}
+        {activeTab === "Overview" && (
+          <View style={styles.contentWrapper}>
+            {renderInfoCard("Personal information", personalInfo)}
+            {renderInfoCard("Pregnancy information", pregnancyInfo)}
 
-          <View style={styles.timelineCard}>
-            <Text style={[styles.cardHeader, styles.fontBold]}>Care timeline</Text>
-            <View style={styles.divider} />
-            <View style={styles.timelineRow}>
-              {timeline.map((item, index) => (
-                <View key={item.label} style={styles.timelineItem}>
-                  <View
-                    style={[
-                      styles.timelineIcon,
-                      item.completed ? styles.timelineIconCompleted : styles.timelineIconPending,
-                    ]}
-                  >
-                    <Ionicons
-                      name={item.completed ? "checkmark" : "ellipsis-horizontal"}
-                      size={16}
-                      color={item.completed ? "#fff" : "#09111E"}
-                    />
+            <View style={styles.timelineCard}>
+              <Text style={[styles.cardHeader, styles.fontBold]}>Care timeline</Text>
+              <View style={styles.divider} />
+              <View style={styles.timelineRow}>
+                {timeline.map((item, index) => (
+                  <View key={item.label} style={styles.timelineItem}>
+                    <View
+                      style={[
+                        styles.timelineIcon,
+                        item.completed ? styles.timelineIconCompleted : styles.timelineIconPending,
+                      ]}
+                    >
+                      <Ionicons
+                        name={item.completed ? "checkmark" : "ellipsis-horizontal"}
+                        size={16}
+                        color={item.completed ? "#fff" : "#09111E"}
+                      />
+                    </View>
+                    <Text
+                      style={[
+                        styles.timelineLabel,
+                        styles.fontRegular,
+                        item.completed ? styles.timelineLabelCompleted : styles.timelineLabelPending,
+                      ]}
+                    >
+                      {item.label}
+                    </Text>
+                    {index !== timeline.length - 1 && <View style={styles.timelineConnector} />}
                   </View>
-                  <Text
-                    style={[
-                      styles.timelineLabel,
-                      styles.fontRegular,
-                      item.completed ? styles.timelineLabelCompleted : styles.timelineLabelPending,
-                    ]}
-                  >
-                    {item.label}
-                  </Text>
-                  {index !== timeline.length - 1 && <View style={styles.timelineConnector} />}
-                </View>
-              ))}
+                ))}
+              </View>
             </View>
           </View>
-        </View>
+        )}
+
+        {activeTab === "Appointments" && <AppointmentsContent />}
+
+        {activeTab === "Emergencies" && <EmergencyContent />}
       </ScrollView>
 
       <View style={styles.fixedBottom}>
