@@ -1,8 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons, MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
+import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold } from "@expo-google-fonts/poppins";
 
 export default function MotherCard() {
+  const [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_600SemiBold,
+    Poppins_700Bold,
+  });
+
+  if (!fontsLoaded) return null;
+
   return (
     <View style={styles.card}>
       {/* Header */}
@@ -53,57 +62,62 @@ export default function MotherCard() {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#fff",
-    padding: 12,
-    borderRadius: 10,
+    padding: 16, // more padding for spacing
+    borderRadius: 12,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
-    width: 280, // compact width
+    width: 300, // slightly wider
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 8,
+    marginBottom: 12, // more space under header
   },
   name: {
-    fontWeight: "700",
+    fontFamily: "Poppins_700Bold",
     fontSize: 16,
+    marginBottom: 2,
   },
   ml: {
+    fontFamily: "Poppins_400Regular",
     fontSize: 12,
     color: "#555",
   },
   statusContainer: {
     backgroundColor: "#0B1E45",
-    borderRadius: 5,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
+    borderRadius: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
   },
   status: {
     color: "#fff",
+    fontFamily: "Poppins_600SemiBold",
     fontSize: 12,
   },
   detailRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 3,
-    gap: 6,
+    marginVertical: 5, // more spacing between rows
+    gap: 8,
   },
   detailText: {
+    fontFamily: "Poppins_400Regular",
     fontSize: 14,
     color: "#000",
   },
   button: {
     backgroundColor: "#0B1E45",
-    paddingVertical: 8,
-    borderRadius: 6,
-    marginTop: 10,
+    paddingVertical: 10,
+    borderRadius: 8,
+    marginTop: 16, // more space before button
     alignItems: "center",
   },
   buttonText: {
     color: "#fff",
-    fontWeight: "600",
+    fontFamily: "Poppins_600SemiBold",
+    fontSize: 14,
   },
 });
