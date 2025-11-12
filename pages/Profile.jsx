@@ -33,9 +33,8 @@ const ProfileSettingsScreen = () => {
           <View style={styles.curvedBackground}></View>
           <View style={styles.profileImageContainer}>
             <Image
-              source={{
-                uri: "https://i.pravatar.cc/200",
-              }}
+              source={require("../assets/images/mariza.png")
+              }
               style={styles.profileImage}
             />
           </View>

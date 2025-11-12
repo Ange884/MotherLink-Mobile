@@ -4,7 +4,7 @@ import BottomNav from "../components/navbar.jsx";
 import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity,Image } from "react-native";
 import { Ionicons, Feather } from "@expo/vector-icons";
 
-export default function Appointments(){
+export default function Appointments({navigation}){
     const [fontsLoaded] = useFonts({
         Poppins_400Regular,
         Poppins_700Bold,
@@ -41,7 +41,18 @@ const appointments = [
                 <Ionicons name="menu" size={28} color="#fff" />
                 <Text style={[styles.headerText, styles.fontRegular]}>Appointments</Text>
               </View>
-              <Ionicons name="notifications-outline" size={24} color="#fff" />
+              <View style={styles.notificationContainer}>
+                          <Ionicons name="notifications-outline" size={24} color="#fff" />
+                          {/* <View style={styles.notificationDot} /> */}
+                          <TouchableOpacity
+                           onPress={() => navigation.navigate("profile")}
+                           >
+                         <Image
+                            source={require("../assets/images/white.png")}
+                              style={styles.notificationImage}
+                          />
+                         </TouchableOpacity>
+                        </View>
             </View>
       
             {/* Search Bar */}
@@ -148,6 +159,24 @@ const appointments = [
         shadowOpacity: 0.1,
         shadowRadius: 3,
       },
+
+      notificationContainer: {
+    position: "relative",
+    flexDirection:"row",
+    gap:8,
+    alignItems:"center"
+
+
+  },
+  notificationDot: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "#FF0000",
+  },
       
     card: {
     backgroundColor: "#fff",

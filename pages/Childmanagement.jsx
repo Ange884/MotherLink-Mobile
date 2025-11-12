@@ -7,12 +7,13 @@ import {
   StyleSheet,
   TextInput,
   Image,
+  useNavigate
 } from "react-native";
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import BottomNav from "../components/navbar.jsx";
 
-const ChildManagementScreen = () => {
+const ChildManagementScreen = ({navigation}) => {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_700Bold,

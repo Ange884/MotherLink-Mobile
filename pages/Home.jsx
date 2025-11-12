@@ -4,7 +4,7 @@ import BottomNav from "../components/navbar.jsx";
 import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity,Image } from "react-native";
 import { Ionicons, Feather } from "@expo/vector-icons";
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_700Bold,
@@ -26,7 +26,14 @@ return (
         <View style={styles.notificationContainer}>
                     <Ionicons name="notifications-outline" size={24} color="#fff" />
                     {/* <View style={styles.notificationDot} /> */}
-                    <Image source={require("../assets/images/white.png")} style={styles.notificationImage}/>
+                    <TouchableOpacity
+                                 onPress={() => navigation.navigate("profile")}
+                                 >
+                               <Image
+                                  source={require("../assets/images/white.png")}
+                                    style={styles.notificationImage}
+                                />
+                               </TouchableOpacity>
                   </View>
       </View>
 
