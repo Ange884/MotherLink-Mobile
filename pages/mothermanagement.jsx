@@ -121,7 +121,10 @@ const MotherManagementScreen = ({navigation}) => {
         {/* Registered Mothers Section */}
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, styles.fontBold]}>Registered mothers</Text>
-          <TouchableOpacity style={styles.addMothersButton}>
+          <TouchableOpacity
+            style={styles.addMothersButton}
+            onPress={() => navigation.navigate("Firstmum")}
+          >
             <Text style={[styles.addMothersButtonText, styles.fontRegular]}>+ add mothers</Text>
           </TouchableOpacity>
         </View>
