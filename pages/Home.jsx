@@ -12,10 +12,9 @@ import BottomNav from "../components/navbar.jsx";
 import HomeVisitForm from "../subpages/HomeVisitPage.jsx";
 import VisitPage2 from "../subpages/VisitPage2.jsx";
 import VisitPage3 from "../subpages/visitPage3.jsx";
-import Reports from "../subpages/reports.jsx";
-import Appointments from "../subpages/appointments.jsx";
 import AddHouseDetails from "../subpages/addHousedetails.jsx";
 import HouseDetailsStep2 from "../subpages/HouseDetails2.jsx";
+import MotherCard from "../subpages/Upcoming.jsx";
 
 const HomeScreen = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
@@ -145,8 +144,11 @@ const HomeScreen = ({ navigation }) => {
                 Due: 12:00, Mbarara Sector
               </Text>
             </View>
-            <TouchableOpacity style={styles.addBtn}>
-              <Text style={[styles.addBtnText, styles.fontRegular]}>Add</Text>
+            <TouchableOpacity
+              style={styles.addBtn}
+              onPress={() => setVisibleForm("motherCard")}
+            >
+              <Text style={[styles.addBtnText, styles.fontRegular]}>ANC</Text>
             </TouchableOpacity>
           </View>
         ))}
@@ -224,6 +226,7 @@ const HomeScreen = ({ navigation }) => {
           onFinish={closeModal}
         />
       )}
+      {visibleForm === "motherCard" && <MotherCard />}
     </BlurView>
   </TouchableOpacity>
 </Modal>

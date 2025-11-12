@@ -6,10 +6,13 @@ import {
   ScrollView,
   StyleSheet,
   TextInput,
+  Modal,
 } from "react-native";
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import BottomNav from "@/components/navbar";
+import { BlurView } from "expo-blur";
+import MotherCard from "@/subpages/Upcoming";
 
 const NotificationsScreen = () => {
   const [activeTab, setActiveTab] = useState("All");
@@ -19,8 +22,10 @@ const NotificationsScreen = () => {
     Poppins_700Bold,
   });
 
-  if (!fontsLoaded) return null;
-
+   const [visibleForm, setVisibleForm] = useState(null);
+    if (!fontsLoaded) return null;
+    const closeModal = () => setVisibleForm(null);
+ 
   const tabs = ["All", "Missed", "Completed", "type", "date"];
   const notifications = [
     { name: "Uwase Claudine", detail: "Due: 12:00, Mbarara Sector", type: "All" },
@@ -87,12 +92,27 @@ const NotificationsScreen = () => {
                 {item.detail}
               </Text>
             </View>
-            <TouchableOpacity style={styles.addBtn}>
-              <Text style={[styles.addBtnText, styles.fontRegular]}>Add</Text>
-            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.addBtn}
+              onPress={() => setVisibleForm("motherCard")}
+                      >
+               <Text style={[styles.addBtnText, styles.fontRegular]}>ANC</Text>
+               </TouchableOpacity>
           </View>
         ))}
       </ScrollView>
+
+      <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
+        <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
+          <BlurView intensity={70} tint="light" style={styles.blurContent}>
+            <TouchableOpacity activeOpacity={1} onPress={() => {}}>
+              {visibleForm === "motherCard" && <MotherCard />}
+            </TouchableOpacity>
+          </BlurView>
+        </TouchableOpacity>
+      </Modal>
+      
+      
 
       <View style={styles.fixedBottom}>
             <BottomNav />
@@ -211,6 +231,18 @@ searchInput: {
   fontSize: 14,
   color: "#000",
 },
+  blurContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 24,
+  },
+  blurContent: {
+    padding: 24,
+    borderRadius: 24,
+    overflow: "hidden",
+    backgroundColor: "rgba(255,255,255,0.85)",
+  },
 
 });
 
