@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 import {
   useFonts,
   Poppins_400Regular,
   Poppins_600SemiBold,
 } from "@expo-google-fonts/poppins";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useNavigationState } from "@react-navigation/native";
 
 export default function BottomNav() {
-  const [active, setActive] = useState("Home");
   const navigation = useNavigation();
+  const routeName = useNavigationState((state) => {
+    const route = state?.routes[state?.index];
+    return route?.name;
+  });
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -21,8 +24,19 @@ export default function BottomNav() {
     return null;
   }
 
-  const handlePress = (buttonName, screenName) => {
-    setActive(buttonName);
+  // Map route names to button names
+  const getActiveButton = () => {
+    if (routeName === "Home") return "Home";
+    if (routeName === "child") return "Child";
+    if (routeName === "appointments") return "Appointments";
+    if (routeName === "mother") return "Mother";
+    if (routeName === "analytics") return "Analytics";
+    return "Home"; // default
+  };
+
+  const active = getActiveButton();
+
+  const handlePress = (screenName) => {
     navigation.navigate(screenName);
   };
 
@@ -32,7 +46,7 @@ export default function BottomNav() {
 
         {/* HOME */}
         <TouchableOpacity
-          onPress={() => handlePress("Home", "Home")}
+          onPress={() => handlePress("Home")}
           style={[styles.navItem, active === "Home" && styles.activeNavItem]}
         >
           <Image
@@ -49,7 +63,7 @@ export default function BottomNav() {
 
         {/* CHILD */}
         <TouchableOpacity
-          onPress={() => handlePress("Child", "child")}
+          onPress={() => handlePress("child")}
           style={[styles.navItem, active === "Child" && styles.activeNavItem]}
         >
           <Image
@@ -66,7 +80,7 @@ export default function BottomNav() {
 
         {/* APPOINTMENTS */}
         <TouchableOpacity
-          onPress={() => handlePress("Appointments", "appointments")}
+          onPress={() => handlePress("appointments")}
           style={[
             styles.navItem,
             active === "Appointments" && styles.activeNavItem,
@@ -91,7 +105,7 @@ export default function BottomNav() {
 
         {/* MOTHER */}
         <TouchableOpacity
-          onPress={() => handlePress("Mother", "mother")}
+          onPress={() => handlePress("mother")}
           style={[styles.navItem, active === "Mother" && styles.activeNavItem]}
         >
           <Image
@@ -108,7 +122,7 @@ export default function BottomNav() {
 
         {/* ANALYTICS */}
         <TouchableOpacity
-          onPress={() => handlePress("Analytics", "analytics")}
+          onPress={() => handlePress("analytics")}
           style={[
             styles.navItem,
             active === "Analytics" && styles.activeNavItem,
