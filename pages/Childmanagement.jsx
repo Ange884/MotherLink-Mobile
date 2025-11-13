@@ -100,26 +100,20 @@ const ChildManagementScreen = ({navigation}) => {
 
         {/* Summary Cards */}
         <View style={styles.cardsContainer}>
-  {summaryCards.map((card, index) => (
-    <View key={index} style={styles.summaryCard}>
-      <View style={styles.cardIcon}>
-        <Ionicons name={card.icon} size={22} color="#09111E" />
-      </View>
-
-      <Text style={[styles.cardTitle, styles.fontBold]}>
-        {card.title}
-      </Text>
-
-      <View style={styles.changeRow}>
-        <Text style={[styles.cardCount, styles.fontBold]}>
-          {card.count}
-        </Text>
-        <Ionicons name="trending-up" size={14} color="#09111E" />
-        <Text style={styles.changeText}>{card.change}</Text>
-      </View>
-    </View>
-  ))}
-</View>
+          {summaryCards.map((card, index) => (
+            <View key={index} style={styles.summaryCard}>
+              <View style={styles.cardIcon}>
+                <Ionicons name={card.icon} size={22} color="#09111E" />
+              </View>
+              <Text style={[styles.cardTitle, styles.fontBold]}>{card.title}</Text>
+              <Text style={[styles.cardCount, styles.fontBold]}>{card.count}</Text>
+              <View style={styles.changeRow}>
+                <Ionicons name="trending-up" size={14} color="#09111E" />
+                <Text style={styles.changeText}>{card.change}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
 
         {/* Today's Appointment Section */}
         <View style={styles.sectionHeader}>

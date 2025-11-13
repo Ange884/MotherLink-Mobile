@@ -63,10 +63,10 @@ const HomeScreen = ({ navigation }) => {
 
         {/* Search Bar */}
         <View style={styles.searchContainer}>
-          <Feather name="search" size={18} color="#252525ff" style={{ marginRight: 6 }} />
+          <Feather name="search" size={18} color="#777" style={{ marginRight: 6 }} />
           <TextInput
             placeholder="Search for anything"
-            placeholderTextColor="#272626ff"
+            placeholderTextColor="#777"
             style={[styles.searchInput, styles.fontRegular]}
           />
         </View>
@@ -189,17 +189,22 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-
-     <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
-  <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
-    {visibleForm === "motherCard" ? (
-      <BlurView intensity={70} tint="light" style={styles.fullBlurView}>
-        <TouchableOpacity activeOpacity={1} onPress={() => {}} style={styles.cardContainer}>
+<Modal
+  transparent
+  animationType="fade"
+  visible={!!visibleForm}
+  onRequestClose={closeModal}
+>
+  <BlurView intensity={20} tint="light" style={styles.fullScreenBlur}>
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={closeModal}
+      style={styles.overlayTouchable}
+    >
+      <View style={styles.centerContent}>
+        {visibleForm === "motherCard" && (
           <MotherCard />
-        </TouchableOpacity>
-      </BlurView>
-    ) : (
-      <BlurView intensity={70} tint="light" style={styles.blurContent}>
+        )}
         {visibleForm === "home" && (
           <HomeVisitForm
             onClose={closeModal}
@@ -233,10 +238,11 @@ const HomeScreen = ({ navigation }) => {
             onFinish={closeModal}
           />
         )}
-      </BlurView>
-    )}
-  </TouchableOpacity>
+      </View>
+    </TouchableOpacity>
+  </BlurView>
 </Modal>
+
 
 
       {/* Fixed Bottom Navigation */}
@@ -302,7 +308,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   activeDayBox: { backgroundColor: "#09111E" },
-  dayText: { color: "#242323ff", fontSize: 14 },
+  dayText: { color: "#777", fontSize: 14 },
   activeDayText: { color: "#fff" },
   dateText: { color: "#000", fontSize: 14, fontWeight: "600" },
   activeDateText: { color: "#fff" },
@@ -323,7 +329,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 4,
   },
-  cardTitle: { fontSize: 12, color: "#161616ff", marginTop: 6 },
+  cardTitle: { fontSize: 12, color: "#333", marginTop: 6 },
   cardCount: { fontSize: 16, marginTop: 4, color: "#09111E" },
 
   sectionHeader: {
@@ -332,7 +338,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
   },
-  seeAll: { color: "#242424ff", fontSize: 13 },
+  seeAll: { color: "#777", fontSize: 13 },
 
   appointmentCard: {
     backgroundColor: "#f7f8fa",
@@ -344,7 +350,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   appointmentName: { fontSize: 15, color: "#09111E" },
-  appointmentDetail: { color: "#1d1d1dff", fontSize: 13, marginTop: 2 },
+  appointmentDetail: { color: "#777", fontSize: 13, marginTop: 2 },
   addBtn: {
     backgroundColor: "#09111E",
     borderRadius: 8,
@@ -410,6 +416,35 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3,
   },
+  fullScreenBlur: {
+  flex: 1,
+  width: "100%",
+  height: "100%",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "rgba(255,255,255,0.3)", // light overlay tint
+},
+
+overlayTouchable: {
+  flex: 1,
+  width: "100%",
+  height: "100%",
+  justifyContent: "center",
+  alignItems: "center",
+},
+
+centerContent: {
+  backgroundColor: "white",
+  borderRadius: 16,
+  padding: 20,
+  width: "90%",
+  maxHeight: "85%",
+  shadowColor: "#000",
+  shadowOpacity: 0.15,
+  shadowRadius: 10,
+  elevation: 10,
+},
+
 });
 
 export default HomeScreen;

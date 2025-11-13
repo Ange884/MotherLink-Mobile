@@ -29,13 +29,13 @@ const MotherManagementScreen = ({navigation}) => {
   const summaryCards = [
     {
       title: "Total mothers",
-      count: "8",
+      count: "128",
       icon: "people-outline",
       change: "12% increase",
     },
     {
       title: "Pregnant",
-      count: "4",
+      count: "514",
       icon: "person-outline",
       change: "7% increase",
     },
@@ -99,27 +99,20 @@ const MotherManagementScreen = ({navigation}) => {
 
         {/* Summary Cards */}
         <View style={styles.cardsContainer}>
-  {summaryCards.map((card, index) => (
-    <View key={index} style={styles.summaryCard}>
-      <View style={styles.cardIcon}>
-        <Ionicons name={card.icon} size={22} color="#09111E" />
-      </View>
-
-      <Text style={[styles.cardTitle, styles.fontBold]}>
-        {card.title}
-      </Text>
-
-      <View style={styles.changeRow}>
-        <Text style={[styles.cardCount, styles.fontBold]}>
-          {card.count}
-        </Text>
-        <Ionicons name="trending-up" size={14} color="#09111E" />
-        <Text style={[styles.changeText, {fontFamily:"Poppins_400Regular"}]}>{card.change}</Text>
-      </View>
-    </View>
-  ))}
-</View>
-
+          {summaryCards.map((card, index) => (
+            <View key={index} style={styles.summaryCard}>
+              <View style={styles.cardIcon}>
+                <Ionicons name={card.icon} size={22} color="#09111E" />
+              </View>
+              <Text style={[styles.cardTitle, styles.fontBold]}>{card.title}</Text>
+              <Text style={[styles.cardCount, styles.fontBold]}>{card.count}</Text>
+              <View style={styles.changeRow}>
+                <Ionicons name="trending-up" size={14} color="#09111E" />
+                <Text style={styles.changeText}>{card.change}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
 
         {/* Today's Appointment Section */}
         <View style={styles.sectionHeader}>
@@ -259,48 +252,52 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#000",
   },
-   cardsContainer: {
+  cardsContainer: {
     flexDirection: "row",
-    flexWrap: "wrap",
     justifyContent: "space-between",
+    marginBottom: 20,
   },
   summaryCard: {
-    width: "33%",
+    flex: 1,
     backgroundColor: "#fff",
-    borderRadius: 10,
-    padding: 12,
-    justifyContent: "space-between", // ✅ pushes top content up & changeRow down
-    height: 120, // optional fixed height for proper spacing
+    borderRadius: 16,
+    padding: 16,
+    alignItems: "flex-start",
+    gap: 10,
+    marginHorizontal: 4,
+    borderWidth: 1,
+    borderColor: "#E0E0E0",
     shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    elevation: 3,
   },
   cardIcon: {
-    backgroundColor: "#f5f5f5",
-    borderRadius: 8,
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#F3F4F6",
     alignItems: "center",
     justifyContent: "center",
   },
   cardTitle: {
-    fontSize: 12,
-    color: "#333",
-    marginTop: 8,
+    fontSize: 14,
+    color: "#09111E",
+  },
+  cardCount: {
+    fontSize: 22,
+    color: "#09111E",
   },
   changeRow: {
     flexDirection: "row",
-    alignItems: "center", // ✅ keeps count, icon, text on same line
-    gap: 10, // ✅ space between count, icon, and change text (RN ≥ 0.71)
-  },
-  cardCount: {
-    fontSize: 16,
-    color: "#09111E",
+    alignItems: "center",
+    gap: 6,
   },
   changeText: {
-    fontSize: 8,
-    color: "#000",
+    fontSize: 12,
+    color: "#424242ff",
+    fontFamily: "Poppins_500Medium",
   },
   sectionHeader: {
     flexDirection: "row",
