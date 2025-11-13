@@ -192,42 +192,49 @@ const HomeScreen = ({ navigation }) => {
 
      <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
   <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
-    <BlurView intensity={70} tint="light" style={styles.blurContent}>
-      {visibleForm === "home" && (
-        <HomeVisitForm
-          onClose={closeModal}
-          onNext={() => setVisibleForm("homeStep2")}
-        />
-      )}
-      {visibleForm === "homeStep2" && (
-        <VisitPage2
-          onClose={closeModal}
-          onBack={() => setVisibleForm("home")}
-          onNext={() => setVisibleForm("homeStep3")}
-        />
-      )}
-      {visibleForm === "homeStep3" && (
-        <VisitPage3
-          onClose={closeModal}
-          onBack={() => setVisibleForm("homeStep2")}
-          onFinish={closeModal}
-        />
-      )}
-      {visibleForm === "house" && (
-        <AddHouseDetails
-          onClose={closeModal}
-          onNext={() => setVisibleForm("houseStep2")}
-        />
-      )}
-      {visibleForm === "houseStep2" && (
-        <HouseDetailsStep2
-          onClose={closeModal}
-          onBack={() => setVisibleForm("house")}
-          onFinish={closeModal}
-        />
-      )}
-      {visibleForm === "motherCard" && <MotherCard />}
-    </BlurView>
+    {visibleForm === "motherCard" ? (
+      <BlurView intensity={70} tint="light" style={styles.fullBlurView}>
+        <TouchableOpacity activeOpacity={1} onPress={() => {}} style={styles.cardContainer}>
+          <MotherCard />
+        </TouchableOpacity>
+      </BlurView>
+    ) : (
+      <BlurView intensity={70} tint="light" style={styles.blurContent}>
+        {visibleForm === "home" && (
+          <HomeVisitForm
+            onClose={closeModal}
+            onNext={() => setVisibleForm("homeStep2")}
+          />
+        )}
+        {visibleForm === "homeStep2" && (
+          <VisitPage2
+            onClose={closeModal}
+            onBack={() => setVisibleForm("home")}
+            onNext={() => setVisibleForm("homeStep3")}
+          />
+        )}
+        {visibleForm === "homeStep3" && (
+          <VisitPage3
+            onClose={closeModal}
+            onBack={() => setVisibleForm("homeStep2")}
+            onFinish={closeModal}
+          />
+        )}
+        {visibleForm === "house" && (
+          <AddHouseDetails
+            onClose={closeModal}
+            onNext={() => setVisibleForm("houseStep2")}
+          />
+        )}
+        {visibleForm === "houseStep2" && (
+          <HouseDetailsStep2
+            onClose={closeModal}
+            onBack={() => setVisibleForm("house")}
+            onFinish={closeModal}
+          />
+        )}
+      </BlurView>
+    )}
   </TouchableOpacity>
 </Modal>
 
@@ -358,7 +365,17 @@ const styles = StyleSheet.create({
   borderRadius: 20,
   padding: 20,
 },
-
+  fullBlurView: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cardContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
   actionCard: {
     backgroundColor: "#f1f3f6",
     borderRadius: 14,
@@ -374,7 +391,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 8,
   },
-  blurContainer: { flex: 1, justifyContent: "center", alignItems: "center" },
+  blurContainer: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+  },
   fixedBottom: {
     position: "absolute",
     bottom: 0,

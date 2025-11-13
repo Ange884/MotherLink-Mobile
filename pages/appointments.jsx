@@ -140,8 +140,8 @@ const appointments = [
 
            <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
                   <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
-                    <BlurView intensity={70} tint="light" style={styles.blurContent}>
-                      <TouchableOpacity activeOpacity={1} onPress={() => {}}>
+                    <BlurView intensity={70} tint="light" style={styles.fullBlurView}>
+                      <TouchableOpacity activeOpacity={1} onPress={() => {}} style={styles.cardContainer}>
                         {visibleForm === "motherCard" && <MotherCard />}
                       </TouchableOpacity>
                     </BlurView>
@@ -381,15 +381,19 @@ const appointments = [
         },
         blurContainer: {
     flex: 1,
+    width: "100%",
+    height: "100%",
+  },
+  fullBlurView: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
     justifyContent: "center",
     alignItems: "center",
-    padding: 24,
   },
-  blurContent: {
-    padding: 24,
-    borderRadius: 24,
-    overflow: "hidden",
-    backgroundColor: "rgba(255,255,255,0.85)",
+  cardContainer: {
+    justifyContent: "center",
+    alignItems: "center",
   },
       });
       

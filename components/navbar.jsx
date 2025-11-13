@@ -186,6 +186,6 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_400Regular",
   },
   activeLabel: {
-    color: "#fff",
+    color: "#0bc00bff",
   },
 });
