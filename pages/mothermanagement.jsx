@@ -27,9 +27,24 @@ const MotherManagementScreen = ({navigation}) => {
 
   // Summary cards data
   const summaryCards = [
-    { title: "Total mothers", count: "128", icon: "people-outline" },
-    { title: "Pregnant", count: "514", icon: "person-outline" },
-    { title: "Mothers", count: "8", icon: "people-circle-outline" },
+    {
+      title: "Total mothers",
+      count: "128",
+      icon: "people-outline",
+      change: "12% increase",
+    },
+    {
+      title: "Pregnant",
+      count: "514",
+      icon: "person-outline",
+      change: "7% increase",
+    },
+    {
+      title: "Mothers",
+      count: "8",
+      icon: "people-circle-outline",
+      change: "3% increase",
+    },
   ];
 
   // Today's appointments data
@@ -89,11 +104,22 @@ const MotherManagementScreen = ({navigation}) => {
               <View style={styles.cardIcon}>
                 <Ionicons name={card.icon} size={24} color="#09111E" />
               </View>
-              <Text style={[styles.cardTitle, styles.fontRegular]}>{card.title}</Text>
-              <Text style={[styles.cardCount, styles.fontBold]}>{card.count}</Text>
+              <Text style={[styles.cardTitle, styles.fontRegular]}>
+                {card.title}
+              </Text>
               <View style={styles.cardFooter}>
-                <Ionicons name="stats-chart" size={12} color="#777" />
-                <Text style={[styles.cardFooterText, styles.fontRegular]}>unknown</Text>
+                <Text style={[styles.cardCount, styles.fontBold]}>
+                  {card.count}
+                </Text>
+                <View style={styles.cardFooterRight}>
+                  <Image
+                    source={require("../assets/images/chop.png")}
+                    style={styles.cardFooterIcon}
+                  />
+                  <Text style={[styles.cardFooterText, styles.fontRegular]}>
+                    {card.change}
+                  </Text>
+                </View>
               </View>
             </View>
           ))}
