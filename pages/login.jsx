@@ -83,7 +83,7 @@ export default function LoginScreen({ navigation }) {
           <Text
             style={[
               styles.rememberText,
-              { fontFamily: "Poppins_400Regular" },
+              { fontFamily: "Poppins_700Bold" },
             ]} onPress={()=>navigation.navigate("signup1")}
           >
             New? Create Account
@@ -92,7 +92,7 @@ export default function LoginScreen({ navigation }) {
 
         <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
           <Text
-            style={[styles.forgotText, { fontFamily: "Poppins_400Regular" }]}
+            style={[styles.forgotText, { fontFamily: "Poppins_400Bold" }]}
           >
             Forgot Password?
           </Text>
