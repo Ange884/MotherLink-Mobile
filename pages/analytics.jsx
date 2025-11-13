@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,16 +6,51 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  ActivityIndicator,
 } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import { Ionicons, Feather, MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 import BottomNav from "@/components/navbar";
 import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold } from "@expo-google-fonts/poppins";
+import { analyticsAPI } from "../services/api.js";
 
 const screenWidth = Dimensions.get("window").width;
 
 const AnalyticsScreen = ({ navigation }) => {
   const [selectedPeriod, setSelectedPeriod] = useState("WEEK");
+  const [loading, setLoading] = useState(true);
+  const [chartData, setChartData] = useState({
+    labels: ["S", "M", "T", "W", "T", "F", "S"],
+    datasets: [
+      {
+        data: [0, 0, 0, 0, 0, 0, 0],
+        color: (opacity = 1) => `rgba(79, 70, 229, ${opacity})`,
+        strokeWidth: 3,
+      },
+      {
+        data: [0, 0, 0, 0, 0, 0, 0],
+        color: (opacity = 1) => `rgba(6, 182, 212, ${opacity})`,
+        strokeWidth: 3,
+      },
+      {
+        data: [0, 0, 0, 0, 0, 0, 0],
+        color: (opacity = 1) => `rgba(245, 158, 11, ${opacity})`,
+        strokeWidth: 3,
+      },
+    ],
+    legend: [],
+  });
+  const [attendance, setAttendance] = useState({
+    totalMothers: 0,
+    totalChildren: 0,
+    ancOverTime: 0,
+  });
+  const [emergency, setEmergency] = useState({
+    totalEmergencies: 0,
+    laborPain: 0,
+    childEmergencies: 0,
+    otherEmergencies: 0,
+  });
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -23,30 +58,38 @@ const AnalyticsScreen = ({ navigation }) => {
     Poppins_700Bold,
   });
 
-  if (!fontsLoaded) return null;
+  useEffect(() => {
+    fetchAnalyticsData();
+  }, [selectedPeriod]);
 
-  // Chart data with 3 lines matching the design
-  const chartData = {
-    labels: ["S", "M", "T", "W", "T", "F", "S"],
-    datasets: [
-      {
-        data: [200, 220, 180, 250, 200, 180, 200],
-        color: (opacity = 1) => `rgba(79, 70, 229, ${opacity})`, // Dark blue/purple
-        strokeWidth: 3,
-      },
-      {
-        data: [150, 170, 140, 160, 150, 130, 120],
-        color: (opacity = 1) => `rgba(6, 182, 212, ${opacity})`, // Light blue
-        strokeWidth: 3,
-      },
-      {
-        data: [60, 80, 50, 90, 70, 40, 30],
-        color: (opacity = 1) => `rgba(245, 158, 11, ${opacity})`, // Light red/orange
-        strokeWidth: 3,
-      },
-    ],
-    legend: [],
+  const fetchAnalyticsData = async () => {
+    try {
+      setLoading(true);
+      const [chartRes, attendanceRes, emergencyRes] = await Promise.all([
+        analyticsAPI.getAntenatalChartData(selectedPeriod),
+        analyticsAPI.getAttendanceOverview(),
+        analyticsAPI.getEmergencyOverview(),
+      ]);
+      
+      if (chartRes.data) {
+        setChartData(chartRes.data);
+      }
+      
+      if (attendanceRes.data) {
+        setAttendance(attendanceRes.data);
+      }
+      
+      if (emergencyRes.data) {
+        setEmergency(emergencyRes.data);
+      }
+    } catch (error) {
+      console.error('Error fetching analytics data:', error);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  if (!fontsLoaded) return null;
 
   return (
     <View style={styles.container}>
@@ -75,7 +118,10 @@ const AnalyticsScreen = ({ navigation }) => {
           {["DAY", "WEEK", "MONTH", "YEAR"].map((period) => (
             <TouchableOpacity
               key={period}
-              onPress={() => setSelectedPeriod(period)}
+              onPress={() => {
+                setSelectedPeriod(period);
+                fetchAnalyticsData();
+              }}
               style={[
                 styles.periodButton,
                 selectedPeriod === period && styles.periodButtonActive,
@@ -103,180 +149,198 @@ const AnalyticsScreen = ({ navigation }) => {
         <Text style={[styles.sectionTitle, { fontFamily: "Poppins_700Bold" }]}>
           Antenatal appointments
         </Text>
-        <View style={styles.chartCard}>
-          <LineChart
-            data={chartData}
-            width={screenWidth - 48}
-            height={280}
-            chartConfig={{
-              backgroundColor: "#ffffff",
-              backgroundGradientFrom: "#ffffff",
-              backgroundGradientTo: "#ffffff",
-              decimalPlaces: 0,
-              color: (opacity = 1) => `rgba(107, 114, 128, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(107, 114, 128, ${opacity})`,
-              style: {
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#09111E" />
+          </View>
+        ) : (
+          <View style={styles.chartCard}>
+            <LineChart
+              data={chartData}
+              width={screenWidth - 48}
+              height={280}
+              chartConfig={{
+                backgroundColor: "#ffffff",
+                backgroundGradientFrom: "#ffffff",
+                backgroundGradientTo: "#ffffff",
+                decimalPlaces: 0,
+                color: (opacity = 1) => `rgba(107, 114, 128, ${opacity})`,
+                labelColor: (opacity = 1) => `rgba(107, 114, 128, ${opacity})`,
+                style: {
+                  borderRadius: 16,
+                },
+                propsForDots: {
+                  r: "5",
+                  strokeWidth: "2",
+                  stroke: "#fff",
+                },
+                propsForBackgroundLines: {
+                  strokeDasharray: "",
+                  stroke: "#E5E7EB",
+                  strokeWidth: 1,
+                },
+              }}
+              bezier
+              withInnerLines={true}
+              withOuterLines={false}
+              withVerticalLabels={true}
+              withHorizontalLabels={true}
+              segments={6}
+              style={{
+                marginVertical: 8,
                 borderRadius: 16,
-              },
-              propsForDots: {
-                r: "5",
-                strokeWidth: "2",
-                stroke: "#fff",
-              },
-              propsForBackgroundLines: {
-                strokeDasharray: "",
-                stroke: "#E5E7EB",
-                strokeWidth: 1,
-              },
-            }}
-            bezier
-            withInnerLines={true}
-            withOuterLines={false}
-            withVerticalLabels={true}
-            withHorizontalLabels={true}
-            segments={6}
-            style={{
-              marginVertical: 8,
-              borderRadius: 16,
-            }}
-          />
-        </View>
+              }}
+            />
+          </View>
+        )}
 
         {/* Attendance Overview */}
         <Text style={[styles.sectionTitle, { fontFamily: "Poppins_700Bold" }]}>
           Attendance overview
         </Text>
-        <View style={styles.attendanceCard}>
-          <View style={styles.attendanceItem}>
-            <Text
-              style={[styles.attendanceValue, { fontFamily: "Poppins_700Bold" }]}
-            >
-              567
-            </Text>
-            <Text
-              style={[
-                styles.attendanceLabel,
-                { fontFamily: "Poppins_400Regular" },
-              ]}
-            >
-              Total mothers
-            </Text>
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="small" color="#09111E" />
           </View>
-          <View style={styles.attendanceDivider} />
-          <View style={styles.attendanceItem}>
-            <Text
-              style={[styles.attendanceValue, { fontFamily: "Poppins_700Bold" }]}
-            >
-              400
-            </Text>
-            <Text
-              style={[
-                styles.attendanceLabel,
-                { fontFamily: "Poppins_400Regular" },
-              ]}
-            >
-              Total children
-            </Text>
+        ) : (
+          <View style={styles.attendanceCard}>
+            <View style={styles.attendanceItem}>
+              <Text
+                style={[styles.attendanceValue, { fontFamily: "Poppins_700Bold" }]}
+              >
+                {attendance.totalMothers || 0}
+              </Text>
+              <Text
+                style={[
+                  styles.attendanceLabel,
+                  { fontFamily: "Poppins_400Regular" },
+                ]}
+              >
+                Total mothers
+              </Text>
+            </View>
+            <View style={styles.attendanceDivider} />
+            <View style={styles.attendanceItem}>
+              <Text
+                style={[styles.attendanceValue, { fontFamily: "Poppins_700Bold" }]}
+              >
+                {attendance.totalChildren || 0}
+              </Text>
+              <Text
+                style={[
+                  styles.attendanceLabel,
+                  { fontFamily: "Poppins_400Regular" },
+                ]}
+              >
+                Total children
+              </Text>
+            </View>
+            <View style={styles.attendanceDivider} />
+            <View style={styles.attendanceItem}>
+              <Text
+                style={[styles.attendanceValue, { fontFamily: "Poppins_700Bold" }]}
+              >
+                {attendance.ancOverTime || 0}
+              </Text>
+              <Text
+                style={[
+                  styles.attendanceLabel,
+                  { fontFamily: "Poppins_400Regular" },
+                ]}
+              >
+                ANC over time
+              </Text>
+            </View>
           </View>
-          <View style={styles.attendanceDivider} />
-          <View style={styles.attendanceItem}>
-            <Text
-              style={[styles.attendanceValue, { fontFamily: "Poppins_700Bold" }]}
-            >
-              100
-            </Text>
-            <Text
-              style={[
-                styles.attendanceLabel,
-                { fontFamily: "Poppins_400Regular" },
-              ]}
-            >
-              ANC over time
-            </Text>
-          </View>
-        </View>
+        )}
 
         {/* Emergency Overview */}
         <Text style={[styles.sectionTitle, { fontFamily: "Poppins_700Bold" }]}>
           Emergency overview
         </Text>
-        <View style={styles.emergencyGrid}>
-          <View style={styles.emergencyCard}>
-            <View style={[styles.emergencyIconWrapper, { backgroundColor: "#FEF3C7" }]}>
-              <Ionicons name="warning" size={24} color="#F59E0B" />
-            </View>
-            <Text
-              style={[styles.emergencyValue, { fontFamily: "Poppins_700Bold" }]}
-            >
-              58
-            </Text>
-            <Text
-              style={[
-                styles.emergencyLabel,
-                { fontFamily: "Poppins_400Regular" },
-              ]}
-            >
-              Total emergencies
-            </Text>
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="small" color="#09111E" />
           </View>
+        ) : (
+          <View style={styles.emergencyGrid}>
+            <View style={styles.emergencyCard}>
+              <View style={[styles.emergencyIconWrapper, { backgroundColor: "#FEF3C7" }]}>
+                <Ionicons name="warning" size={24} color="#F59E0B" />
+              </View>
+              <Text
+                style={[styles.emergencyValue, { fontFamily: "Poppins_700Bold" }]}
+              >
+                {emergency.totalEmergencies || 0}
+              </Text>
+              <Text
+                style={[
+                  styles.emergencyLabel,
+                  { fontFamily: "Poppins_400Regular" },
+                ]}
+              >
+                Total emergencies
+              </Text>
+            </View>
 
-          <View style={styles.emergencyCard}>
-            <View style={[styles.emergencyIconWrapper, { backgroundColor: "#DBEAFE" }]}>
-              <Ionicons name="snow" size={24} color="#3B82F6" />
+            <View style={styles.emergencyCard}>
+              <View style={[styles.emergencyIconWrapper, { backgroundColor: "#DBEAFE" }]}>
+                <Ionicons name="snow" size={24} color="#3B82F6" />
+              </View>
+              <Text
+                style={[styles.emergencyValue, { fontFamily: "Poppins_700Bold" }]}
+              >
+                {emergency.laborPain || 0}%
+              </Text>
+              <Text
+                style={[
+                  styles.emergencyLabel,
+                  { fontFamily: "Poppins_400Regular" },
+                ]}
+              >
+                Labor pain
+              </Text>
             </View>
-            <Text
-              style={[styles.emergencyValue, { fontFamily: "Poppins_700Bold" }]}
-            >
-              37%
-            </Text>
-            <Text
-              style={[
-                styles.emergencyLabel,
-                { fontFamily: "Poppins_400Regular" },
-              ]}
-            >
-              Labor pain
-            </Text>
-          </View>
 
-          <View style={styles.emergencyCard}>
-            <View style={[styles.emergencyIconWrapper, { backgroundColor: "#E0E7FF" }]}>
-              <MaterialIcons name="local-hospital" size={24} color="#6366F1" />
+            <View style={styles.emergencyCard}>
+              <View style={[styles.emergencyIconWrapper, { backgroundColor: "#E0E7FF" }]}>
+                <MaterialIcons name="local-hospital" size={24} color="#6366F1" />
+              </View>
+              <Text
+                style={[styles.emergencyValue, { fontFamily: "Poppins_700Bold" }]}
+              >
+                {emergency.childEmergencies || 0}
+              </Text>
+              <Text
+                style={[
+                  styles.emergencyLabel,
+                  { fontFamily: "Poppins_400Regular" },
+                ]}
+              >
+                Child emergencies
+              </Text>
             </View>
-            <Text
-              style={[styles.emergencyValue, { fontFamily: "Poppins_700Bold" }]}
-            >
-              20
-            </Text>
-            <Text
-              style={[
-                styles.emergencyLabel,
-                { fontFamily: "Poppins_400Regular" },
-              ]}
-            >
-              Child emergencies
-            </Text>
-          </View>
 
-          <View style={styles.emergencyCard}>
-            <View style={[styles.emergencyIconWrapper, { backgroundColor: "#CCFBF1" }]}>
-              <Ionicons name="water" size={24} color="#14B8A6" />
+            <View style={styles.emergencyCard}>
+              <View style={[styles.emergencyIconWrapper, { backgroundColor: "#CCFBF1" }]}>
+                <Ionicons name="water" size={24} color="#14B8A6" />
+              </View>
+              <Text
+                style={[styles.emergencyValue, { fontFamily: "Poppins_700Bold" }]}
+              >
+                {emergency.otherEmergencies || 0}
+              </Text>
+              <Text
+                style={[
+                  styles.emergencyLabel,
+                  { fontFamily: "Poppins_400Regular" },
+                ]}
+              >
+                Other emergencies
+              </Text>
             </View>
-            <Text
-              style={[styles.emergencyValue, { fontFamily: "Poppins_700Bold" }]}
-            >
-              40
-            </Text>
-            <Text
-              style={[
-                styles.emergencyLabel,
-                { fontFamily: "Poppins_400Regular" },
-              ]}
-            >
-              Other emergencies
-            </Text>
           </View>
-        </View>
+        )}
       </ScrollView>
 
       {/* Fixed Bottom Navigation */}
@@ -446,5 +510,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
+  },
+  loadingContainer: {
+    padding: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: 200,
   },
 });

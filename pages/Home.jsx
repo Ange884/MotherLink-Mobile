@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   View, Text, TextInput, StyleSheet, ScrollView, 
-  TouchableOpacity, Image, Modal 
+  TouchableOpacity, Image, Modal, ActivityIndicator 
 } from "react-native";
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import { Ionicons, Feather } from "@expo/vector-icons";
@@ -15,6 +15,7 @@ import VisitPage3 from "../subpages/visitPage3.jsx";
 import AddHouseDetails from "../subpages/addHousedetails.jsx";
 import HouseDetailsStep2 from "../subpages/HouseDetails2.jsx";
 import MotherCard from "../subpages/Upcoming.jsx";
+import { homeAPI } from "../services/api.js";
 
 const HomeScreen = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
@@ -23,6 +24,40 @@ const HomeScreen = ({ navigation }) => {
   });
 
   const [visibleForm, setVisibleForm] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [overview, setOverview] = useState({
+    totalHouses: 0,
+    totalMothers: 0,
+    totalChildren: 0,
+  });
+  const [appointments, setAppointments] = useState([]);
+
+  useEffect(() => {
+    fetchHomeData();
+  }, []);
+
+  const fetchHomeData = async () => {
+    try {
+      setLoading(true);
+      const [overviewRes, appointmentsRes] = await Promise.all([
+        homeAPI.getOverview(),
+        homeAPI.getTodayAppointments(),
+      ]);
+      setOverview(overviewRes.data);
+      setAppointments(appointmentsRes.data || []);
+    } catch (error) {
+      console.error('Error fetching home data:', error);
+      // Set default values on error
+      setOverview({
+        totalHouses: 120,
+        totalMothers: 534,
+        totalChildren: 620,
+      });
+      setAppointments([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!fontsLoaded) return null;
 
@@ -108,23 +143,29 @@ const HomeScreen = ({ navigation }) => {
 
         {/* Overview */}
         <Text style={[styles.sectionTitle, styles.fontBold]}>Overview</Text>
-        <View style={styles.overviewContainer}>
-          <View style={styles.overviewCard}>
-            <Image source={require("../assets/images/Group1.png")} />
-            <Text style={[styles.cardTitle, styles.fontBold]}>Total Houses</Text>
-            <Text style={[styles.cardCount, styles.fontBold]}>120</Text>
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#09111E" />
           </View>
-          <View style={styles.overviewCard}>
-            <Image source={require("../assets/images/Group2.png")} />
-            <Text style={[styles.cardTitle, styles.fontBold]}>Total Mothers</Text>
-            <Text style={[styles.cardCount, styles.fontBold]}>534</Text>
+        ) : (
+          <View style={styles.overviewContainer}>
+            <View style={styles.overviewCard}>
+              <Image source={require("../assets/images/Group1.png")} />
+              <Text style={[styles.cardTitle, styles.fontBold]}>Total Houses</Text>
+              <Text style={[styles.cardCount, styles.fontBold]}>{overview.totalHouses || 0}</Text>
+            </View>
+            <View style={styles.overviewCard}>
+              <Image source={require("../assets/images/Group2.png")} />
+              <Text style={[styles.cardTitle, styles.fontBold]}>Total Mothers</Text>
+              <Text style={[styles.cardCount, styles.fontBold]}>{overview.totalMothers || 0}</Text>
+            </View>
+            <View style={styles.overviewCard}>
+              <Image source={require("../assets/images/Group4.png")} />
+              <Text style={[styles.cardTitle, styles.fontBold]}>Total Children</Text>
+              <Text style={[styles.cardCount, styles.fontBold]}>{overview.totalChildren || 0}</Text>
+            </View>
           </View>
-          <View style={styles.overviewCard}>
-            <Image source={require("../assets/images/Group4.png")} />
-            <Text style={[styles.cardTitle, styles.fontBold]}>Total Children</Text>
-            <Text style={[styles.cardCount, styles.fontBold]}>620</Text>
-          </View>
-        </View>
+        )}
 
         {/* Appointments */}
         <View style={styles.sectionHeader}>
@@ -134,24 +175,32 @@ const HomeScreen = ({ navigation }) => {
           <Text style={[styles.seeAll, styles.fontBold]}>See all</Text>
         </View>
 
-        {[1, 2, 3].map((_, i) => (
-          <View key={i} style={styles.appointmentCard}>
-            <View>
-              <Text style={[styles.appointmentName, styles.fontBold]}>
-                Uwase Claudine
-              </Text>
-              <Text style={[styles.appointmentDetail, styles.fontRegular]}>
-                Due: 12:00, Mbarara Sector
-              </Text>
-            </View>
-            <TouchableOpacity
-              style={styles.addBtn}
-              onPress={() => setVisibleForm("motherCard")}
-            >
-              <Text style={[styles.addBtnText, styles.fontRegular]}>ANC</Text>
-            </TouchableOpacity>
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="small" color="#09111E" />
           </View>
-        ))}
+        ) : appointments.length > 0 ? (
+          appointments.map((appointment, i) => (
+            <View key={i} style={styles.appointmentCard}>
+              <View>
+                <Text style={[styles.appointmentName, styles.fontBold]}>
+                  {appointment.name || appointment.motherName || 'N/A'}
+                </Text>
+                <Text style={[styles.appointmentDetail, styles.fontRegular]}>
+                  Due: {appointment.time || appointment.scheduledTime || 'N/A'}, {appointment.location || appointment.sector || 'N/A'}
+                </Text>
+              </View>
+              <TouchableOpacity
+                style={styles.addBtn}
+                onPress={() => setVisibleForm("motherCard")}
+              >
+                <Text style={[styles.addBtnText, styles.fontRegular]}>ANC</Text>
+              </TouchableOpacity>
+            </View>
+          ))
+        ) : (
+          <Text style={[styles.noDataText, styles.fontRegular]}>No appointments today</Text>
+        )}
 
         {/* Quick Actions */}
         <Text style={[styles.sectionTitle, styles.fontBold]}>Quick Actions</Text>
@@ -396,6 +445,17 @@ const styles = StyleSheet.create({
     color: "#09111E",
     textAlign: "center",
     marginTop: 8,
+  },
+  loadingContainer: {
+    padding: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  noDataText: {
+    textAlign: "center",
+    color: "#777",
+    marginTop: 20,
+    fontSize: 14,
   },
   blurContainer: {
     flex: 1,

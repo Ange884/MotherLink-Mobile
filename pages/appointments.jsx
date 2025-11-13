@@ -1,10 +1,11 @@
-import React , {useState} from "react";
+import React , {useState, useEffect} from "react";
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';
 import BottomNav from "../components/navbar.jsx";
-import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity,Image,Modal} from "react-native";
+import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity,Image,Modal,ActivityIndicator} from "react-native";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import MotherCard from "@/subpages/Upcoming.jsx";
+import { appointmentAPI } from "../services/api.js";
 
 export default function Appointments({navigation}){
     const [fontsLoaded] = useFonts({
@@ -13,27 +14,62 @@ export default function Appointments({navigation}){
       });
     
       const [visibleForm, setVisibleForm] = useState(null);
+      const [loading, setLoading] = useState(true);
+      const [overview, setOverview] = useState({
+        upcoming: 0,
+        missed: 0,
+        completed: 0,
+      });
+      const [todayAppointments, setTodayAppointments] = useState([]);
+      const [appointmentTypes, setAppointmentTypes] = useState([]);
+
+      useEffect(() => {
+        fetchAppointmentData();
+      }, []);
+
+      const fetchAppointmentData = async () => {
+        try {
+          setLoading(true);
+          const [statsRes, todayRes, upcomingRes, missedRes] = await Promise.all([
+            appointmentAPI.getAppointmentStats(),
+            appointmentAPI.getAppointmentsByStatus('today'),
+            appointmentAPI.getAppointmentsByStatus('upcoming'),
+            appointmentAPI.getAppointmentsByStatus('missed'),
+          ]);
+          
+          setOverview(statsRes.data || { upcoming: 0, missed: 0, completed: 0 });
+          setTodayAppointments(todayRes.data || []);
+          
+          // Combine upcoming and missed appointments
+          const types = [];
+          if (upcomingRes.data?.length > 0) {
+            types.push({
+              type: "upcoming",
+              title: "Upcoming appointment",
+              appointments: upcomingRes.data,
+              icon: require("../assets/images/Tick.png"),
+              rightIcon: null,
+            });
+          }
+          if (missedRes.data?.length > 0) {
+            types.push({
+              type: "missed",
+              title: "Missed appointment",
+              appointments: missedRes.data,
+              icon: require("../assets/images/Tick.png"),
+              rightIcon: require("../assets/images/warning.png"),
+            });
+          }
+          setAppointmentTypes(types);
+        } catch (error) {
+          console.error('Error fetching appointment data:', error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
           if (!fontsLoaded) return null;
           const closeModal = () => setVisibleForm(null);
-
-const appointments = [
-  {
-    type: "upcoming",
-    title: "Upcoming appointment",
-    time: "11:00",
-    location: "Mukamira sector",
-    icon: require("../assets/images/Tick.png"),
-    rightIcon: null,
-  },
-  {
-    type: "missed",
-    title: "Missed appointment",
-    time: "11:00",
-    location: "Mukamira sector",
-    icon: require("../assets/images/Tick.png"),
-    rightIcon: require("../assets/images/warning.png"),
-  },
-];
       return (
         <View style={styles.screen}>
           {/* Scrollable content */}
@@ -77,23 +113,29 @@ const appointments = [
             
             {/* Overview */}
             <Text style={[styles.sectionTitle, styles.fontBold]}>Overview</Text>
-            <View style={styles.overviewContainer}>
-              <View style={styles.overviewCard}>
-                <Image source={require("../assets/images/camm.png")} />
-                <Text style={[styles.cardTitle, styles.fontBold]}>UpComing</Text>
-                <Text style={[styles.cardCount, styles.fontBold]}>50</Text>
+            {loading ? (
+              <View style={styles.loadingContainer}>
+                <ActivityIndicator size="small" color="#09111E" />
               </View>
-              <View style={styles.overviewCard}>
-                <Image source={require("../assets/images/dash.png")} />
-                <Text style={[styles.cardTitle, styles.fontBold]}>Missed</Text>
-                <Text style={[styles.cardCount, styles.fontBold]}>120</Text>
+            ) : (
+              <View style={styles.overviewContainer}>
+                <View style={styles.overviewCard}>
+                  <Image source={require("../assets/images/camm.png")} />
+                  <Text style={[styles.cardTitle, styles.fontBold]}>UpComing</Text>
+                  <Text style={[styles.cardCount, styles.fontBold]}>{overview.upcoming || 0}</Text>
+                </View>
+                <View style={styles.overviewCard}>
+                  <Image source={require("../assets/images/dash.png")} />
+                  <Text style={[styles.cardTitle, styles.fontBold]}>Missed</Text>
+                  <Text style={[styles.cardCount, styles.fontBold]}>{overview.missed || 0}</Text>
+                </View>
+                <View style={styles.overviewCard}>
+                  <Image source={require("../assets/images/Tick.png")} />
+                  <Text style={[styles.cardTitle, styles.fontBold]}>Completed</Text>
+                  <Text style={[styles.cardCount, styles.fontBold]}>{overview.completed || 0}</Text>
+                </View>
               </View>
-              <View style={styles.overviewCard}>
-                <Image source={require("../assets/images/Tick.png")} />
-                <Text style={[styles.cardTitle, styles.fontBold]}>Completed</Text>
-                <Text style={[styles.cardCount, styles.fontBold]}>8</Text>
-              </View>
-            </View>
+            )}
       
             {/* Appointments */}
             <View style={styles.sectionHeader}>
@@ -101,39 +143,59 @@ const appointments = [
               <Text style={[styles.seeAll, styles.fontBold]} onPress={() =>navigation.navigate("notifications")}>See all</Text>
             </View>
       
-            {[1, 2, 3,4,5].map((_, i) => (
-              <View key={i} style={styles.appointmentCard}>
-                <View>
-                  <Text style={[styles.appointmentName, styles.fontBold]}>Uwase Claudine</Text>
-                  <Text style={[styles.appointmentDetail, styles.fontRegular]}>
-                    Due: 12:00, Mbarara Sector
-                  </Text>
-                </View>
-                <TouchableOpacity style={styles.addBtn} onPress={()=>setVisibleForm("motherCard")}>
-                  <Text style={[styles.addBtnText, styles.fontRegular]}>ANC</Text>
-                </TouchableOpacity>
+            {loading ? (
+              <View style={styles.loadingContainer}>
+                <ActivityIndicator size="small" color="#09111E" />
               </View>
-            ))}
+            ) : todayAppointments.length > 0 ? (
+              todayAppointments.map((appointment, i) => (
+                <View key={i} style={styles.appointmentCard}>
+                  <View>
+                    <Text style={[styles.appointmentName, styles.fontBold]}>
+                      {appointment.name || appointment.motherName || appointment.childName || 'N/A'}
+                    </Text>
+                    <Text style={[styles.appointmentDetail, styles.fontRegular]}>
+                      Due: {appointment.time || appointment.scheduledTime || 'N/A'}, {appointment.location || appointment.sector || 'N/A'}
+                    </Text>
+                  </View>
+                  <TouchableOpacity style={styles.addBtn} onPress={()=>setVisibleForm("motherCard")}>
+                    <Text style={[styles.addBtnText, styles.fontRegular]}>ANC</Text>
+                  </TouchableOpacity>
+                </View>
+              ))
+            ) : (
+              <Text style={[styles.noDataText, styles.fontRegular]}>No appointments today</Text>
+            )}
       
             <View style={{ paddingHorizontal: 16, paddingVertical: 10,flexDirection:"column" }}>
-      {appointments.map((item, index) => (
-        <View key={index} style={[styles.card, {flexDirection:"column", justifyContent:"flex-start"}]}>
-          <View style={styles.cardHeader}>
-            <Image source={item.icon} style={styles.icon} />
-            <Text style={styles.title}>{item.title}</Text>
-          </View>
-
-          <View style={styles.cardBody}>
-            <Text style={styles.info}>{`Scheduled ${item.time}`}</Text>
-            <View style={styles.dot} />
-            <Text style={styles.info}>{item.location}</Text>
-          </View>
-
-          {item.rightIcon && (
-            <Image source={item.rightIcon} style={styles.rightIcon} />
-          )}
+      {loading ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="small" color="#09111E" />
         </View>
-      ))}
+      ) : appointmentTypes.length > 0 ? (
+        appointmentTypes.map((item, index) => (
+          <View key={index} style={[styles.card, {flexDirection:"column", justifyContent:"flex-start"}]}>
+            <View style={styles.cardHeader}>
+              <Image source={item.icon} style={styles.icon} />
+              <Text style={styles.title}>{item.title}</Text>
+            </View>
+
+            {item.appointments?.map((apt, aptIndex) => (
+              <View key={aptIndex} style={styles.cardBody}>
+                <Text style={styles.info}>{`Scheduled ${apt.time || apt.scheduledTime || 'N/A'}`}</Text>
+                <View style={styles.dot} />
+                <Text style={styles.info}>{apt.location || apt.sector || 'N/A'}</Text>
+              </View>
+            ))}
+
+            {item.rightIcon && (
+              <Image source={item.rightIcon} style={styles.rightIcon} />
+            )}
+          </View>
+        ))
+      ) : (
+        <Text style={[styles.noDataText, styles.fontRegular]}>No appointments</Text>
+      )}
     </View>
             
           </ScrollView>
@@ -394,6 +456,17 @@ const appointments = [
   cardContainer: {
     justifyContent: "center",
     alignItems: "center",
+  },
+  loadingContainer: {
+    padding: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  noDataText: {
+    textAlign: "center",
+    color: "#777",
+    marginTop: 20,
+    fontSize: 14,
   },
       });
       
