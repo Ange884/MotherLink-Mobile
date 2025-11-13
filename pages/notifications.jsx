@@ -155,23 +155,24 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: "left",
   },
-  tabs: {
+   tabs: {
     flexDirection: "row",
-    justifyContent: "flex-start",
-    marginBottom: 20,
+    justifyContent: "space-evenly", // distributes tabs evenly but keeps natural size
+    alignItems: "center",
+    width: "100%",
   },
   tabBtn: {
-    paddingVertical: 8,
-    paddingHorizontal: 20,
-    borderRadius: 7,
-    backgroundColor: "#E8E9EB",
+    paddingHorizontal: 13, // space around text
+    paddingVertical: 10,
+    borderRadius: 8,
+    backgroundColor: "#f0f0f0",
   },
   activeTabBtn: {
     backgroundColor: "#09111E",
   },
   tabText: {
-    color: "#09111E",
     fontSize: 14,
+    color: "#555",
   },
   activeTabText: {
     color: "#fff",
