@@ -39,7 +39,7 @@ export default function BottomNav() {
             source={require("../assets/images/Home.png")}
             style={[
               styles.icon,
-              { tintColor: active === "Home" ? "#fff" : "#09111E" },
+              { tintColor: active === "Home" ? "#09111E" : "#09111E" },
             ]}
           />
           <Text style={[styles.label, active === "Home" && styles.activeLabel]}>
@@ -56,7 +56,7 @@ export default function BottomNav() {
             source={require("../assets/images/child.png")}
             style={[
               styles.icon,
-              { tintColor: active === "Child" ? "#fff" : "#09111E" },
+              { tintColor: active === "Child" ? "#09111E" : "#09111E" },
             ]}
           />
           <Text style={[styles.label, active === "Child" && styles.activeLabel]}>
@@ -76,7 +76,7 @@ export default function BottomNav() {
             source={require("../assets/images/appoint.png")}
             style={[
               styles.icon,
-              { tintColor: active === "Appointments" ? "#fff" : "#09111E" },
+              { tintColor: active === "Appointments" ? "#09111E" : "#09111E" },
             ]}
           />
           <Text
@@ -98,7 +98,7 @@ export default function BottomNav() {
             source={require("../assets/images/mother.png")}
             style={[
               styles.icon,
-              { tintColor: active === "Mother" ? "#fff" : "#09111E" },
+              { tintColor: active === "Mother" ? "#09111E" : "#09111E" },
             ]}
           />
           <Text style={[styles.label, active === "Mother" && styles.activeLabel]}>
@@ -118,7 +118,7 @@ export default function BottomNav() {
             source={require("../assets/images/chop.png")}
             style={[
               styles.icon,
-              { tintColor: active === "Analytics" ? "#fff" : "#09111E" },
+              { tintColor: active === "Analytics" ? "#09111E": "#09111E" },
             ]}
           />
           <Text
@@ -164,9 +164,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     borderRadius: 12,
     backgroundColor: "#fff",
-  },
-  activeNavItem: {
-    backgroundColor: "#09111E",
   },
   label: {
     color: "#09111E",

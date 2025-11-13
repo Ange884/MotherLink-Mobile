@@ -83,7 +83,7 @@ export default function LoginScreen({ navigation }) {
           <Text
             style={[
               styles.rememberText,
-              { fontFamily: "Poppins_700Bold" },
+              { fontFamily: "Poppins_400Regular",fontWeight:"600" },
             ]} onPress={()=>navigation.navigate("signup1")}
           >
             New? Create Account
@@ -92,7 +92,7 @@ export default function LoginScreen({ navigation }) {
 
         <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
           <Text
-            style={[styles.forgotText, { fontFamily: "Poppins_400Bold" }]}
+            style={[styles.forgotText, { fontFamily: "Poppins_400Regular",fontWeight:"600" }]}
           >
             Forgot Password?
           </Text>
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: 300,
-    marginBottom: 15,
+    marginBottom: 1,
   },
   rememberMeContainer: {
     flexDirection: "row",
