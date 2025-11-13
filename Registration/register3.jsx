@@ -12,6 +12,7 @@ import {
   Poppins_400Regular,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function RegisterMother3({ navigation }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_700Bold });
@@ -188,20 +189,42 @@ export default function RegisterMother3({ navigation }) {
           />
         </View>
 
-        {/* Button */}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("info")}
-        >
-          <Text
-            style={[
-              styles.buttonText,
-              { fontFamily: "Poppins_400Regular", fontWeight: "600" },
-            ]}
+        
+        {/* Navigation Buttons */}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.previousButton}
+            onPress={() => {
+              if (navigation && navigation.goBack) {
+                navigation.goBack();
+              }
+            }}
           >
-            Proceed
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={[
+                styles.previousButtonText,
+                { fontFamily: "Poppins_400Regular" },
+              ]}
+            >
+              Previous
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.nextButton}
+            onPress={() => navigation.navigate("info")}
+          >
+            <Text
+              style={[
+                styles.nextButtonText,
+                { fontFamily: "Poppins_400Regular" },
+              ]}
+            >
+              Next
+            </Text>
+            <Ionicons name="chevron-forward" size={18} color="#fff" />
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
@@ -311,15 +334,37 @@ export const styles = StyleSheet.create({
     color: "#063392",
     fontWeight: "bold",
   },
-  button: {
-    backgroundColor: "#09111E",
-    padding: 15,
-    marginTop: 20,
-    borderRadius: 8,
+  buttonContainer: {
+    flexDirection: "row",
     width: 330,
+    justifyContent: "space-between",
+    marginTop: 20,
+    gap: 12,
+  },
+  previousButton: {
+    flex: 1,
+    backgroundColor: "#fff",
+    borderWidth: 1.5,
+    borderColor: "#000",
+    paddingVertical: 15,
+    borderRadius: 8,
     alignItems: "center",
   },
-  buttonText: {
+  previousButtonText: {
+    color: "#09111E",
+    fontSize: 16,
+  },
+  nextButton: {
+    flex: 1,
+    backgroundColor: "#0B0F2F",
+    paddingVertical: 15,
+    borderRadius: 8,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 6,
+  },
+  nextButtonText: {
     color: "#fff",
     fontSize: 16,
   },

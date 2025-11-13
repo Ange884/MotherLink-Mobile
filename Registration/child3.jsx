@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   headerSection: {
-    width: "90%",
+    width: "87%",
     backgroundColor: "#0B0F2F",
     paddingTop: 60,
     paddingBottom: 35,
@@ -252,8 +252,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   healthCenterButton: {
-    width: "100%",
-    maxWidth: 300,
+    width: 330,
     backgroundColor: "#fff",
     borderRadius: 12,
     paddingVertical: 16,
@@ -271,8 +270,7 @@ const styles = StyleSheet.create({
     color: "#09111E",
   },
   fieldset: {
-    width: "90%",
-    maxWidth: 300,
+    width: 330,
     borderWidth: 1.5,
     borderColor: "#000",
     borderRadius: 8,
@@ -304,14 +302,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   vaccinationBox: {
-    width: "100%",
-    maxWidth: 300,
+    width:330,
     backgroundColor: "#fff",
     borderWidth: 1.5,
     borderColor: "#000",
     borderRadius: 8,
     padding: 16,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   checkboxRow: {
     flexDirection: "row",
@@ -337,8 +334,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    width: "100%",
-    maxWidth: 300,
+    width: 330,
     justifyContent: "space-between",
     marginTop: 20,
     gap: 12,
