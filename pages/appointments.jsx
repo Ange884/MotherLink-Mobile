@@ -98,7 +98,7 @@ const appointments = [
             {/* Appointments */}
             <View style={styles.sectionHeader}>
               <Text style={[styles.sectionTitle, styles.fontBold]}>Today's Appointment</Text>
-              <Text style={[styles.seeAll, styles.fontBold]}>See all</Text>
+              <Text style={[styles.seeAll, styles.fontBold]} onPress={() =>navigation.navigate("notifications")}>See all</Text>
             </View>
       
             {[1, 2, 3,4,5].map((_, i) => (

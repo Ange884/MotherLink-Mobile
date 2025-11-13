@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons, MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold } from "@expo-google-fonts/poppins";
+import { useNavigation } from "expo-router";
 
 export default function MotherCard() {
   const [fontsLoaded] = useFonts({
@@ -9,7 +10,7 @@ export default function MotherCard() {
     Poppins_600SemiBold,
     Poppins_700Bold,
   });
-
+const navigation = useNavigation();
   if (!fontsLoaded) return null;
 
   return (
@@ -53,7 +54,7 @@ export default function MotherCard() {
 
       {/* Button */}
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Contact mother</Text>
+        <Text style={styles.buttonText} onPress={()=>navigation.navigate("profile")}>Contact mother</Text>
       </TouchableOpacity>
     </View>
   );
@@ -87,10 +88,12 @@ const styles = StyleSheet.create({
     color: "#555",
   },
   statusContainer: {
-    backgroundColor: "#0B1E45",
+    backgroundColor: "#09111E",
     borderRadius: 6,
     paddingHorizontal: 10,
     paddingVertical: 4,
+    alignItems:"center",
+    justifyContent:"center",
   },
   status: {
     color: "#fff",
@@ -109,7 +112,7 @@ const styles = StyleSheet.create({
     color: "#000",
   },
   button: {
-    backgroundColor: "#0B1E45",
+    backgroundColor: "#09111E",
     paddingVertical: 10,
     borderRadius: 8,
     marginTop: 16, // more space before button
