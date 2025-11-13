@@ -74,10 +74,10 @@ const MotherManagementScreen = ({navigation}) => {
 
         {/* Search Bar */}
         <View style={styles.searchContainer}>
-          <Feather name="search" size={18} color="#777" style={{ marginRight: 6 }} />
+          <Feather name="search" size={18} color="#2e2e2eff" style={{ marginRight: 6 }} />
           <TextInput
             placeholder="search for anything"
-            placeholderTextColor="#777"
+            placeholderTextColor="#2e2e2eff"
             style={[styles.searchInput, styles.fontRegular]}
           />
         </View>
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
   },
   cardFooterText: {
     fontSize: 10,
-    color: "#777",
+    color: "#424242ff",
     marginLeft: 4,
   },
   sectionHeader: {
@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
     color: "#09111E",
   },
   seeAll: {
-    color: "#777",
+    color: "#363636ff",
     fontSize: 13,
   },
   appointmentCard: {
@@ -318,7 +318,7 @@ const styles = StyleSheet.create({
   },
   appointmentDetail: {
     fontSize: 14,
-    color: "#555",
+    color: "#252525ff",
   },
   ancButton: {
     backgroundColor: "#09111E",
@@ -365,12 +365,12 @@ const styles = StyleSheet.create({
   },
   motherId: {
     fontSize: 14,
-    color: "#555",
+    color: "#2e2d2dff",
     marginBottom: 4,
   },
   motherDetail: {
     fontSize: 13,
-    color: "#555",
+    color: "#252525ff",
     marginBottom: 2,
   },
   motherButtons: {
@@ -385,6 +385,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: 8,
     alignItems: "center",
+    justifyContent:"center",
   },
   viewDetailsButtonText: {
     color: "#fff",

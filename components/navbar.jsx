@@ -184,8 +184,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 4,
     fontFamily: "Poppins_400Regular",
+    fontWeight:500,
   },
   activeLabel: {
-    color: "#0bc00bff",
+    color: "#055a8bff",
+    fontWeight:900,
   },
 });

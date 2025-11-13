@@ -63,10 +63,10 @@ const HomeScreen = ({ navigation }) => {
 
         {/* Search Bar */}
         <View style={styles.searchContainer}>
-          <Feather name="search" size={18} color="#777" style={{ marginRight: 6 }} />
+          <Feather name="search" size={18} color="#252525ff" style={{ marginRight: 6 }} />
           <TextInput
             placeholder="Search for anything"
-            placeholderTextColor="#777"
+            placeholderTextColor="#272626ff"
             style={[styles.searchInput, styles.fontRegular]}
           />
         </View>
@@ -302,7 +302,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   activeDayBox: { backgroundColor: "#09111E" },
-  dayText: { color: "#777", fontSize: 14 },
+  dayText: { color: "#242323ff", fontSize: 14 },
   activeDayText: { color: "#fff" },
   dateText: { color: "#000", fontSize: 14, fontWeight: "600" },
   activeDateText: { color: "#fff" },
@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 4,
   },
-  cardTitle: { fontSize: 12, color: "#333", marginTop: 6 },
+  cardTitle: { fontSize: 12, color: "#161616ff", marginTop: 6 },
   cardCount: { fontSize: 16, marginTop: 4, color: "#09111E" },
 
   sectionHeader: {
@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
   },
-  seeAll: { color: "#777", fontSize: 13 },
+  seeAll: { color: "#242424ff", fontSize: 13 },
 
   appointmentCard: {
     backgroundColor: "#f7f8fa",
@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   appointmentName: { fontSize: 15, color: "#09111E" },
-  appointmentDetail: { color: "#777", fontSize: 13, marginTop: 2 },
+  appointmentDetail: { color: "#1d1d1dff", fontSize: 13, marginTop: 2 },
   addBtn: {
     backgroundColor: "#09111E",
     borderRadius: 8,

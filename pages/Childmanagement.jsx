@@ -75,10 +75,10 @@ const ChildManagementScreen = ({navigation}) => {
 
         {/* Search Bar */}
         <View style={styles.searchContainer}>
-          <Feather name="search" size={18} color="#777" style={{ marginRight: 6 }} />
+          <Feather name="search" size={18} color="#1d1d1dff" style={{ marginRight: 6 }} />
           <TextInput
             placeholder="search for anything"
-            placeholderTextColor="#777"
+            placeholderTextColor="#1d1d1dff"
             style={[styles.searchInput, styles.fontRegular]}
           />
         </View>
@@ -91,11 +91,15 @@ const ChildManagementScreen = ({navigation}) => {
                 <Ionicons name={card.icon} size={24} color="#09111E" />
               </View>
               <Text style={[styles.cardTitle, styles.fontRegular]}>{card.title}</Text>
-              <Text style={[styles.cardCount, styles.fontBold]}>{card.count}</Text>
               <View style={styles.cardFooter}>
-                <Ionicons name="stats-chart" size={12} color="#777" />
-                <Text style={[styles.cardFooterText, styles.fontRegular]}>unknown</Text>
-              </View>
+  <Text style={[styles.cardCount, styles.fontRegular]}>{card.count}</Text>
+  <View style={styles.rightGroup}>
+    <Image source={require("../assets/images/chop.png")} style={styles.icon}/>
+    <Text style={styles.cardFooterText}>unknown</Text>
+  </View>
+</View>
+
+
             </View>
           ))}
         </View>
@@ -316,20 +320,35 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   cardCount: {
-    fontSize: 18,
+    fontSize: 10,
     color: "#09111E",
-    marginBottom: 4,
+    marginBottom: 0,
   },
   cardFooter: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 4,
-  },
-  cardFooterText: {
-    fontSize: 10,
-    color: "#777",
-    marginLeft: 4,
-  },
+  flexDirection: "row",
+  alignItems: "center", // ✅ aligns both left & right items on the same Y line
+  justifyContent: "space-between",
+  marginTop: 8,
+
+},
+
+rightGroup: {
+  marginBottom: 3,
+  flexDirection: "row",
+  alignItems: "center", // ✅ aligns icon + text properly
+},
+
+cardFooterText: {
+  fontSize: 10,
+  color: "#555",
+  marginLeft: 4, // small gap between icon and text
+},
+
+icon: {
+  marginBottom: -1,
+  fontSize:10, // ✅ adjust to visually align with small text
+},
+
   sectionHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -342,7 +361,7 @@ const styles = StyleSheet.create({
     color: "#09111E",
   },
   seeAll: {
-    color: "#777",
+    color: "#242424ff",
     fontSize: 13,
   },
   appointmentCard: {
@@ -366,7 +385,7 @@ const styles = StyleSheet.create({
   },
   appointmentDetail: {
     fontSize: 14,
-    color: "#555",
+    color: "#1f1f1fff",
   },
   ancButton: {
     backgroundColor: "#09111E",
@@ -414,12 +433,12 @@ const styles = StyleSheet.create({
   },
   motherId: {
     fontSize: 14,
-    color: "#555",
+    color: "#1f1f1fff",
     marginBottom: 4,
   },
   motherDetail: {
     fontSize: 13,
-    color: "#555",
+    color: "#1d1d1dff",
     marginBottom: 2,
   },
   motherButtons: {
@@ -434,6 +453,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: 8,
     alignItems: "center",
+    justifyContent:"center",
   },
   viewDetailsButtonText: {
     color: "#fff",
