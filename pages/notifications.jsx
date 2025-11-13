@@ -157,9 +157,8 @@ const styles = StyleSheet.create({
   },
   tabs: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "flex-start",
     marginBottom: 20,
-    width:"100%",
   },
   tabBtn: {
     paddingVertical: 8,
