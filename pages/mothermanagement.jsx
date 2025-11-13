@@ -29,13 +29,13 @@ const MotherManagementScreen = ({navigation}) => {
   const summaryCards = [
     {
       title: "Total mothers",
-      count: "128",
+      count: "8",
       icon: "people-outline",
       change: "12% increase",
     },
     {
       title: "Pregnant",
-      count: "514",
+      count: "4",
       icon: "person-outline",
       change: "7% increase",
     },
@@ -43,7 +43,7 @@ const MotherManagementScreen = ({navigation}) => {
       title: "Mothers",
       count: "8",
       icon: "people-circle-outline",
-      change: "3% increase",
+      change: "4% increase",
     },
   ];
 
@@ -99,31 +99,27 @@ const MotherManagementScreen = ({navigation}) => {
 
         {/* Summary Cards */}
         <View style={styles.cardsContainer}>
-          {summaryCards.map((card, index) => (
-            <View key={index} style={styles.summaryCard}>
-              <View style={styles.cardIcon}>
-                <Ionicons name={card.icon} size={24} color="#09111E" />
-              </View>
-              <Text style={[styles.cardTitle, styles.fontRegular]}>
-                {card.title}
-              </Text>
-              <View style={styles.cardFooter}>
-                <Text style={[styles.cardCount, styles.fontBold]}>
-                  {card.count}
-                </Text>
-                <View style={styles.cardFooterRight}>
-                  <Image
-                    source={require("../assets/images/chop.png")}
-                    style={styles.cardFooterIcon}
-                  />
-                  <Text style={[styles.cardFooterText, styles.fontRegular]}>
-                    {card.change}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          ))}
-        </View>
+  {summaryCards.map((card, index) => (
+    <View key={index} style={styles.summaryCard}>
+      <View style={styles.cardIcon}>
+        <Ionicons name={card.icon} size={22} color="#09111E" />
+      </View>
+
+      <Text style={[styles.cardTitle, styles.fontBold]}>
+        {card.title}
+      </Text>
+
+      <View style={styles.changeRow}>
+        <Text style={[styles.cardCount, styles.fontBold]}>
+          {card.count}
+        </Text>
+        <Ionicons name="trending-up" size={14} color="#09111E" />
+        <Text style={[styles.changeText, {fontFamily:"Poppins_400Regular"}]}>{card.change}</Text>
+      </View>
+    </View>
+  ))}
+</View>
+
 
         {/* Today's Appointment Section */}
         <View style={styles.sectionHeader}>
@@ -263,50 +259,48 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#000",
   },
-  cardsContainer: {
+   cardsContainer: {
     flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "space-between",
-    marginBottom: 20,
   },
   summaryCard: {
-    flex: 1,
+    width: "33%",
     backgroundColor: "#fff",
-    borderRadius: 12,
+    borderRadius: 10,
     padding: 12,
-    alignItems: "center",
-    marginHorizontal: 4,
-    borderWidth: 1,
-    borderColor: "#E0E0E0",
+    justifyContent: "space-between", // ✅ pushes top content up & changeRow down
+    height: 120, // optional fixed height for proper spacing
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
   },
   cardIcon: {
-    width: 40,
-    height: 40,
+    backgroundColor: "#f5f5f5",
     borderRadius: 8,
-    backgroundColor: "#F1F3F6",
+    width: 30,
+    height: 30,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 8,
   },
   cardTitle: {
     fontSize: 12,
-    color: "#09111E",
-    marginBottom: 4,
-    textAlign: "center",
+    color: "#333",
+    marginTop: 8,
+  },
+  changeRow: {
+    flexDirection: "row",
+    alignItems: "center", // ✅ keeps count, icon, text on same line
+    gap: 10, // ✅ space between count, icon, and change text (RN ≥ 0.71)
   },
   cardCount: {
-    fontSize: 18,
+    fontSize: 16,
     color: "#09111E",
-    marginBottom: 4,
   },
-  cardFooter: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 4,
-  },
-  cardFooterText: {
-    fontSize: 10,
-    color: "#424242ff",
-    marginLeft: 4,
+  changeText: {
+    fontSize: 8,
+    color: "#000",
   },
   sectionHeader: {
     flexDirection: "row",

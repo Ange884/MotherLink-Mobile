@@ -11,7 +11,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import BottomNav from "../components/navbar.jsx";
-import ChildAppointments from "./ChildAppointment.jsx";
+import AppointmentsContent from "../pages/appoint.jsx";
 import ChildEmergency from "./ChildEmergency.jsx";
 
 const tabs = ["Overview", "Appointments", "Emergencies"];
@@ -154,7 +154,7 @@ const ChildProfileScreen = ({ navigation }) => {
           </View>
         )}
 
-        {activeTab === "Appointments" && <ChildAppointments />}
+        {activeTab === "Appointments" && <AppointmentsContent />}
 
         {activeTab === "Emergencies" && <ChildEmergency />}
       </ScrollView>

@@ -28,9 +28,24 @@ const ChildManagementScreen = ({navigation}) => {
 
   // Summary cards data
   const summaryCards = [
-    { title: "Total children", count: "128", icon: "people-outline" },
-    { title: "Infants", count: "514", icon: "person-outline" },
-    { title: "Toddlers", count: "8", icon: "people-circle-outline" },
+    {
+      title: "Total children",
+      count: "128",
+      icon: "people-outline",
+      change: "12% increase",
+    },
+    {
+      title: "Infants",
+      count: "514",
+      icon: "person-outline",
+      change: "9% increase",
+    },
+    {
+      title: "Toddlers",
+      count: "8",
+      icon: "people-circle-outline",
+      change: "1-5 years",
+    },
   ];
 
   // Today's appointments data
@@ -85,24 +100,26 @@ const ChildManagementScreen = ({navigation}) => {
 
         {/* Summary Cards */}
         <View style={styles.cardsContainer}>
-          {summaryCards.map((card, index) => (
-            <View key={index} style={styles.summaryCard}>
-              <View style={styles.cardIcon}>
-                <Ionicons name={card.icon} size={24} color="#09111E" />
-              </View>
-              <Text style={[styles.cardTitle, styles.fontRegular]}>{card.title}</Text>
-              <View style={styles.cardFooter}>
-  <Text style={[styles.cardCount, styles.fontRegular]}>{card.count}</Text>
-  <View style={styles.rightGroup}>
-    <Image source={require("../assets/images/chop.png")} style={styles.icon}/>
-    <Text style={styles.cardFooterText}>unknown</Text>
-  </View>
+  {summaryCards.map((card, index) => (
+    <View key={index} style={styles.summaryCard}>
+      <View style={styles.cardIcon}>
+        <Ionicons name={card.icon} size={22} color="#09111E" />
+      </View>
+
+      <Text style={[styles.cardTitle, styles.fontBold]}>
+        {card.title}
+      </Text>
+
+      <View style={styles.changeRow}>
+        <Text style={[styles.cardCount, styles.fontBold]}>
+          {card.count}
+        </Text>
+        <Ionicons name="trending-up" size={14} color="#09111E" />
+        <Text style={styles.changeText}>{card.change}</Text>
+      </View>
+    </View>
+  ))}
 </View>
-
-
-            </View>
-          ))}
-        </View>
 
         {/* Today's Appointment Section */}
         <View style={styles.sectionHeader}>
@@ -209,7 +226,7 @@ const ChildManagementScreen = ({navigation}) => {
 
        <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
               <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
-                <BlurView intensity={70} tint="light" style={styles.fullBlurView}>
+                <BlurView intensity={20} tint="light" style={styles.fullBlurView}>
                   <TouchableOpacity activeOpacity={1} onPress={() => {}} style={styles.cardContainer}>
                     {visibleForm === "motherCard" && <MotherCard />}
                   </TouchableOpacity>
@@ -297,58 +314,45 @@ const styles = StyleSheet.create({
   summaryCard: {
     flex: 1,
     backgroundColor: "#fff",
-    borderRadius: 12,
-    padding: 12,
-    alignItems: "center",
+    borderRadius: 16,
+    padding: 16,
+    alignItems: "flex-start",
+    gap: 10,
     marginHorizontal: 4,
     borderWidth: 1,
     borderColor: "#E0E0E0",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    elevation: 3,
   },
   cardIcon: {
     width: 40,
     height: 40,
-    borderRadius: 8,
-    backgroundColor: "#F1F3F6",
+    borderRadius: 20,
+    backgroundColor: "#F3F4F6",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 8,
   },
   cardTitle: {
-    fontSize: 12,
+    fontSize: 14,
     color: "#09111E",
-    marginBottom: 4,
-    textAlign: "center",
   },
   cardCount: {
-    fontSize: 10,
+    fontSize: 22,
     color: "#09111E",
-    marginBottom: 0,
   },
-  cardFooter: {
-  flexDirection: "row",
-  alignItems: "center", // ✅ aligns both left & right items on the same Y line
-  justifyContent: "space-between",
-  marginTop: 8,
-
-},
-
-rightGroup: {
-  marginBottom: 3,
-  flexDirection: "row",
-  alignItems: "center", // ✅ aligns icon + text properly
-},
-
-cardFooterText: {
-  fontSize: 10,
-  color: "#555",
-  marginLeft: 4, // small gap between icon and text
-},
-
-icon: {
-  marginBottom: -1,
-  fontSize:10, // ✅ adjust to visually align with small text
-},
-
+  changeRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+  changeText: {
+    fontSize: 12,
+    color: "#4B5563",
+    fontFamily: "Poppins_500Medium",
+  },
   sectionHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
