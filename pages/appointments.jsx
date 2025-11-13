@@ -140,7 +140,7 @@ const appointments = [
 
            <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
                   <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
-                    <BlurView intensity={70} tint="light" style={styles.fullBlurView}>
+                    <BlurView intensity={20} tint="light" style={styles.fullBlurView}>
                       <TouchableOpacity activeOpacity={1} onPress={() => {}} style={styles.cardContainer}>
                         {visibleForm === "motherCard" && <MotherCard />}
                       </TouchableOpacity>

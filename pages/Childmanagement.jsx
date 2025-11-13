@@ -98,22 +98,27 @@ const ChildManagementScreen = ({navigation}) => {
           />
         </View>
 
-        {/* Summary Cards */}
-        <View style={styles.cardsContainer}>
-          {summaryCards.map((card, index) => (
-            <View key={index} style={styles.summaryCard}>
-              <View style={styles.cardIcon}>
-                <Ionicons name={card.icon} size={22} color="#09111E" />
-              </View>
-              <Text style={[styles.cardTitle, styles.fontBold]}>{card.title}</Text>
-              <Text style={[styles.cardCount, styles.fontBold]}>{card.count}</Text>
-              <View style={styles.changeRow}>
-                <Ionicons name="trending-up" size={14} color="#09111E" />
-                <Text style={styles.changeText}>{card.change}</Text>
-              </View>
-            </View>
-          ))}
-        </View>
+<View style={styles.cardsContainer}>
+  {summaryCards.map((card, index) => (
+    <View key={index} style={styles.summaryCard}>
+      <View style={styles.cardIcon}>
+        <Ionicons name={card.icon} size={22} color="#09111E" />
+      </View>
+
+      <Text style={[styles.cardTitle, styles.fontBold]}>
+        {card.title}
+      </Text>
+
+      <View style={styles.changeRow}>
+        <Text style={[styles.cardCount, styles.fontBold]}>
+          {card.count}
+        </Text>
+        <Ionicons name="trending-up" size={14} color="#09111E" />
+        <Text style={[styles.changeText, {fontFamily:"Poppins_400Regular"}]}>{card.change}</Text>
+      </View>
+    </View>
+  ))}
+</View>
 
         {/* Today's Appointment Section */}
         <View style={styles.sectionHeader}>
@@ -302,51 +307,48 @@ const styles = StyleSheet.create({
   },
   cardsContainer: {
     flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "space-between",
-    marginBottom: 20,
   },
   summaryCard: {
-    flex: 1,
+    width: "33%",
     backgroundColor: "#fff",
-    borderRadius: 16,
-    padding: 16,
-    alignItems: "flex-start",
-    gap: 10,
-    marginHorizontal: 4,
-    borderWidth: 1,
-    borderColor: "#E0E0E0",
+    borderRadius: 10,
+    padding: 12,
+    justifyContent: "space-between", // ✅ pushes top content up & changeRow down
+    height: 120, // optional fixed height for proper spacing
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 3,
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
   },
   cardIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: "#F3F4F6",
+    backgroundColor: "#f5f5f5",
+    borderRadius: 8,
+    width: 30,
+    height: 30,
     alignItems: "center",
     justifyContent: "center",
   },
   cardTitle: {
-    fontSize: 14,
-    color: "#09111E",
-  },
-  cardCount: {
-    fontSize: 22,
-    color: "#09111E",
+    fontSize: 12,
+    color: "#333",
+    marginTop: 8,
   },
   changeRow: {
     flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
+    alignItems: "center", // ✅ keeps count, icon, text on same line
+    gap: 5, // ✅ space between count, icon, and change text (RN ≥ 0.71)
+  },
+  cardCount: {
+    fontSize: 10,
+    color: "#09111E",
   },
   changeText: {
-    fontSize: 12,
-    color: "#4B5563",
-    fontFamily: "Poppins_500Medium",
+    fontSize: 9,
+    color: "#000",
   },
+
   sectionHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
