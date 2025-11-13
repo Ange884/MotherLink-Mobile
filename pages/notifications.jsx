@@ -104,9 +104,9 @@ const NotificationsScreen = () => {
 
       <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
         <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
-          <BlurView intensity={70} tint="light" style={styles.blurContent}>
+          <BlurView intensity={70} tint="light" style={styles.blurContent}>            
             <TouchableOpacity activeOpacity={1} onPress={() => {}}>
-              {visibleForm === "motherCard" && <MotherCard />}
+            {visibleForm === "motherCard" && <MotherCard />}
             </TouchableOpacity>
           </BlurView>
         </TouchableOpacity>
@@ -242,7 +242,7 @@ searchInput: {
     borderRadius: 24,
     overflow: "hidden",
     backgroundColor: "rgba(255,255,255,0.85)",
-  },
+},
 
 });
 

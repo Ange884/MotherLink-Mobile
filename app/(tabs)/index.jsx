@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import LandingScreen from "../../pages/Landing";
-import LoginScreen from "../../pages/login"
+import LoginScreen from "../../pages/login.jsx"
 import VerifyScreen from "../../pages/Verify"
 import ForgotPasswordScreen from "../../pages/forgot-password";
 import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
