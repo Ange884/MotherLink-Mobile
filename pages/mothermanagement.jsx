@@ -1,4 +1,4 @@
-import React, {useState, useEffect}  from "react";
+import React, {useState}  from "react";
 import {
   View,
   Text,
@@ -8,14 +8,12 @@ import {
   TextInput,
   Image,
   Modal,
-  ActivityIndicator,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import BottomNav from "../components/navbar.jsx";
 import MotherCard from "@/subpages/Upcoming.jsx";
-import { motherAPI, appointmentAPI } from "../services/api.js";
 
 const MotherManagementScreen = ({navigation}) => {
   const [fontsLoaded] = useFonts({
@@ -24,96 +22,39 @@ const MotherManagementScreen = ({navigation}) => {
   });
 
   const [visibleForm, setVisibleForm] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [summaryCards, setSummaryCards] = useState([
+      if (!fontsLoaded) return null;
+      const closeModal = () => setVisibleForm(null);
+
+  // Summary cards data
+  const summaryCards = [
     {
       title: "Total mothers",
-      count: "0",
+      count: "128",
       icon: "people-outline",
-      change: "0% increase",
+      change: "12% increase",
     },
     {
       title: "Pregnant",
-      count: "0",
+      count: "514",
       icon: "person-outline",
-      change: "0% increase",
+      change: "7% increase",
     },
     {
       title: "Mothers",
-      count: "0",
+      count: "8",
       icon: "people-circle-outline",
-      change: "0% increase",
+      change: "4% increase",
     },
-  ]);
-  const [appointments, setAppointments] = useState([]);
-  const [registeredMothers, setRegisteredMothers] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  ];
 
-  useEffect(() => {
-    fetchMotherData();
-  }, []);
-
-  useEffect(() => {
-    if (searchQuery) {
-      searchMothers();
-    } else {
-      fetchMotherData();
-    }
-  }, [searchQuery]);
-
-  const fetchMotherData = async () => {
-    try {
-      setLoading(true);
-      const [statsRes, appointmentsRes, mothersRes] = await Promise.all([
-        motherAPI.getMotherStats(),
-        appointmentAPI.getAppointmentsByStatus('today'),
-        motherAPI.getAllMothers({ limit: 10 }),
-      ]);
-      
-      // Update summary cards
-      const stats = statsRes.data;
-      setSummaryCards([
-        {
-          title: "Total mothers",
-          count: stats.totalMothers?.toString() || "0",
-          icon: "people-outline",
-          change: `${stats.mothersIncrease || 0}% increase`,
-        },
-        {
-          title: "Pregnant",
-          count: stats.pregnantMothers?.toString() || "0",
-          icon: "person-outline",
-          change: `${stats.pregnantIncrease || 0}% increase`,
-        },
-        {
-          title: "Mothers",
-          count: stats.activeMothers?.toString() || "0",
-          icon: "people-circle-outline",
-          change: `${stats.activeIncrease || 0}% increase`,
-        },
-      ]);
-      
-      setAppointments(appointmentsRes.data || []);
-      setRegisteredMothers(mothersRes.data || []);
-    } catch (error) {
-      console.error('Error fetching mother data:', error);
-      // Keep default values on error
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const searchMothers = async () => {
-    try {
-      const res = await motherAPI.searchMothers(searchQuery);
-      setRegisteredMothers(res.data || []);
-    } catch (error) {
-      console.error('Error searching mothers:', error);
-    }
-  };
-
-  if (!fontsLoaded) return null;
-  const closeModal = () => setVisibleForm(null);
+  // Today's appointments data
+  const appointments = [
+    { name: "Uwase Claudine", detail: "Due 11:00 * Mukamira Sector" },
+    { name: "Uwase Claudine", detail: "Due 11:00 * Mukamira Sector" },
+    { name: "Uwase Claudine", detail: "Due 11:00 * Mukamira Sector" },
+    { name: "Uwase Claudine", detail: "Due 11:00 * Mukamira Sector" },
+    { name: "Uwase Claudine", detail: "Due 11:00 * Mukamira Sector" },
+  ];
 
   return (
     <View style={styles.screen}>
@@ -153,37 +94,29 @@ const MotherManagementScreen = ({navigation}) => {
             placeholder="search for anything"
             placeholderTextColor="#2e2e2eff"
             style={[styles.searchInput, styles.fontRegular]}
-            value={searchQuery}
-            onChangeText={setSearchQuery}
           />
         </View>
 
        <View style={styles.cardsContainer}>
-  {loading ? (
-    <View style={styles.loadingContainer}>
-      <ActivityIndicator size="small" color="#09111E" />
-    </View>
-  ) : (
-    summaryCards.map((card, index) => (
-      <View key={index} style={styles.summaryCard}>
-        <View style={styles.cardIcon}>
-          <Ionicons name={card.icon} size={22} color="#09111E" />
-        </View>
-
-        <Text style={[styles.cardTitle, styles.fontBold]}>
-          {card.title}
-        </Text>
-
-        <View style={styles.changeRow}>
-          <Text style={[styles.cardCount, styles.fontBold]}>
-            {card.count}
-          </Text>
-          <Ionicons name="trending-up" size={14} color="#09111E" />
-          <Text style={[styles.changeText, {fontFamily:"Poppins_400Regular"}]}>{card.change}</Text>
-        </View>
+  {summaryCards.map((card, index) => (
+    <View key={index} style={styles.summaryCard}>
+      <View style={styles.cardIcon}>
+        <Ionicons name={card.icon} size={22} color="#09111E" />
       </View>
-    ))
-  )}
+
+      <Text style={[styles.cardTitle, styles.fontBold]}>
+        {card.title}
+      </Text>
+
+      <View style={styles.changeRow}>
+        <Text style={[styles.cardCount, styles.fontBold]}>
+          {card.count}
+        </Text>
+        <Ionicons name="trending-up" size={14} color="#09111E" />
+        <Text style={[styles.changeText, {fontFamily:"Poppins_400Regular"}]}>{card.change}</Text>
+      </View>
+    </View>
+  ))}
 </View>
 
 
@@ -195,29 +128,21 @@ const MotherManagementScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-        {loading ? (
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator size="small" color="#09111E" />
-          </View>
-        ) : appointments.length > 0 ? (
-          appointments.map((appointment, index) => (
-            <View key={index} style={styles.appointmentCard}>
-              <View style={styles.appointmentInfo}>
-                <Text style={[styles.appointmentName, styles.fontBold]}>
-                  {appointment.name || appointment.motherName || 'N/A'}
-                </Text>
-                <Text style={[styles.appointmentDetail, styles.fontRegular]}>
-                  Due {appointment.time || appointment.scheduledTime || 'N/A'} * {appointment.location || appointment.sector || 'N/A'}
-                </Text>
-              </View>
-              <TouchableOpacity style={styles.ancButton} onPress={() =>setVisibleForm("motherCard")}>
-                <Text style={[styles.ancButtonText, styles.fontRegular]}>ANC</Text>
-              </TouchableOpacity>
+        {appointments.map((appointment, index) => (
+          <View key={index} style={styles.appointmentCard}>
+            <View style={styles.appointmentInfo}>
+              <Text style={[styles.appointmentName, styles.fontBold]}>
+                {appointment.name}
+              </Text>
+              <Text style={[styles.appointmentDetail, styles.fontRegular]}>
+                {appointment.detail}
+              </Text>
             </View>
-          ))
-        ) : (
-          <Text style={[styles.noDataText, styles.fontRegular]}>No appointments today</Text>
-        )}
+            <TouchableOpacity style={styles.ancButton} onPress={() =>setVisibleForm("motherCard")}>
+              <Text style={[styles.ancButtonText, styles.fontRegular]}>ANC</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
 
         {/* Registered Mothers Section */}
         <View style={styles.sectionHeader}>
@@ -230,51 +155,38 @@ const MotherManagementScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-        {/* Mother Cards */}
-        {loading ? (
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator size="small" color="#09111E" />
-          </View>
-        ) : registeredMothers.length > 0 ? (
-          registeredMothers.map((mother, index) => (
-            <View key={index} style={styles.motherCard}>
-              <Image
-                source={require("../assets/images/mariza.png")}
-                style={styles.profileImage}
-              />
-              <View style={[styles.motherInfo,]}>
-                <Text style={[styles.motherName, styles.fontBold]}>{mother.name || 'N/A'}</Text>
-                <Text style={[styles.motherId, styles.fontRegular]}>ID: {mother.id || mother.motherId || 'N/A'}</Text>
-                <Text style={[styles.motherDetail, styles.fontRegular]}>
-                  Stage: {mother.stage || mother.pregnancyStage || 'N/A'}
+        {/* Mother Card */}
+        <View style={styles.motherCard}>
+          <Image
+            source={require("../assets/images/mariza.png")}
+            style={styles.profileImage}
+          />
+          <View style={[styles.motherInfo,]}>
+            <Text style={[styles.motherName, styles.fontBold]}>Nziza Ange</Text>
+            <Text style={[styles.motherId, styles.fontRegular]}>ID: CL-076</Text>
+            <Text style={[styles.motherDetail, styles.fontRegular]}>
+              Stage: 6 months ( trimester 2)
+            </Text>
+            <Text style={[styles.motherDetail, styles.fontRegular]}>
+              Health center: Mukamira Health center
+            </Text>
+            <Text style={[styles.motherDetail, styles.fontRegular]}>
+              Location: Mukamira
+            </Text>
+            <View style={styles.motherButtons}>
+              <TouchableOpacity style={styles.viewDetailsButton} onPress={()=> navigation.navigate("motherProfile")}>
+                <Text style={[styles.viewDetailsButtonText, styles.fontRegular]}>
+                  View details
                 </Text>
-                <Text style={[styles.motherDetail, styles.fontRegular]}>
-                  Health center: {mother.healthCenter || 'N/A'}
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.emergencyButton}>
+                <Text style={[styles.emergencyButtonText, styles.fontRegular]}>
+                  Record emergency
                 </Text>
-                <Text style={[styles.motherDetail, styles.fontRegular]}>
-                  Location: {mother.location || 'N/A'}
-                </Text>
-                <View style={styles.motherButtons}>
-                  <TouchableOpacity 
-                    style={styles.viewDetailsButton}
-                    onPress={() => navigation.navigate('motherProfile', { motherId: mother.id })}
-                  >
-                    <Text style={[styles.viewDetailsButtonText, styles.fontRegular]}>
-                      View details
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.emergencyButton}>
-                    <Text style={[styles.emergencyButtonText, styles.fontRegular]}>
-                      Record emergency
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
+              </TouchableOpacity>
             </View>
-          ))
-        ) : (
-          <Text style={[styles.noDataText, styles.fontRegular]}>No registered mothers</Text>
-        )}
+          </View>
+        </View>
       </ScrollView>
        <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
                      <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
@@ -541,17 +453,6 @@ const styles = StyleSheet.create({
   cardContainer: {
     justifyContent: "center",
     alignItems: "center",
-  },
-  loadingContainer: {
-    padding: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  noDataText: {
-    textAlign: "center",
-    color: "#777",
-    marginTop: 20,
-    fontSize: 14,
   },
 });
 

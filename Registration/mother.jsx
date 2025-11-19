@@ -6,8 +6,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  ActivityIndicator,
-  Alert,
 } from "react-native";
 import {
   useFonts,
@@ -15,37 +13,14 @@ import {
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
 import { Ionicons } from "@expo/vector-icons";
-import { motherAPI } from "../services/api.js";
 
 export default function RegisterMother({ navigation }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_700Bold });
 
-  const [name, setName] = useState("");
-  const [dob, setDob] = useState("");
-  const [phone, setPhone] = useState("");
-  const [nationalId, setNationalId] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [focusedField, setFocusedField] = useState(null);
-
-  const handleNext = async () => {
-    // Basic validation
-    if (!name || !dob || !phone || !nationalId || !maritalStatus) {
-      Alert.alert("Error", "Please fill in all fields");
-      return;
-    }
-
-    try {
-      setLoading(true);
-      // Save step 1 data (you might want to store in context/state management)
-      // For now, just navigate to next step
-      navigation.navigate("register2");
-    } catch (error) {
-      Alert.alert("Error", "Failed to save data. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (!fontsLoaded) return null;
 
@@ -98,22 +73,22 @@ export default function RegisterMother({ navigation }) {
             Name
           </Text>
           <TextInput
-            value={name}
-            onChangeText={setName}
+            value={email}
+            onChangeText={setEmail}
             style={[
               styles.input,
               { fontFamily: "Poppins_400Regular", fontWeight: "600" },
             ]}
-            placeholder="Enter mother's name"
+            placeholder="Enter your email"
             placeholderTextColor="#09111E"
             underlineColorAndroid="transparent"
             selectionColor="#09111E"
-            onFocus={() => setFocusedField("name")}
+            onFocus={() => setFocusedField("email")}
             onBlur={() => setFocusedField(null)}
           />
         </View>
 
-        {/* DOB Fieldset */}
+        {/* Password Fieldset */}
         <View style={styles.fieldset}>
           <Text
             style={[
@@ -124,22 +99,23 @@ export default function RegisterMother({ navigation }) {
             DOB
           </Text>
           <TextInput
-            value={dob}
-            onChangeText={setDob}
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
             style={[
               styles.input,
               { fontFamily: "Poppins_400Regular", fontWeight: "600" },
             ]}
-            placeholder="Enter date of birth"
+            placeholder="Enter your password"
             placeholderTextColor="#09111E"
             underlineColorAndroid="transparent"
             selectionColor="#09111E"
-            onFocus={() => setFocusedField("dob")}
+            onFocus={() => setFocusedField("password")}
             onBlur={() => setFocusedField(null)}
           />
         </View>
 
-        {/* Phone Fieldset */}
+        {/* Confirm Password Fieldset */}
         <View style={styles.fieldset}>
           <Text
             style={[
@@ -150,18 +126,17 @@ export default function RegisterMother({ navigation }) {
            Phone
           </Text>
           <TextInput
-            value={phone}
-            onChangeText={setPhone}
-            keyboardType="phone-pad"
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
             style={[
               styles.input,
               { fontFamily: "Poppins_400Regular", fontWeight: "600" },
             ]}
-            placeholder="Enter phone number"
+            placeholder="Confirm your password"
             placeholderTextColor="#09111E"
             underlineColorAndroid="transparent"
             selectionColor="#09111E"
-            onFocus={() => setFocusedField("phone")}
+            onFocus={() => setFocusedField("confirm")}
             onBlur={() => setFocusedField(null)}
           />
         </View>
@@ -175,17 +150,17 @@ export default function RegisterMother({ navigation }) {
            National Id
           </Text>
           <TextInput
-            value={nationalId}
-            onChangeText={setNationalId}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
             style={[
               styles.input,
               { fontFamily: "Poppins_400Regular", fontWeight: "600" },
             ]}
-            placeholder="Enter national ID"
+            placeholder="Confirm your password"
             placeholderTextColor="#09111E"
             underlineColorAndroid="transparent"
             selectionColor="#09111E"
-            onFocus={() => setFocusedField("nationalId")}
+            onFocus={() => setFocusedField("confirm")}
             onBlur={() => setFocusedField(null)}
           />
         </View>
@@ -199,17 +174,17 @@ export default function RegisterMother({ navigation }) {
             Marital Status
           </Text>
           <TextInput
-            value={maritalStatus}
-            onChangeText={setMaritalStatus}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
             style={[
               styles.input,
               { fontFamily: "Poppins_400Regular", fontWeight: "600" },
             ]}
-            placeholder="Enter marital status"
+            placeholder="Confirm your password"
             placeholderTextColor="#09111E"
             underlineColorAndroid="transparent"
             selectionColor="#09111E"
-            onFocus={() => setFocusedField("maritalStatus")}
+            onFocus={() => setFocusedField("confirm")}
             onBlur={() => setFocusedField(null)}
           />
         </View>
@@ -234,25 +209,18 @@ export default function RegisterMother({ navigation }) {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.nextButton, loading && styles.buttonDisabled]}
-            onPress={handleNext}
-            disabled={loading}
+            style={styles.nextButton}
+            onPress={() => navigation.navigate("register2")}
           >
-            {loading ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <>
-                <Text
-                  style={[
-                    styles.nextButtonText,
-                    { fontFamily: "Poppins_400Regular" },
-                  ]}
-                >
-                  Next
-                </Text>
-                <Ionicons name="chevron-forward" size={18} color="#fff" />
-              </>
-            )}
+            <Text
+              style={[
+                styles.nextButtonText,
+                { fontFamily: "Poppins_400Regular" },
+              ]}
+            >
+              Next
+            </Text>
+            <Ionicons name="chevron-forward" size={18} color="#fff" />
           </TouchableOpacity>
         </View>
       </View>
@@ -398,7 +366,5 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
   },
-  buttonDisabled: {
-    opacity: 0.6,
-  },
+  
 });

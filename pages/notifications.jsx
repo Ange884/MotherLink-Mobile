@@ -82,32 +82,24 @@ const NotificationsScreen = () => {
 
       {/* Notification list */}
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {loading ? (
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#09111E" />
-          </View>
-        ) : filtered.length > 0 ? (
-          filtered.map((item, i) => (
-            <View key={i} style={styles.appointmentCard}>
-              <View style={{ flex: 1 }}>
-                <Text style={[styles.appointmentName, styles.fontBold]}>
-                  {item.name || item.title || 'N/A'}
-                </Text>
-                <Text style={[styles.appointmentDetail, styles.fontRegular]}>
-                  {item.detail || item.message || item.description || 'N/A'}
-                </Text>
-              </View>
-              <TouchableOpacity
-                style={styles.addBtn}
-                onPress={() => setVisibleForm("motherCard")}
-                        >
-                 <Text style={[styles.addBtnText, styles.fontRegular]}>ANC</Text>
-                 </TouchableOpacity>
+        {filtered.map((item, i) => (
+          <View key={i} style={styles.appointmentCard}>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.appointmentName, styles.fontBold]}>
+                {item.name}
+              </Text>
+              <Text style={[styles.appointmentDetail, styles.fontRegular]}>
+                {item.detail}
+              </Text>
             </View>
-          ))
-        ) : (
-          <Text style={[styles.noDataText, styles.fontRegular]}>No notifications</Text>
-        )}
+            <TouchableOpacity
+              style={styles.addBtn}
+              onPress={() => setVisibleForm("motherCard")}
+                      >
+               <Text style={[styles.addBtnText, styles.fontRegular]}>ANC</Text>
+               </TouchableOpacity>
+          </View>
+        ))}
       </ScrollView>
 
       <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
@@ -254,17 +246,6 @@ searchInput: {
   cardContainer: {
     justifyContent: "center",
     alignItems: "center",
-  },
-  loadingContainer: {
-    padding: 40,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  noDataText: {
-    textAlign: "center",
-    color: "#777",
-    marginTop: 40,
-    fontSize: 14,
   },
 
 });

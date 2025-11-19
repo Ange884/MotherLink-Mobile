@@ -6,42 +6,18 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  ActivityIndicator,
-  Alert,
 } from "react-native";
 import { useFonts, Poppins_400Regular,Poppins_700Bold } from "@expo-google-fonts/poppins";
-import { authAPI } from "../services/api.js";
 
 export default function LoginScreen({ navigation }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular,Poppins_700Bold });
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [focusedField, setFocusedField] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [focusedField, setFocusedField] = useState(null); // new: track focused field
 
-  const handleLogin = async () => {
-    if (!email || !password) {
-      Alert.alert("Error", "Please fill in all fields");
-      return;
-    }
-
-    try {
-      setLoading(true);
-      const response = await authAPI.login({ email, password });
-      // Handle successful login - navigate to home
-      navigation.navigate("home");
-    } catch (error) {
-      Alert.alert(
-        "Login Failed",
-        error.response?.data?.message || "Invalid credentials. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (!fontsLoaded) return null;
+  if (!fontsLoaded) return null; // optionally <AppLoading />
 
   return (
     <View style={styles.container}>
@@ -124,20 +100,12 @@ export default function LoginScreen({ navigation }) {
       </View>
 
       {/* Login Button */}
-      <TouchableOpacity 
-        style={[styles.button, loading && styles.buttonDisabled]} 
-        onPress={handleLogin}
-        disabled={loading}
-      >
-        {loading ? (
-          <ActivityIndicator color="#fff" />
-        ) : (
-          <Text
-            style={[styles.buttonText, { fontFamily: "Poppins_400Regular" }]}
-          >
-            Login
-          </Text>
-        )}
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("home")}>
+        <Text
+          style={[styles.buttonText, { fontFamily: "Poppins_400Regular" }]}
+        >
+          Login
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -225,6 +193,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: { color: "#fff", fontWeight: "600", fontSize: 16 },
-  buttonDisabled: { opacity: 0.6 },
   forgotText: { color: "#09111E",fontSize:12 },
 });
