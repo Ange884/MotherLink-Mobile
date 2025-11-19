@@ -17,7 +17,42 @@ export default function LoginScreen({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [focusedField, setFocusedField] = useState(null); // new: track focused field
 
-  if (!fontsLoaded) return null; // optionally <AppLoading />
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert("Error", "Please fill in all fields");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      // Call the backend login API
+      const response = await authAPI.login({ email, password });
+      
+      // Extract token from response
+      const token = response.data?.accessToken;
+      const success = response.data?.success;
+      
+      if (success && token) {
+        // TODO: Store token in AsyncStorage for future API calls
+        // Example: await AsyncStorage.setItem('authToken', token);
+        
+        // Navigate to home on successful login
+        navigation.navigate("home");
+      } else {
+        Alert.alert("Login Failed", response.data?.message || "Login failed. Please try again.");
+      }
+    } catch (error) {
+      // Handle API errors
+      const errorMessage = error.response?.data?.message || 
+                          error.message || 
+                          "Unable to connect to server. Please check your connection.";
+      Alert.alert("Login Failed", errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
 
   return (
     <View style={styles.container}>
