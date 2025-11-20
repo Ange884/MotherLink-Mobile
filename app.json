@@ -38,7 +38,10 @@
       "typedRoutes": true
     },
     "extra": {
-      // "apiUrl": process.env.EXPO_PUBLIC_API_URL || "http://localhost:8080"
+      "router": {},
+      "eas": {
+        "projectId": "ee300018-4f73-4025-9583-1027338c59b1"
+      }
     }
   }
 }
