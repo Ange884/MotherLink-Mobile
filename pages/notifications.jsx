@@ -138,10 +138,12 @@ const styles = StyleSheet.create({
   borderTopWidth: 1,
   borderTopColor: "#ddd",
   elevation: 10,
-  shadowColor: "#000",
-  shadowOffset: { width: 0, height: -2 },
-  shadowOpacity: 0.1,
-  shadowRadius: 3,
+  boxShadow: {
+    color: "#000",
+    offset: { width: 0, height: -2 },
+    opacity: 0.1,
+    radius: 3,
+  },
 },
   fontBold: {
     fontFamily: "Poppins_700Bold",
@@ -220,10 +222,12 @@ const styles = StyleSheet.create({
   borderWidth: 1.5,
   borderColor: "#E0E0E0",
   marginBottom: 16,
-  shadowColor: "#000",
-  shadowOpacity: 0.05,
-  shadowOffset: { width: 0, height: 2 },
-  shadowRadius: 3,
+  boxShadow: {
+    color: "#000",
+    opacity: 0.05,
+    offset: { width: 0, height: 2 },
+    radius: 3,
+  },
   elevation: 2,
 },
 searchInput: {

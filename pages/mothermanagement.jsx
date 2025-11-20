@@ -270,9 +270,12 @@ const styles = StyleSheet.create({
     padding: 12,
     justifyContent: "space-between", // ✅ pushes top content up & changeRow down
     height: 120, // optional fixed height for proper spacing
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+    boxShadow: {
+      color: "#000",
+      opacity: 0.1,
+      radius: 3,
+      offset: { width: 0, height: 0 },
+    },
     elevation: 2,
   },
   cardIcon: {
@@ -433,10 +436,12 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: "#ddd",
     elevation: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+    boxShadow: {
+      color: "#000",
+      offset: { width: 0, height: -2 },
+      opacity: 0.1,
+      radius: 3,
+    },
   },
   blurContainer: {
     flex: 1,

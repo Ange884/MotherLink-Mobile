@@ -174,10 +174,12 @@ const appointments = [
         borderTopWidth: 1,
         borderTopColor: "#ddd",
         elevation: 10,
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: -2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
+        boxShadow: {
+          color: "#000",
+          offset: { width: 0, height: -2 },
+          opacity: 0.1,
+          radius: 3,
+        },
       },
 
       notificationContainer: {
@@ -205,10 +207,12 @@ const appointments = [
     borderWidth:1,
     borderColor:"#e7e2e2ff",
     marginVertical: 8,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 4,
+    boxShadow: {
+      color: "#000",
+      opacity: 0.1,
+      offset: { width: 0, height: 2 },
+      radius: 4,
+    },
     elevation: 3,
   },
   cardHeader: {

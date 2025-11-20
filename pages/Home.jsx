@@ -411,10 +411,12 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: "#ddd",
     elevation: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+    boxShadow: {
+      color: "#000",
+      offset: { width: 0, height: -2 },
+      opacity: 0.1,
+      radius: 3,
+    },
   },
   fullScreenBlur: {
   flex: 1,
@@ -439,9 +441,12 @@ centerContent: {
   padding: 20,
   width: "90%",
   maxHeight: "85%",
-  shadowColor: "#000",
-  shadowOpacity: 0.15,
-  shadowRadius: 10,
+  boxShadow: {
+    color: "#000",
+    opacity: 0.15,
+    radius: 10,
+    offset: { width: 0, height: 0 },
+  },
   elevation: 10,
 },
 
