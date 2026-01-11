@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   subtitle:{ fontSize: 16, fontFamily:"Poppins_700Bold", fontWeight:"700", marginBottom: 20, color: "#09111E" },
 
   fieldset: {
-    width: 300,
+    width: "95%",
     borderWidth: 1.5,
     borderColor: "#000",
     borderRadius: 8,
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginTop: 20,
     borderRadius: 8,
-    width: 300,
+    width: "95%",
     alignItems: "center",
   },
   buttonText: { color: "#fff", fontWeight: "600", fontSize: 16 },
