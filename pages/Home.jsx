@@ -196,13 +196,10 @@ const HomeScreen = ({ navigation }) => {
   onRequestClose={closeModal}
 >
   <BlurView intensity={18} tint="light" style={styles.fullScreenBlur}>
-    <TouchableOpacity
-      activeOpacity={1}
-      style={styles.overlayTouchable}
-    >
+    <View style={styles.overlayTouchable}>
       <View style={styles.centerContent}>
         {visibleForm === "motherCard" && (
-          <MotherCard />
+          <MotherCard onClose={closeModal} />
         )}
         {visibleForm === "home" && (
           <HomeVisitForm
@@ -238,7 +235,7 @@ const HomeScreen = ({ navigation }) => {
           />
         )}
       </View>
-    </TouchableOpacity>
+    </View>
   </BlurView>
 </Modal>
 
@@ -428,7 +425,7 @@ const styles = StyleSheet.create({
 
 overlayTouchable: {
   flex: 1,
-  width: "100%",
+  width: "90%",
   height: "100%",
   justifyContent: "center",
   alignItems: "center",
@@ -438,8 +435,8 @@ centerContent: {
   backgroundColor: "white",
   borderRadius: 16,
   padding: 20,
-  width: "90%",
-  maxHeight: "85%",
+  width: "100%",
+  maxHeight: "90%",
   boxShadow: {
     color: "#000",
     opacity: 0.15,

@@ -4,7 +4,7 @@ import { Ionicons, MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import { useNavigation } from "expo-router";
 
-export default function MotherCard() {
+export default function MotherCard({ onClose }) {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_600SemiBold,
@@ -15,6 +15,18 @@ const navigation = useNavigation();
 
   return (
     <View style={styles.card}>
+      {/* Close Icon */}
+      {onClose && (
+        <TouchableOpacity 
+          style={styles.closeButton}
+          onPress={onClose}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          activeOpacity={0.7}
+        >
+          <Ionicons name="close" size={20} color="#09111E" />
+        </TouchableOpacity>
+      )}
+      
       {/* Header */}
       <View style={styles.header}>
         <View>
@@ -64,13 +76,32 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "#fff",
     padding: 16, // more padding for spacing
+    paddingTop: 20, // extra top padding for close button
     elevation: 3,
-    width: "100%", // slightly wider
+    width: "100%", // full width
+    position: "relative",
+    borderRadius: 12,
+    maxWidth: "100%",
+  },
+  closeButton: {
+    position: "absolute",
+    top: 12,
+    right: 12,
+    zIndex: 10,
+    padding: 4,
+    backgroundColor: "rgba(0,0,0,0.05)",
+    borderRadius: 20,
+    width: 32,
+    height: 32,
+    alignItems: "center",
+    justifyContent: "center",
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 12, // more space under header
+    marginTop: 4,
+    paddingRight: 8, // space for close button
   },
   name: {
     fontFamily: "Poppins_700Bold",

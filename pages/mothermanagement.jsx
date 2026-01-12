@@ -189,13 +189,13 @@ const MotherManagementScreen = ({navigation}) => {
         </View>
       </ScrollView>
        <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
-                     <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
+                     <View style={styles.blurContainer}>
                        <BlurView intensity={20} tint="light" style={styles.fullBlurView}>
-                         <TouchableOpacity activeOpacity={1} onPress={() => {}} style={styles.cardContainer}>
-                           {visibleForm === "motherCard" && <MotherCard />}
-                         </TouchableOpacity>
+                         <View style={styles.cardContainer}>
+                           {visibleForm === "motherCard" && <MotherCard onClose={closeModal} />}
+                         </View>
                        </BlurView>
-                     </TouchableOpacity>
+                     </View>
                    </Modal>
 
       {/* Fixed Bottom Navigation */}
@@ -456,6 +456,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   cardContainer: {
+    width: "90%",
+    paddingHorizontal: 16,
     justifyContent: "center",
     alignItems: "center",
   },

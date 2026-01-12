@@ -13,8 +13,7 @@ export default function Appointments({navigation}){
       });
     
       const [visibleForm, setVisibleForm] = useState(null);
-          if (!fontsLoaded) return null;
-          const closeModal = () => setVisibleForm(null);
+      const closeModal = () => setVisibleForm(null);
 
 const appointments = [
   {
@@ -109,7 +108,7 @@ const appointments = [
                     Due: 12:00, Mbarara Sector
                   </Text>
                 </View>
-                <TouchableOpacity style={styles.addBtn} onPress={()=>setVisibleForm("motherCard")}>
+                <TouchableOpacity style={styles.addBtn} onPress={()=> setVisibleForm("motherCard")}>
                   <Text style={[styles.addBtnText, styles.fontRegular]}>ANC</Text>
                 </TouchableOpacity>
               </View>
@@ -139,13 +138,13 @@ const appointments = [
           </ScrollView>
 
            <Modal transparent animationType="fade" visible={!!visibleForm} onRequestClose={closeModal}>
-                  <TouchableOpacity activeOpacity={1} style={styles.blurContainer} onPress={closeModal}>
+                  <View style={styles.blurContainer}>
                     <BlurView intensity={20} tint="light" style={styles.fullBlurView}>
-                      <TouchableOpacity activeOpacity={1} onPress={() => {}} style={styles.cardContainer}>
-                        {visibleForm === "motherCard" && <MotherCard />}
-                      </TouchableOpacity>
+                      <View style={styles.cardContainer}>
+                        {visibleForm === "motherCard" && <MotherCard onClose={closeModal} />}
+                      </View>
                     </BlurView>
-                  </TouchableOpacity>
+                  </View>
                 </Modal>
                 
       
@@ -396,6 +395,8 @@ const appointments = [
     alignItems: "center",
   },
   cardContainer: {
+    width: "90%",
+    paddingHorizontal: 16,
     justifyContent: "center",
     alignItems: "center",
   },
