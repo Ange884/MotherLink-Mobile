@@ -25,7 +25,7 @@ const navigation = useNavigation();
           <Text style={styles.status}>Upcoming</Text>
         </View>
       </View>
-
+      
       {/* Details */}
       <View style={styles.detailRow}>
         <FontAwesome5 name="stethoscope" size={16} color="#000" />
@@ -64,13 +64,8 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "#fff",
     padding: 16, // more padding for spacing
-    borderRadius: 12,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
     elevation: 3,
-    width: 300, // slightly wider
+    width: "100%", // slightly wider
   },
   header: {
     flexDirection: "row",
