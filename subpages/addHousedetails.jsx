@@ -126,7 +126,7 @@ export default function AddHouseDetails({ onClose, onNext }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: 320,
+    width: "100%",
     maxHeight: 500,
     justifyContent: "center",
     alignItems: "center",
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   subtitle:{ fontSize: 16, fontFamily:"Poppins_700Bold", fontWeight:"700", marginBottom: 15, color: "#09111E" },
 
   fieldset: {
-    width: 280,
+    width: "100%",
     borderWidth: 1.5,
     borderColor: "#000",
     borderRadius: 8,
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     padding: 12,
     marginTop: 15,
     borderRadius: 8,
-    width: 280,
+    width: "100%",
     alignItems: "center",
   },
   buttonText: { color: "#fff", fontWeight: "600", fontSize: 16 },

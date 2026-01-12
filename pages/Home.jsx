@@ -195,10 +195,9 @@ const HomeScreen = ({ navigation }) => {
   visible={!!visibleForm}
   onRequestClose={closeModal}
 >
-  <BlurView intensity={20} tint="light" style={styles.fullScreenBlur}>
+  <BlurView intensity={18} tint="light" style={styles.fullScreenBlur}>
     <TouchableOpacity
       activeOpacity={1}
-      onPress={closeModal}
       style={styles.overlayTouchable}
     >
       <View style={styles.centerContent}>

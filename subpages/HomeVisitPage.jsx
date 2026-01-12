@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useFonts, Poppins_400Regular,Poppins_700Bold } from "@expo-google-fonts/poppins";
 
-export default function HomeVisitScreen({ onClose, onNext }) {
+export default function VisitScreen({ onClose, onNext }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular,Poppins_700Bold });
 
   const [email, setEmail] = useState("");
@@ -76,7 +76,6 @@ export default function HomeVisitScreen({ onClose, onNext }) {
           placeholderTextColor="#09111E"
           underlineColorAndroid="transparent"
           selectionColor="#09111E"
-          onFocus={() => setFocusedField("confirm")}
           onBlur={() => setFocusedField(null)}
         />
          
@@ -106,7 +105,7 @@ export default function HomeVisitScreen({ onClose, onNext }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: 320,
+    width: "100%",
     maxHeight: 500,
     justifyContent: "center",
     alignItems: "center",
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
   subtitle:{ fontSize: 16, fontFamily:"Poppins_700Bold", fontWeight:"700", marginBottom: 15, color: "#09111E" },
 
   fieldset: {
-    width: 280,
+    width: "100%",
     borderWidth: 1.5,
     borderColor: "#000",
     borderRadius: 8,
@@ -184,7 +183,7 @@ const styles = StyleSheet.create({
     padding: 12,
     marginTop: 15,
     borderRadius: 8,
-    width: 280,
+    width: "100%",
     alignItems: "center",
   },
   buttonText: { color: "#fff", fontWeight: "600", fontSize: 16 },
