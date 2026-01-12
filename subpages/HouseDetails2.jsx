@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
+import { Ionicons } from '@expo/vector-icons';
 
 export default function HouseDetailsStep2({ onClose, onBack, onFinish }) {
   const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_700Bold });
@@ -14,6 +15,18 @@ export default function HouseDetailsStep2({ onClose, onBack, onFinish }) {
 
   return (
     <View style={styles.container}>
+
+      {/* Close Icon */}
+      {onClose && (
+        <TouchableOpacity 
+          style={styles.closeButton}
+          onPress={onClose}
+          hitSlop={{ top: 0, bottom: 0, left: 0, right: 0 }}
+          activeOpacity={0.7}
+        >
+          <Ionicons name="close" size={20} color="#09111E" />
+        </TouchableOpacity>
+      )}
 
       <TouchableOpacity
         style={styles.backButton}
@@ -144,6 +157,22 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     paddingTop: 20,
   },
+
+    closeButton: {
+    position: "absolute",
+    top: 2,
+    right: 2,
+    zIndex: 10,
+    padding: 4,
+    backgroundColor: "rgba(0,0,0,0.05)",
+    borderRadius: 20,
+    width: 24,
+    height: 24,
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 4,
+  },
+
   logo: { width: 60, height: 60, resizeMode: "contain" },
   title: { fontSize: 18, fontFamily:"Poppins_700Bold", fontWeight:"900", marginBottom: 20, color: "#09111E" },
   subtitle:{ fontSize: 16, fontFamily:"Poppins_700Bold", fontWeight:"700", marginBottom: 15, color: "#09111E" },

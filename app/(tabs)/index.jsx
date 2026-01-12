@@ -40,13 +40,11 @@ export default function AppNavigator() {
 
   if (!fontsLoaded) return null;
 
-  // Set global font
   const customTextProps = { style: { fontFamily: 'Poppins_400Regular' } };
   setCustomText(customTextProps);
   setCustomTextInput(customTextProps);
 
   return (
-    // <NavigationContainer> {/* ⚠ This is essential */}
       <Stack.Navigator initialRouteName="Landing">
         <Stack.Screen 
           name="Landing" 
