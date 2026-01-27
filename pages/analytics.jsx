@@ -72,7 +72,7 @@ const AnalyticsScreen = ({ navigation }) => {
       >
         {/* Period Selector */}
         <View style={styles.periodContainer}>
-          {["DAY", "WEEK", "MONTH", "YEAR"].map((period) => (
+          {(["DAY", "WEEK", "MONTH", "YEAR"] || []).map((period) => (
             <TouchableOpacity
               key={period}
               onPress={() => setSelectedPeriod(period)}

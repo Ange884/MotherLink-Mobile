@@ -25,7 +25,7 @@ export default function AppointmentsContent() {
       </TouchableOpacity>
 
       {/* Appointments List */}
-      {appointments.map((appointment, index) => (
+      {(appointments || []).map((appointment, index) => (
         <View key={index} style={styles.appointmentCard}>
           <View style={styles.appointmentLeft}>
             <View style={styles.dateContainer}>

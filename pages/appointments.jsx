@@ -100,7 +100,7 @@ const appointments = [
               <Text style={[styles.seeAll, styles.fontBold]} onPress={() =>navigation.navigate("notifications")}>See all</Text>
             </View>
       
-            {[1, 2, 3,4,5].map((_, i) => (
+            {([1, 2, 3,4,5] || []).map((_, i) => (
               <View key={i} style={styles.appointmentCard}>
                 <View>
                   <Text style={[styles.appointmentName, styles.fontBold]}>Uwase Claudine</Text>
@@ -115,7 +115,7 @@ const appointments = [
             ))}
       
             <View style={{ paddingHorizontal: 16, paddingVertical: 10,flexDirection:"column" }}>
-      {appointments.map((item, index) => (
+      {(appointments || []).map((item, index) => (
         <View key={index} style={[styles.card, {flexDirection:"column", justifyContent:"flex-start"}]}>
           <View style={styles.cardHeader}>
             <Image source={item.icon} style={styles.icon} />

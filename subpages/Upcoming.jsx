@@ -75,10 +75,10 @@ const navigation = useNavigation();
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#fff",
-    padding: 16, // more padding for spacing
-    paddingTop: 20, // extra top padding for close button
+    padding: 16,
+    paddingTop: 20, 
     elevation: 3,
-    width: "100%", // full width
+    width: "100%", 
     position: "relative",
     borderRadius: 12,
     maxWidth: "100%",

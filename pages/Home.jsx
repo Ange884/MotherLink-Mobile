@@ -75,12 +75,12 @@ const HomeScreen = ({ navigation }) => {
         <View style={styles.calendar}>
           <Text style={[styles.calendarHeader, styles.fontBold]}>August 2024</Text>
           <View style={styles.daysRow}>
-            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"].map((day, index) => (
+            {(["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"] || []).map((day, index) => (
               <View
                 key={index}
                 style={[
                   styles.dayBox,
-                  day === "Wed" && styles.activeDayBox, // active day
+                  day === "Wed" && styles.activeDayBox,
                 ]}
               >
                 <Text
@@ -134,7 +134,7 @@ const HomeScreen = ({ navigation }) => {
           <Text style={[styles.seeAll, styles.fontBold]}>See all</Text>
         </View>
 
-        {[1, 2, 3].map((_, i) => (
+        {([1, 2, 3] || []).map((_, i) => (
           <View key={i} style={styles.appointmentCard}>
             <View>
               <Text style={[styles.appointmentName, styles.fontBold]}>
@@ -407,12 +407,10 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: "#ddd",
     elevation: 10,
-    boxShadow: {
-      color: "#000",
-      offset: { width: 0, height: -2 },
-      opacity: 0.1,
-      radius: 3,
-    },
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
   },
   fullScreenBlur: {
   flex: 1,
@@ -437,12 +435,10 @@ centerContent: {
   padding: 20,
   width: "100%",
   maxHeight: "90%",
-  boxShadow: {
-    color: "#000",
-    opacity: 0.15,
-    radius: 10,
-    offset: { width: 0, height: 0 },
-  },
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: 0 },
+  shadowOpacity: 0.15,
+  shadowRadius: 10,
   elevation: 10,
 },
 

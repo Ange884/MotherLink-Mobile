@@ -43,7 +43,7 @@ const NotificationsScreen = () => {
       { name: "Irakoze Ange", detail: "Due: 14:15, Gatsibo Sector", type: "type" },
   ];
 
-  const filtered = activeTab === "All" ? notifications : notifications.filter(n => n.type === activeTab);
+  const filtered = activeTab === "All" ? (notifications || []) : ((notifications || []).filter(n => n.type === activeTab) || []);
 
   return (
     <View style={styles.container}>
@@ -59,7 +59,7 @@ const NotificationsScreen = () => {
 
       {/* Tabs */}
       <View style={styles.tabs}>
-        {tabs.map((tab) => (
+        {(tabs || []).map((tab) => (
           <TouchableOpacity
             key={tab}
             style={[
@@ -82,7 +82,7 @@ const NotificationsScreen = () => {
 
       {/* Notification list */}
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {filtered.map((item, i) => (
+        {(filtered || []).map((item, i) => (
           <View key={i} style={styles.appointmentCard}>
             <View style={{ flex: 1 }}>
               <Text style={[styles.appointmentName, styles.fontBold]}>

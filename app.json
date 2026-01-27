@@ -4,51 +4,28 @@
     "slug": "motherlink",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/adaptive-icon.png",
-    "scheme": "motherlink",
+    "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": false,
+
     "splash": {
-      "image": "./assets/images/adaptive-icon.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "ios": {
-      "supportsTablet": true
-    },
+
     "android": {
+      "package": "com.anonymous.motherlink",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/adaptive-foreground.png",
         "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.motherlink"
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/adaptive-icon.png"
-    },
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ],
-    "experiments": {
-      "typedRoutes": true
-    },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "ee300018-4f73-4025-9583-1027338c59b1"
       }
     },
-    "owner": "titine",
-    "runtimeVersion": {
-      "policy": "appVersion"
+
+    "web": {
+      "favicon": "./assets/images/favicon.png"
     },
-    "updates": {
-      "url": "https://u.expo.dev/ee300018-4f73-4025-9583-1027338c59b1"
-    }
+
+    "plugins": ["expo-router", "expo-font"]
   }
 }

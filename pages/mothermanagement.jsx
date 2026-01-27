@@ -98,7 +98,7 @@ const MotherManagementScreen = ({navigation}) => {
         </View>
 
        <View style={styles.cardsContainer}>
-  {summaryCards.map((card, index) => (
+  {(summaryCards || []).map((card, index) => (
     <View key={index} style={styles.summaryCard}>
       <View style={styles.cardIcon}>
         <Ionicons name={card.icon} size={22} color="#09111E" />
@@ -128,7 +128,7 @@ const MotherManagementScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-        {appointments.map((appointment, index) => (
+        {(appointments || []).map((appointment, index) => (
           <View key={index} style={styles.appointmentCard}>
             <View style={styles.appointmentInfo}>
               <Text style={[styles.appointmentName, styles.fontBold]}>
