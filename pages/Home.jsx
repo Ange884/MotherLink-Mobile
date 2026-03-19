@@ -44,19 +44,11 @@ const HomeScreen = ({ navigation }) => {
           </View>
 
           <View style={styles.notificationContainer}>
-            <TouchableOpacity
-                     onPress={() => navigation.navigate("notifications")}
-                      >
-                   <Image
-                     source={require("../assets/images/notii.png")}
-                     style={styles.notificationImage}
-                    />
-                                     </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("notifications")}>
+              <Ionicons name="notifications-outline" size={24} color="#fff" />
+            </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate("profile")}>
-              <Image
-                source={require("../assets/images/white.png")}
-                style={styles.notificationImage}
-              />
+              <Ionicons name="person-circle-outline" size={26} color="#fff" />
             </TouchableOpacity>
           </View>
         </View>
@@ -110,17 +102,17 @@ const HomeScreen = ({ navigation }) => {
         <Text style={[styles.sectionTitle, styles.fontBold]}>Overview</Text>
         <View style={styles.overviewContainer}>
           <View style={styles.overviewCard}>
-            <Image source={require("../assets/images/Group1.png")} />
+            <Ionicons name="home-outline" size={32} color="#09111E" />
             <Text style={[styles.cardTitle, styles.fontBold]}>Total Houses</Text>
             <Text style={[styles.cardCount, styles.fontBold]}>120</Text>
           </View>
           <View style={styles.overviewCard}>
-            <Image source={require("../assets/images/Group2.png")} />
+            <Ionicons name="woman-outline" size={32} color="#09111E" />
             <Text style={[styles.cardTitle, styles.fontBold]}>Total Mothers</Text>
             <Text style={[styles.cardCount, styles.fontBold]}>534</Text>
           </View>
           <View style={styles.overviewCard}>
-            <Image source={require("../assets/images/Group4.png")} />
+            <Ionicons name="people-outline" size={32} color="#09111E" />
             <Text style={[styles.cardTitle, styles.fontBold]}>Total Children</Text>
             <Text style={[styles.cardCount, styles.fontBold]}>620</Text>
           </View>
@@ -160,7 +152,7 @@ const HomeScreen = ({ navigation }) => {
             style={styles.actionCard}
             onPress={() => setVisibleForm("home")}
           >
-            <Image source={require("../assets/images/Vector1.png")} />
+            <Ionicons name="walk" size={32} color="#09111E" />
             <Text style={styles.actionText}>Start Home Visit</Text>
           </TouchableOpacity>
 
@@ -168,7 +160,7 @@ const HomeScreen = ({ navigation }) => {
             style={styles.actionCard}
             onPress={() => setVisibleForm("house")}
           >
-            <Image source={require("../assets/images/house.png")} />
+            <Ionicons name="business" size={32} color="#09111E" />
             <Text style={styles.actionText}>Add House Details</Text>
           </TouchableOpacity>
 
@@ -176,7 +168,7 @@ const HomeScreen = ({ navigation }) => {
             style={styles.actionCard}
             onPress={() => navigation.navigate("appointments")}
           >
-            <Image source={require("../assets/images/Vector.png")} />
+            <Ionicons name="id-card" size={32} color="#09111E" />
             <Text style={styles.actionText}>VHWID</Text>
           </TouchableOpacity>
 
@@ -184,7 +176,7 @@ const HomeScreen = ({ navigation }) => {
             style={styles.actionCard}
             onPress={() => navigation.navigate("analytics")}
           >
-            <Image source={require("../assets/images/Group .png")} />
+            <Ionicons name="document-text" size={32} color="#09111E" />
             <Text style={styles.actionText}>Reports</Text>
           </TouchableOpacity>
         </View>

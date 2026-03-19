@@ -1,5 +1,6 @@
 import React from "react";
-import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import {
   useFonts,
   Poppins_400Regular,
@@ -49,12 +50,10 @@ export default function BottomNav() {
           onPress={() => handlePress("Home")}
           style={[styles.navItem, active === "Home" && styles.activeNavItem]}
         >
-          <Image
-            source={require("../assets/images/Home.png")}
-            style={[
-              styles.icon,
-              { tintColor: active === "Home" ? "#09111E" : "#09111E" },
-            ]}
+          <Ionicons
+            name={active === "Home" ? "home" : "home-outline"}
+            size={24}
+            color={active === "Home" ? "#055a8bff" : "#09111E"}
           />
           <Text style={[styles.label, active === "Home" && styles.activeLabel]}>
             Home
@@ -66,12 +65,10 @@ export default function BottomNav() {
           onPress={() => handlePress("child")}
           style={[styles.navItem, active === "Child" && styles.activeNavItem]}
         >
-          <Image
-            source={require("../assets/images/child.png")}
-            style={[
-              styles.icon,
-              { tintColor: active === "Child" ? "#09111E" : "#09111E" },
-            ]}
+          <Ionicons
+            name={active === "Child" ? "people" : "people-outline"}
+            size={24}
+            color={active === "Child" ? "#055a8bff" : "#09111E"}
           />
           <Text style={[styles.label, active === "Child" && styles.activeLabel]}>
             Child
@@ -86,12 +83,10 @@ export default function BottomNav() {
             active === "Appointments" && styles.activeNavItem,
           ]}
         >
-          <Image
-            source={require("../assets/images/appoint.png")}
-            style={[
-              styles.icon,
-              { tintColor: active === "Appointments" ? "#09111E" : "#09111E" },
-            ]}
+          <Ionicons
+            name={active === "Appointments" ? "calendar" : "calendar-outline"}
+            size={24}
+            color={active === "Appointments" ? "#055a8bff" : "#09111E"}
           />
           <Text
             style={[
@@ -108,12 +103,10 @@ export default function BottomNav() {
           onPress={() => handlePress("mother")}
           style={[styles.navItem, active === "Mother" && styles.activeNavItem]}
         >
-          <Image
-            source={require("../assets/images/mother.png")}
-            style={[
-              styles.icon,
-              { tintColor: active === "Mother" ? "#09111E" : "#09111E" },
-            ]}
+          <Ionicons
+            name={active === "Mother" ? "person" : "person-outline"}
+            size={24}
+            color={active === "Mother" ? "#055a8bff" : "#09111E"}
           />
           <Text style={[styles.label, active === "Mother" && styles.activeLabel]}>
             Mother
@@ -128,12 +121,10 @@ export default function BottomNav() {
             active === "Analytics" && styles.activeNavItem,
           ]}
         >
-          <Image
-            source={require("../assets/images/chop.png")}
-            style={[
-              styles.icon,
-              { tintColor: active === "Analytics" ? "#09111E": "#09111E" },
-            ]}
+          <Ionicons
+            name={active === "Analytics" ? "pie-chart" : "pie-chart-outline"}
+            size={24}
+            color={active === "Analytics" ? "#055a8bff" : "#09111E"}
           />
           <Text
             style={[styles.label, active === "Analytics" && styles.activeLabel]}

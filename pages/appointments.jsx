@@ -21,16 +21,18 @@ const appointments = [
     title: "Upcoming appointment",
     time: "11:00",
     location: "Mukamira sector",
-    icon: require("../assets/images/Tick.png"),
-    rightIcon: null,
+    iconName: "checkmark-circle",
+    iconColor: "#10b981", // green
+    rightIconName: null,
   },
   {
     type: "missed",
     title: "Missed appointment",
     time: "11:00",
     location: "Mukamira sector",
-    icon: require("../assets/images/Tick.png"),
-    rightIcon: require("../assets/images/warning.png"),
+    iconName: "close-circle",
+    iconColor: "#ef4444", // red
+    rightIconName: "warning",
   },
 ];
       return (
@@ -44,23 +46,13 @@ const appointments = [
                 <Text style={[styles.headerText, styles.fontRegular]}>Appointments</Text>
               </View>
               <View style={styles.notificationContainer}>
-                          <TouchableOpacity
-                           onPress={() => navigation.navigate("notifications")}
-                           >
-                         <Image
-                            source={require("../assets/images/notii.png")}
-                              style={styles.notificationImage}
-                          />
-                         </TouchableOpacity>
-                          <TouchableOpacity
-                           onPress={() => navigation.navigate("profile")}
-                           >
-                         <Image
-                            source={require("../assets/images/white.png")}
-                              style={styles.notificationImage}
-                          />
-                         </TouchableOpacity>
-                        </View>
+                <TouchableOpacity onPress={() => navigation.navigate("notifications")}>
+                  <Ionicons name="notifications-outline" size={24} color="#fff" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("profile")}>
+                  <Ionicons name="person-circle-outline" size={26} color="#fff" />
+                </TouchableOpacity>
+              </View>
             </View>
       
             {/* Search Bar */}
@@ -78,17 +70,17 @@ const appointments = [
             <Text style={[styles.sectionTitle, styles.fontBold]}>Overview</Text>
             <View style={styles.overviewContainer}>
               <View style={styles.overviewCard}>
-                <Image source={require("../assets/images/camm.png")} />
+                <Ionicons name="calendar" size={32} color="#09111E" />
                 <Text style={[styles.cardTitle, styles.fontBold]}>UpComing</Text>
                 <Text style={[styles.cardCount, styles.fontBold]}>50</Text>
               </View>
               <View style={styles.overviewCard}>
-                <Image source={require("../assets/images/dash.png")} />
+                <Ionicons name="close-circle" size={32} color="#09111E" />
                 <Text style={[styles.cardTitle, styles.fontBold]}>Missed</Text>
                 <Text style={[styles.cardCount, styles.fontBold]}>120</Text>
               </View>
               <View style={styles.overviewCard}>
-                <Image source={require("../assets/images/Tick.png")} />
+                <Ionicons name="checkmark-circle" size={32} color="#09111E" />
                 <Text style={[styles.cardTitle, styles.fontBold]}>Completed</Text>
                 <Text style={[styles.cardCount, styles.fontBold]}>8</Text>
               </View>
@@ -118,7 +110,7 @@ const appointments = [
       {(appointments || []).map((item, index) => (
         <View key={index} style={[styles.card, {flexDirection:"column", justifyContent:"flex-start"}]}>
           <View style={styles.cardHeader}>
-            <Image source={item.icon} style={styles.icon} />
+            <Ionicons name={item.iconName} size={24} color={item.iconColor} />
             <Text style={styles.title}>{item.title}</Text>
           </View>
 
@@ -128,8 +120,8 @@ const appointments = [
             <Text style={styles.info}>{item.location}</Text>
           </View>
 
-          {item.rightIcon && (
-            <Image source={item.rightIcon} style={styles.rightIcon} />
+          {item.rightIconName && (
+            <Ionicons name={item.rightIconName} size={20} color="#f59e0b" style={styles.rightIcon} />
           )}
         </View>
       ))}
@@ -173,12 +165,10 @@ const appointments = [
         borderTopWidth: 1,
         borderTopColor: "#ddd",
         elevation: 10,
-        boxShadow: {
-          color: "#000",
-          offset: { width: 0, height: -2 },
-          opacity: 0.1,
-          radius: 3,
-        },
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: -2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
       },
 
       notificationContainer: {
@@ -206,12 +196,10 @@ const appointments = [
     borderWidth:1,
     borderColor:"#e7e2e2ff",
     marginVertical: 8,
-    boxShadow: {
-      color: "#000",
-      opacity: 0.1,
-      offset: { width: 0, height: 2 },
-      radius: 4,
-    },
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
     elevation: 3,
   },
   cardHeader: {

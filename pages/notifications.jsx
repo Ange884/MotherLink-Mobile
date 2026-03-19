@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F8F9FB",
     paddingHorizontal: 16,
     paddingTop: 50,
+    paddingBottom:50,
   },
 
   fixedBottom: {
@@ -138,12 +139,10 @@ const styles = StyleSheet.create({
   borderTopWidth: 1,
   borderTopColor: "#ddd",
   elevation: 10,
-  boxShadow: {
-    color: "#000",
-    offset: { width: 0, height: -2 },
-    opacity: 0.1,
-    radius: 3,
-  },
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: -2 },
+  shadowOpacity: 0.1,
+  shadowRadius: 3,
 },
   fontBold: {
     fontFamily: "Poppins_700Bold",
@@ -159,15 +158,18 @@ const styles = StyleSheet.create({
   },
    tabs: {
     flexDirection: "row",
-    justifyContent: "space-evenly", // distributes tabs evenly but keeps natural size
+    justifyContent: "space-between", // distributes tabs evenly but keeps natural size
     alignItems: "center",
     width: "100%",
+    paddingBottom:20,
+    gap: 12,
   },
   tabBtn: {
     paddingHorizontal: 13, // space around text
     paddingVertical: 10,
     borderRadius: 8,
     backgroundColor: "#f0f0f0",
+    flex:1,
   },
   activeTabBtn: {
     backgroundColor: "#09111E",
@@ -222,12 +224,10 @@ const styles = StyleSheet.create({
   borderWidth: 1.5,
   borderColor: "#E0E0E0",
   marginBottom: 16,
-  boxShadow: {
-    color: "#000",
-    opacity: 0.05,
-    offset: { width: 0, height: 2 },
-    radius: 3,
-  },
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.05,
+  shadowRadius: 3,
   elevation: 2,
 },
 searchInput: {

@@ -68,22 +68,12 @@ const ChildManagementScreen = ({navigation}) => {
           <Ionicons name="menu" size={28} color="#fff" />
           <Text style={[styles.headerTitle, styles.fontBold]}>Child management</Text>
           <View style={styles.notificationContainer}>
-            <TouchableOpacity
-                onPress={() => navigation.navigate("notifications")}
-                       >
-                  <Image
-                    source={require("../assets/images/notii.png")}
-                    style={styles.notificationImage}
-                          />
-               </TouchableOpacity>
-            <TouchableOpacity
-             onPress={() => navigation.navigate("profile")}
-             >
-           <Image
-              source={require("../assets/images/white.png")}
-                style={styles.notificationImage}
-            />
-           </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("notifications")}>
+              <Ionicons name="notifications-outline" size={24} color="#fff" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("profile")}>
+              <Ionicons name="person-circle-outline" size={26} color="#fff" />
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -316,12 +306,10 @@ const styles = StyleSheet.create({
     padding: 12,
     justifyContent: "space-between", // ✅ pushes top content up & changeRow down
     height: 120, // optional fixed height for proper spacing
-    boxShadow: {
-      color: "#000",
-      opacity: 0.1,
-      radius: 3,
-      offset: { width: 0, height: 0 },
-    },
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
     elevation: 2,
   },
   cardIcon: {
@@ -484,12 +472,10 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: "#ddd",
     elevation: 10,
-    boxShadow: {
-      color: "#000",
-      offset: { width: 0, height: -2 },
-      opacity: 0.1,
-      radius: 3,
-    },
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
   },
   blurContainer: {
     flex: 1,

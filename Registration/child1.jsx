@@ -363,12 +363,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     width: "100%",
     alignItems: "center",
-    boxShadow: {
-      color: "#000",
-      offset: { width: 0, height: 3 },
-      opacity: 0.15,
-      radius: 3,
-    },
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.15,
+    shadowRadius: 3,
     elevation: 4,
   },
   cardText: {
