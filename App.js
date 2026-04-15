@@ -3,48 +3,45 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import LandingScreen from "../../pages/Landing";
-import LoginScreen from "../../pages/login.jsx"
-import VerifyScreen from "../../pages/Verify"
-import ForgotPasswordScreen from "../../pages/forgot-password";
+import LandingScreen from "./pages/Landing.jsx";
+import LoginScreen from "./pages/login.jsx"
+import VerifyScreen from "./pages/Verify.jsx"
+import ForgotPasswordScreen from "./pages/forgot-password.jsx";
 import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
-import { setCustomText, setCustomTextInput } from 'react-native-global-props';
-import Signup1screen from "../../pages/sign-up1.jsx";
-import Signup2screen from "../../pages/sign-up2.jsx";
-import Signup3screen from "../../pages/sign-up3.jsx";
-import Home from "../../pages/Home.jsx"
-import Appointments from "../../pages/appointments";
-import MotherManagementScreen from "../../pages/mothermanagement.jsx";
-import  AnalyticsScreen from "../../pages/analytics.jsx";
-import ChildManagementscreen from "../../pages/Childmanagement.jsx";
-import ProfileSettingsScreen from "../../pages/Profile.jsx";
-import HomeVisitScreen2 from "../../subpages/VisitPage2";
-import NotificationsScreen from "../../pages/notifications.jsx";
-import RegisterMother from "../../Registration/mother.jsx";
-import RegisterMother2 from "../../Registration/register2.jsx";
-import RegisterMother3 from "../../Registration/register3.jsx";
-import InfoSection from "../../Registration/Info.jsx";
-import RegisterChild from "../../Registration/child1.jsx";
-import RegisterChild2 from "../../Registration/child2.jsx";
-import RegisterChild3 from "../../Registration/child3.jsx";
-import InfoChild from "../../Registration/ChildInfo.jsx";
-import motherProfileScreen from "../../pages/motherProfile.jsx";
-import ChildProfileScreen from "../../subpages/ChildProfile.jsx";
-import ChildAppointments from "../../subpages/ChildAppointment.jsx";
-import ChildEmergency from "../../subpages/ChildEmergency.jsx"
+
+import Signup1screen from "./pages/sign-up1.jsx";
+import Signup2screen from "./pages/sign-up2.jsx";
+import Signup3screen from "./pages/sign-up3.jsx";
+import Home from "./pages/Home.jsx"
+import Appointments from "./pages/appointments.jsx";
+import MotherManagementScreen from "./pages/mothermanagement.jsx";
+import AnalyticsScreen from "./pages/analytics.jsx";
+import ChildManagementscreen from "./pages/Childmanagement.jsx";
+import ProfileSettingsScreen from "./pages/Profile.jsx";
+import HomeVisitScreen2 from "./subpages/VisitPage2.jsx";
+import NotificationsScreen from "./pages/notifications.jsx";
+import RegisterMother from "./Registration/mother.jsx";
+import RegisterMother2 from "./Registration/register2.jsx";
+import RegisterMother3 from "./Registration/register3.jsx";
+import InfoSection from "./Registration/Info.jsx";
+import RegisterChild from "./Registration/child1.jsx";
+import RegisterChild2 from "./Registration/child2.jsx";
+import RegisterChild3 from "./Registration/child3.jsx";
+import InfoChild from "./Registration/ChildInfo.jsx";
+import motherProfileScreen from "./pages/motherProfile.jsx";
+import ChildProfileScreen from "./subpages/ChildProfile.jsx";
+import ChildAppointments from "./subpages/ChildAppointment.jsx";
+import ChildEmergency from "./subpages/ChildEmergency.jsx"
 
 const Stack = createNativeStackNavigator();
 
-export default function AppNavigator() {
-   const [fontsLoaded] = useFonts({ Poppins_400Regular });
+export default function App() {
+  const [fontsLoaded] = useFonts({ Poppins_400Regular });
 
   if (!fontsLoaded) return null;
 
-  const customTextProps = { style: { fontFamily: 'Poppins_400Regular' } };
-  setCustomText(customTextProps);
-  setCustomTextInput(customTextProps);
-
   return (
+    <NavigationContainer>
       <Stack.Navigator initialRouteName="Landing">
         <Stack.Screen 
           name="Landing" 
@@ -109,6 +106,6 @@ export default function AppNavigator() {
           options={{ title: "Verify OTP" }} 
         />
       </Stack.Navigator>
-    // </NavigationContainer>
+    </NavigationContainer>
   );
 }
